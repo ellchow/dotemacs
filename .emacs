@@ -102,7 +102,10 @@
 
 (setq inhibit-startup-message t)
 
+
+;; tramp/ssh
 (setq password-cache-expiry 72000)
+(setq tramp-default-method "ssh")
 
 ;; fix copy/paste
 (setq x-select-enable-clipboard t)
@@ -214,6 +217,21 @@
 (defun open-current-pom()
   (interactive)
   (open-pom (buffer-file-name))
+)
+
+(defun build-sbt-dir ()
+  (interactive)
+  (locate-dominating-file (buffer-file-name) "build.sbt")
+)
+
+(defun open-build-sbt (x)
+  (interactive)
+  (find-file (format "%s/build.sbt" (mvn-dir)))
+)
+
+(defun open-current-build-sbt()
+  (interactive)
+  (open-build-sbt (buffer-file-name))
 )
 
 (defun hs-load-hide-block ()
@@ -368,6 +386,7 @@
  *
  */" nil 0)
     ))
+
 
 ;;;;
 
@@ -559,8 +578,6 @@ Pop up the buffer containing MARKER and scroll to MARKER if we ask the user."
   (shell-command "git pull && git push")
 )
 
-
-
 ;;;; MODES
 
 ; Python
@@ -571,12 +588,12 @@ Pop up the buffer containing MARKER and scroll to MARKER if we ask the user."
 (setq py-indent-offset 2)
 
 ; Haskell
-(load (format "%s/haskell-mode/haskell-site-file.el" ELISPDIR))
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-; use only one indentation mode
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+;; (load (format "%s/haskell-mode/haskell-site-file.el" ELISPDIR))
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+;; ; use only one indentation mode
+;; ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;; ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
 
 
@@ -601,6 +618,11 @@ Pop up the buffer containing MARKER and scroll to MARKER if we ask the user."
 (add-to-list 'load-path (format "%s/scala" ELISPDIR))
 (add-to-list 'auto-mode-alist '("\\.sbt\\'" . scala-mode))
 (require 'scala-mode-auto)
+
+(add-to-list 'load-path (format "%s/ensime_2.9.2-0.9.8.1/elisp/" ELISPDIR))
+(require 'ensime)
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
 
 ; ESS
 (require 'ess-site)
