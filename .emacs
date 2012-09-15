@@ -226,7 +226,7 @@
 
 (defun open-build-sbt (x)
   (interactive)
-  (find-file (format "%s/build.sbt" (mvn-dir)))
+  (find-file (format "%s/build.sbt" (build-sbt-dir)))
 )
 
 (defun open-current-build-sbt()
