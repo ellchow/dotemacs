@@ -586,6 +586,8 @@ Pop up the buffer containing MARKER and scroll to MARKER if we ask the user."
 (setq-default py-indent-offset 2)
 (define-key py-mode-map [backspace] 'py-electric-backspace)
 (setq py-indent-offset 2)
+(add-to-list 'auto-mode-alist '("\\.yaml$" . python-mode))
+
 
 ; Haskell
 ;; (load (format "%s/haskell-mode/haskell-site-file.el" ELISPDIR))
