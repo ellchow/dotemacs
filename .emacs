@@ -173,8 +173,8 @@
 (add-hook 'find-file-hooks 'bm-buffer-restore)
 (add-hook 'kill-buffer-hook 'bm-buffer-save)
 (add-hook 'kill-emacs-hook (lambda ()
-			     (bm-buffer-save-all)
-			     (bm-repository-save)))
+                             (bm-buffer-save-all)
+                             (bm-repository-save)))
 (add-hook 'after-save-hook 'bm-buffer-save)
 (add-hook 'after-revert-hook 'bm-buffer-restore)
 (setq bm-cycle-all-buffers 1)
@@ -189,9 +189,9 @@
 )
 
 (defun eval-buffer2 ()
-	(interactive)
-	(eval-buffer)
-	(eval-buffer)
+        (interactive)
+        (eval-buffer)
+        (eval-buffer)
 )
 
 (defun mvn-dir ()
@@ -226,7 +226,7 @@
 
 (defun open-build-sbt (x)
   (interactive)
-  (find-file (format "%s/build.sbt" (mvn-dir)))
+  (find-file (format "%s/build.sbt" (build-sbt-dir)))
 )
 
 (defun open-current-build-sbt()
@@ -570,15 +570,16 @@ Pop up the buffer containing MARKER and scroll to MARKER if we ask the user."
 (require 'egg)
 (require 'git-blame)
 (defun exec-git-pull ()
-	(interactive)
+        (interactive)
   (shell-command "git pull")
 )
 (defun exec-git-pull-push ()
-	(interactive)
+        (interactive)
   (shell-command "git pull && git push")
 )
 
 ;;;; MODES
+
 
 ; Python
 (require 'python-mode)
@@ -586,6 +587,7 @@ Pop up the buffer containing MARKER and scroll to MARKER if we ask the user."
 (setq-default py-indent-offset 2)
 (define-key py-mode-map [backspace] 'py-electric-backspace)
 (setq py-indent-offset 2)
+(add-to-list 'auto-mode-alist '("\\.yaml$" . python-mode))
 
 ; Haskell
 ;; (load (format "%s/haskell-mode/haskell-site-file.el" ELISPDIR))
@@ -622,6 +624,11 @@ Pop up the buffer containing MARKER and scroll to MARKER if we ask the user."
 (add-to-list 'load-path (format "%s/ensime_2.9.2-0.9.8.1/elisp/" ELISPDIR))
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
+
+; SQL
+(eval-after-load "sql"
+  '(load-library "sql-indent"))
 
 
 ; ESS
@@ -695,14 +702,14 @@ Pop up the buffer containing MARKER and scroll to MARKER if we ask the user."
 
 
 
-;; (add-hook 'before-save-hook
-  ;; (lambda ()
-    ;; (untabify (point-min) (point-max))
-    ;; ))
+(add-hook 'before-save-hook
+  (lambda ()
+    (untabify (point-min) (point-max))
+    ))
 
 (add-hook 'find-file-hook
   (lambda ()
-	(show-paren-mode 1)
+        (show-paren-mode 1)
     ;;(highlight-parentheses-mode 0)
     ;; (hs-minor-mode 1)
     (autopair-mode 1)
