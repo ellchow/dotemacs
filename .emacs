@@ -658,7 +658,8 @@ Pop up the buffer containing MARKER and scroll to MARKER if we ask the user."
 (global-set-key [C-f9]  'egg-log)
 (global-set-key [C-S-f9]  'exec-git-pull-push)
 ;; (global-set-key [C-M-f9]  'exec-git-pull-push)
-(global-set-key [M-f9]  'git-blame-mode)
+(global-set-key [M-f9]  'egg-checkout-ref)
+(global-set-key [M-S-f9]  'egg-start-new-branch)
 
 (global-set-key "\C-ch" 'hs-load-hide-block)
 (global-set-key "\C-cH" 'hs-load-hide-all)
