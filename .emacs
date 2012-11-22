@@ -621,9 +621,15 @@ Pop up the buffer containing MARKER and scroll to MARKER if we ask the user."
 (add-to-list 'auto-mode-alist '("\\.sbt\\'" . scala-mode))
 (require 'scala-mode-auto)
 
-(add-to-list 'load-path (format "%s/ensime_2.9.2-0.9.8.1/elisp/" ELISPDIR))
-(require 'ensime)
-(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
+(add-to-list 'load-path "~/elisp/scalaz")
+(require 'scalaz-unicode-input-method)
+(add-hook 'scala-mode-hook
+  (lambda () (set-input-method "scalaz-unicode")))
+
+;; (add-to-list 'load-path (format "%s/ensime_2.9.2-0.9.8.1/elisp/" ELISPDIR))
+;; (require 'ensime)
+;; (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
 
 ; SQL
