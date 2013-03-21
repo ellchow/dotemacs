@@ -604,17 +604,17 @@ Pop up the buffer containing MARKER and scroll to MARKER if we ask the user."
 ;; (autoload 'javascript-mode "javascript" nil t)
 
 ;; ; CEDET
-;; (load-file (format "%s/cedet-1.0/common/cedet.el" ELISPDIR))
-;; (global-ede-mode 1)                      ; Enable the Project management system
-;; (semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion
-;; (global-srecode-minor-mode 1)            ; Enable template insertion menu
+(load-file (format "%s/cedet-1.0/common/cedet.el" ELISPDIR))
+(global-ede-mode 1)                      ; Enable the Project management system
+(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion
+;;(global-srecode-minor-mode 1)            ; Enable template insertion menu
 
 
 ;; ; ECB
-;; (add-to-list 'load-path (format "%s/ecb-2.40" ELISPDIR))
-;; (setq ecb-tip-of-the-day nil)
-;; (require 'ecb)
-;; (require 'ecb-autoloads)
+(add-to-list 'load-path (format "%s/ecb-2.40" ELISPDIR))
+(setq ecb-tip-of-the-day nil)
+(require 'ecb)
+(require 'ecb-autoloads)
 
 ; Scala
 (add-to-list 'load-path (format "%s/scala" ELISPDIR))
@@ -722,3 +722,17 @@ Pop up the buffer containing MARKER and scroll to MARKER if we ask the user."
     ;; (hs-minor-mode 1)
     (autopair-mode 1)
     ))
+
+
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(ecb-options-version "2.40"))
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
