@@ -68,8 +68,8 @@
 (setq ring-bell-function 'ignore)
 
 ;;;; 80+ rule
-;; (require 'highlight-80+)
-;; (highlight-80+-mode 1)
+(require 'highlight-80+)
+(highlight-80+-mode 1)
 
 ;; scroll 1 at a time at bottom of page
 ;;(setq scroll-step 1)
@@ -487,7 +487,11 @@ Pop up the buffer containing MARKER and scroll to MARKER if we ask the user."
 
 (defun my-save ()
   (interactive)
-  (delete-trailing-whitespace)
+
+  (when (not (string-match "\[.\]\\(tsv\\|md\\)" (buffer-name))) (untabify (point-min) (point-max)))
+
+  (when (not (string-match "\[.\]\\(tsv\\)" (buffer-name))) (delete-trailing-whitespace))
+
   (save-buffer)
   )
 
@@ -580,6 +584,8 @@ Pop up the buffer containing MARKER and scroll to MARKER if we ask the user."
 
 ;;;; MODES
 
+;; tab width
+;; (setq c-basic-offset 4)
 
 ; Python
 (require 'python-mode)
@@ -712,13 +718,6 @@ Pop up the buffer containing MARKER and scroll to MARKER if we ask the user."
       (concat user-temporary-file-directory ".auto-saves-"))
 (setq auto-save-file-name-transforms
       `((".*" ,user-temporary-file-directory t)))
-
-
-
-(add-hook 'before-save-hook
-  (lambda ()
-    (untabify (point-min) (point-max))
-    ))
 
 (add-hook 'find-file-hook
   (lambda ()

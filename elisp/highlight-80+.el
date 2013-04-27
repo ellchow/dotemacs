@@ -38,7 +38,7 @@
   "Highlight characters beyond column 80."
   :group 'faces)
 
-(defcustom highlight-80+-columns 80
+(defcustom highlight-80+-columns 100
   "*Number of columns to allow in lines."
   :group 'highlight-80+
   :type 'integer)
