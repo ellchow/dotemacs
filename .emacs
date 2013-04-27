@@ -604,17 +604,17 @@ Pop up the buffer containing MARKER and scroll to MARKER if we ask the user."
 ;; (autoload 'javascript-mode "javascript" nil t)
 
 ;; ; CEDET
-(load-file (format "%s/cedet-1.0/common/cedet.el" ELISPDIR))
-(global-ede-mode 1)                      ; Enable the Project management system
-(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion
+;; (load-file (format "%s/cedet-1.0/common/cedet.el" ELISPDIR))
+;; (global-ede-mode 1)                      ; Enable the Project management system
+;; (semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion
 ;;(global-srecode-minor-mode 1)            ; Enable template insertion menu
 
 
 ;; ; ECB
-(add-to-list 'load-path (format "%s/ecb-2.40" ELISPDIR))
-(setq ecb-tip-of-the-day nil)
-(require 'ecb)
-(require 'ecb-autoloads)
+;; (add-to-list 'load-path (format "%s/ecb-2.40" ELISPDIR))
+;; (setq ecb-tip-of-the-day nil)
+;; (require 'ecb)
+;; (require 'ecb-autoloads)
 
 ; Scala
 (add-to-list 'load-path (format "%s/scala" ELISPDIR))
@@ -649,6 +649,11 @@ Pop up the buffer containing MARKER and scroll to MARKER if we ask the user."
 (setq auto-mode-alist
       (cons '("\\.md" . markdown-mode) auto-mode-alist))
 (require 'markdown-mode)
+
+;; Textile Mode
+(require 'textile-mode)
+(add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
+
 
 ;;;; KEY BINDINGS
 
