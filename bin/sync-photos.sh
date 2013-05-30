@@ -100,3 +100,26 @@ if not simulate:
 "
 
 echo 'INFO - Ended at '`date`
+
+
+
+
+
+
+
+
+
+
+
+
+# import('utils'); load.data('digikam_albums_table.csv',header=T,sep=',',quote='"') -> x; subset(x,select=c(relativePath,caption)) -> y; y$relativePath <- gsub('_','',sapply(str_split(as.character(y$relativePath), '/'), function(e) tail(e,1))); y$caption <- gsub(';(_| );',';',gsub('_+','_',gsub('\\s*:\\s*',' - ',gsub('\\s+',' ',gsub('(\n|;\\s*|；\\s*)',' ; ', str_trim(as.character(y$caption))))))); y <- subset(y, !str_detect(caption,'^\\s*$')); write.table(named(y, c('date','caption')),file='~/Pictures/photos/digikam_albums_table.tsv',sep='\t',col.names=T,row.names=F,quote=F); file.show('~/Pictures/photos/digikam_albums_table.tsv')
+
+# cat /home/elliot/Pictures/photos/digikam_albums_table.tsv |tail -n+2 | python -c "
+# import sys,os,re
+# for ln in sys.stdin:
+#   p = re.sub(\"'\",\"\\\\'\",' : '.join(ln.strip().split('\t')))
+#   p = re.sub(\" \",\"\\ \", p)
+#   p = re.sub(\";\",\"\\;\", p)
+#   print p" | xargs touch
+
+
