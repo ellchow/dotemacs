@@ -587,6 +587,11 @@ Pop up the buffer containing MARKER and scroll to MARKER if we ask the user."
 ;; tab width
 ;; (setq c-basic-offset 4)
 
+; JSON
+
+(require 'json-mode)
+(add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
+
 ; Python
 (require 'python-mode)
 (setq tab-width 2)
