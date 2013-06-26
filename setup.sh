@@ -11,3 +11,4 @@ ln -s -v $wd/.bash_profile .bash_profile
 ln -s -v $wd/.profile .profile
 ln -s -v $wd/.git-completion.sh .git-completion.sh
 ln -s -v $wd/.pystartup .pystartup
+ln -s -v $wd/.Rprofile .Rprofile
