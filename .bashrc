@@ -12,7 +12,7 @@ fi
 #### environment variables
 # export PATH=$PATH
 export EDITOR=emacs
-export PYTHONSTARTUP="~/.pystartup"
+export PYTHONSTARTUP=~/.pystartup
 export TERM=xterm-256color
 export TMPDIR="/tmp"
 
@@ -22,7 +22,7 @@ export TMPDIR="/tmp"
 
 #### misc aliases/functions
 alias emacs='emacs -nw'
-alias rm="rm -I"
+# alias rm="rm -I"
 function mbc(){ echo "scale=3;$@" | bc -l ; }
 
 #### tsv stuff
