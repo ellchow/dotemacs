@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+
 
 # requires PIL (sudo apt-get install python-imaging, brew install pil)
 
@@ -10,7 +10,7 @@ snk=$2
 simulate=`test $# -gt 2 && test $3 = 1 && echo True || echo False`
 
 
-tmpdir=`mktemp -d`
+tmpdir=`mktemp -d /tmp/XXXX`
 existing=$tmpdir/existing
 to_import=$tmpdir/to_import
 mkdir -p $snk
@@ -19,15 +19,11 @@ echo 'INFO - Started at '`date`
 test $simulate = True && echo 'INFO - Simulating!'
 
 ## find photos in sink directory (only basenames)
-find $snk -iname "*.jpg" -or -iname "*.png" -type f | xargs -I {} python -c "
-import os
-
-path = '"{}"'
-print os.path.basename(path)
-" | sort | uniq > $existing
-
+echo 'INFO - finding exisitng photos'
+find $snk -iname "*.jpg" -or -iname "*.png" -type f | xargs -P 10 -I {} basename {} | sort | uniq > $existing
 
 ## find photos to import
+echo 'INFO - finding photos to import'
 find $src -iname "*.jpg" -or -iname "*.png" -type f > $to_import
 
 ## generate filenames for photos to import
@@ -37,6 +33,7 @@ from PIL.ExifTags import TAGS
 import re
 import os
 import sys
+import md5
 
 ## simple string normalization
 def str_norm(s):
@@ -55,50 +52,57 @@ with open('"$to_import"') as f:
 
 ## loop over photos to import
 for path in to_import:
-  ## read exif data
-  ret = dict()
-  i = Image.open(path)
-  info = i._getexif()
-  for tag, value in info.items():
-    decoded = TAGS.get(tag, tag)
-    ret[decoded] = value
+  try:
+    ## read exif data
+    ret = dict()
+    i = Image.open(path)
+    info = i._getexif()
+    for tag, value in info.items():
+      decoded = TAGS.get(tag, tag)
+      ret[decoded] = value
 
-  make = str_norm(ret['Make'])
-  model = str_norm(ret['Model'])
-  timestamp = str_norm(ret['DateTimeOriginal'])
-  id = re.search(r'(.*)_IMG_([0-9]+)\..*',path).group(2)
+    make = str_norm(ret['Make']) if 'Make' in ret else 'NoMake'
+    model = str_norm(ret['Model']) if 'Model' in ret else 'NoModel'
+    timestamp = str_norm(ret['DateTimeOriginal']) if 'DateTimeOriginal' in ret else 'NoDateTimeOriginal'
 
-  ## get extension
-  ext = str_norm(os.path.splitext(path)[1])
+    #id = re.search(r'(.*)_-_(.*)..*?',path).group(2)
+    id = md5.new(path).hexdigest()
 
-  ## create new path
-  new_path = '%(timestamp)s-%(make)s-%(model)s-%(id)s.%(ext)s' % {'make': make, 'model': model, 'timestamp': timestamp, 'ext': ext, 'id': id}
+    ## get extension
+    ext = str_norm(os.path.splitext(path)[1])
 
-  ## print the source and sink paths if need to be copied
-  if new_path in existing:
-    sys.stderr.write('WARNING - %s exists (skipping)\n' % new_path)
-  else:
-    new_path = os.path.join(snk, new_path)
-    print '%s\v%s' % (path, new_path)
-" | \
-xargs -P 5 -I {} python -c "
+    ## create new path
+    new_path = '%(timestamp)s-%(make)s-%(model)s-%(id)s.%(ext)s' % {'make': make, 'model': model, 'timestamp': timestamp, 'ext': ext, 'id': id}
+
+    ## print the source and sink paths if need to be copied
+    if new_path in existing:
+      sys.stderr.write('WARNING - %s exists (skipping)\n' % new_path)
+    else:
+      new_path = os.path.join(snk, new_path)
+      print '%s\t%s' % (path, new_path)
+  except Exception,e:
+    sys.stderr.write('ERROR - problem processing %s: %s\n' % (path, e.message))
+
+" | python -c "
+
 import sys
 import shutil
 
 simulate = "$simulate"
 
-pair = '"{}"'.strip()
-path, new_path = pair.split('\v')
+for ln in sys.stdin:
+  pair = ln.strip()
+  path, new_path = pair.split('\t')
 
-sys.stderr.write('INFO - copying %s to %s %s\n' % (path, new_path, '(simulating)' if simulate else ''))
-## copy file from source to sink if not simulating
-if not simulate:
-  try:
-    shutil.copy(path, new_path)
-  except e:
-    sys.stderr.write('ERROR - error while copying %s - %s\n' % (path, e))
+  sys.stderr.write('INFO - copying %s to %s %s\n' % (path, new_path, '(simulating)' if simulate else ''))
+  ## copy file from source to sink if not simulating
+  if not simulate:
+    try:
+      shutil.copy(path, new_path)
+    except e:
+      sys.stderr.write('ERROR - error while copying %s - %s\n' % (path, e))""
+
 "
-
 echo 'INFO - Ended at '`date`
 
 
@@ -114,12 +118,13 @@ echo 'INFO - Ended at '`date`
 
 # import('utils'); load.data('digikam_albums_table.csv',header=T,sep=',',quote='"') -> x; subset(x,select=c(relativePath,caption)) -> y; y$relativePath <- gsub('_','',sapply(str_split(as.character(y$relativePath), '/'), function(e) tail(e,1))); y$caption <- gsub(';(_| );',';',gsub('_+','_',gsub('\\s*:\\s*',' - ',gsub('\\s+',' ',gsub('(\n|;\\s*|；\\s*)',' ; ', str_trim(as.character(y$caption))))))); y <- subset(y, !str_detect(caption,'^\\s*$')); write.table(named(y, c('date','caption')),file='~/Pictures/photos/digikam_albums_table.tsv',sep='\t',col.names=T,row.names=F,quote=F); file.show('~/Pictures/photos/digikam_albums_table.tsv')
 
-# cat /home/elliot/Pictures/photos/digikam_albums_table.tsv |tail -n+2 | python -c "
+# cat /Volumes/WD\ Passport/SYNCed/Pictures/photos/digikam_albums_table.tsv |tail -n+2 | python -c "
 # import sys,os,re
 # for ln in sys.stdin:
 #   p = re.sub(\"'\",\"\\\\'\",' : '.join(ln.strip().split('\t')))
 #   p = re.sub(\" \",\"\\ \", p)
+#   p = re.sub(\"/\",\"\\ \", p)
 #   p = re.sub(\";\",\"\\;\", p)
-#   print p" | xargs touch
+#   print p + '.info'" | xargs touch
 
 
