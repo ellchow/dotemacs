@@ -15,12 +15,13 @@ existing=$tmpdir/existing
 to_import=$tmpdir/to_import
 mkdir -p $snk
 
+echo 'INFO - tmp directory' $tmpdir
 echo 'INFO - Started at '`date`
 test $simulate = True && echo 'INFO - Simulating!'
 
-## find photos in sink directory (only basenames)
+## find photos in sink directory
 echo 'INFO - finding exisitng photos'
-find $snk -iname "*.jpg" -or -iname "*.png" -type f | xargs -P 10 -I {} basename {} | sort | uniq > $existing
+find $snk -iname "*.jpg" -or -iname "*.png" -type f | sort | uniq > $existing
 
 ## find photos to import
 echo 'INFO - finding photos to import'
@@ -44,7 +45,7 @@ snk = '"$snk"'
 
 ## load photos that exist
 with open('"$existing"') as f:
-  existing = set(map(lambda x: x.strip(), f.readlines()))
+  existing = set(map(lambda x: os.path.basename(x.strip()), f.readlines()))
 
 ## load photos to import
 with open('"$to_import"') as f:
