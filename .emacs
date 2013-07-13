@@ -592,6 +592,12 @@ Pop up the buffer containing MARKER and scroll to MARKER if we ask the user."
 
 ;;;; MODES
 
+; IDO
+
+(setq ido-enable-flex-matching t)
+  (setq ido-everywhere t)
+  (ido-mode 1)
+
 ;; tab width
 ;; (setq c-basic-offset 4)
 
