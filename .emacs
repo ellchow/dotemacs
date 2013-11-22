@@ -67,9 +67,9 @@
 ;setq visible-bell t)
 (setq ring-bell-function 'ignore)
 
-;;;; 80+ rule
-(require 'highlight-80+)
-(highlight-80+-mode 1)
+;;;; column marker
+(require 'column-marker)
+(defun column-marker-2-80 () (interactive) (column-marker-2 80))
 
 ;; scroll 1 at a time at bottom of page
 ;;(setq scroll-step 1)
@@ -679,7 +679,6 @@ Pop up the buffer containing MARKER and scroll to MARKER if we ask the user."
 (require 'textile-mode)
 (add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
 
-
 ;;;; KEY BINDINGS
 
 (global-set-key [f4]  'toggle-input-method)
@@ -690,7 +689,8 @@ Pop up the buffer containing MARKER and scroll to MARKER if we ask the user."
 (global-set-key [f6] 'bm-toggle)
 (global-set-key [f7]  'my-start-or-clear-eshell)
 ;; (global-set-key [f3]  'exec-mvn-compile)
-(global-set-key [f9]  'egg-status)
+;; (global-set-key [f3]  'exec-mvn-compile)
+(global-set-key [f8] 'column-marker-2-80)
 (global-set-key [C-f9]  'egg-log)
 (global-set-key [C-S-f9]  'exec-git-pull-push)
 ;; (global-set-key [C-M-f9]  'exec-git-pull-push)
