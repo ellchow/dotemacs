@@ -691,6 +691,7 @@ Pop up the buffer containing MARKER and scroll to MARKER if we ask the user."
 ;; (global-set-key [f3]  'exec-mvn-compile)
 ;; (global-set-key [f3]  'exec-mvn-compile)
 (global-set-key [f8] 'column-marker-2-80)
+(global-set-key [f9]  'egg-status)
 (global-set-key [C-f9]  'egg-log)
 (global-set-key [C-S-f9]  'exec-git-pull-push)
 ;; (global-set-key [C-M-f9]  'exec-git-pull-push)
