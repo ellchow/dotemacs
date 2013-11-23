@@ -1,4 +1,3 @@
-
 #### bash completion if available
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
@@ -11,7 +10,7 @@ fi
 
 #### environment variables
 # export PATH=$PATH
-export EDITOR=emacs
+export EDITOR='emacs -nw'
 export PYTHONSTARTUP=~/.pystartup
 export TERM=xterm-256color
 export TMPDIR="/tmp"
