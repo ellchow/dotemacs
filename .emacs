@@ -62,7 +62,7 @@
 
 ;;;; copy paste
 (setq x-select-enable-clipboard t)
-(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
+;; (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 
 ;;;; tramp
 (setq password-cache-expiry 72000)
@@ -385,5 +385,3 @@
     (autopair-mode 1)
     )
   )
-
-
