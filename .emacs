@@ -292,7 +292,7 @@
 (add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode))
 
 (require 'ensime)
-(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+;; (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
 ;;;; sql
 (eval-after-load "sql"
