@@ -336,6 +336,8 @@
 ;;;;;;;;;;;; key bindings
 (setq mac-command-modifier 'meta)
 
+(global-set-key [f4] 'sort-lines)
+
 (global-set-key [C-f6]  'bm-next)
 (global-set-key [M-f6]  'bm-previous)
 (global-set-key [f6] 'bm-toggle)
