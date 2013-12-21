@@ -342,6 +342,7 @@
 
 (global-set-key [f7]  'my-start-or-clear-eshell)
 
+(global-set-key [f3]  'longlines-mode)
 (global-set-key [f9]  'egg-status)
 (global-set-key [C-f9]  'egg-log)
 (global-set-key [M-f9]  'egg-checkout-ref)
