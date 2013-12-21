@@ -336,6 +336,8 @@
 ;;;;;;;;;;;; key bindings
 (setq mac-command-modifier 'meta)
 
+(global-set-key [f4] 'sort-lines)
+
 (global-set-key [C-f6]  'bm-next)
 (global-set-key [M-f6]  'bm-previous)
 (global-set-key [f6] 'bm-toggle)
@@ -347,7 +349,7 @@
 (global-set-key [C-f9]  'egg-log)
 (global-set-key [M-f9]  'egg-checkout-ref)
 (global-set-key [M-S-f9]  'egg-start-new-branch)
-(global-set-key [C-S-f9]  'git-blame)
+(global-set-key [C-S-f9]  'git-blame-mode)
 
 (global-set-key "\C-ch" 'hs-load-hide-block)
 (global-set-key "\C-cH" 'hs-load-hide-all)
