@@ -107,6 +107,14 @@
     (while (search-forward (string ?\C-m) nil t)
       (replace-match (string ?\C-j) nil t))))
 
+(defun sort-lines-ignore-case ()
+  (interactive)
+  (setq sort-fold-case t)
+  (call-interactively 'sort-lines)
+  (setq sort-fold-case nil)
+)
+
+
 ;;;; tab complete
 
 (require 'hippie-exp)
@@ -337,6 +345,7 @@
 (setq mac-command-modifier 'meta)
 
 (global-set-key [f4] 'sort-lines)
+(global-set-key [C-f4] 'sort-lines-ignore-case)
 
 (global-set-key [C-f6]  'bm-next)
 (global-set-key [M-f6]  'bm-previous)
