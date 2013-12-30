@@ -15,16 +15,16 @@ existing=$tmpdir/existing
 to_import=$tmpdir/to_import
 mkdir -p $snk
 
-echo 'INFO - tmp directory' $tmpdir
+echo 'INFO - tmp directory' $tmpdir >&2
 echo 'INFO - Started at '`date`
-test $simulate = True && echo 'INFO - Simulating!'
+test $simulate = True && echo 'INFO - Simulating!' >&2
 
 ## find photos in sink directory
-echo 'INFO - finding exisitng photos'
+echo 'INFO - finding exisitng photos' >&2
 find $snk -iname "*.jpg" -or -iname "*.png" -type f | sort | uniq > $existing
 
 ## find photos to import
-echo 'INFO - finding photos to import'
+echo 'INFO - finding photos to import' >&2
 find $src -iname "*.jpg" -or -iname "*.png" -type f > $to_import
 
 ## generate filenames for photos to import
@@ -67,7 +67,9 @@ for path in to_import:
     timestamp = str_norm(ret['DateTimeOriginal']) if 'DateTimeOriginal' in ret else 'NoDateTimeOriginal'
 
     #id = re.search(r'(.*)_-_(.*)..*?',path).group(2)
-    id = md5.new(path).hexdigest()
+    # id = md5.new(path).hexdigest()
+    id = str_norm(os.path.splitext(path)[0])
+
 
     ## get extension
     ext = str_norm(os.path.splitext(path)[1])
@@ -127,5 +129,3 @@ echo 'INFO - Ended at '`date`
 #   p = re.sub(\"/\",\"\\ \", p)
 #   p = re.sub(\";\",\"\\;\", p)
 #   print p + '.info'" | xargs touch
-
-
