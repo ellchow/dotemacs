@@ -271,6 +271,13 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;; modes
 
+;;;; simple note
+(require 'simplenote)
+(setq simplenote-email "zzzxqq@gmail.com")
+(setq simplenote-password nil)
+(simplenote-setup)
+
+
 ;;;; json
 (require 'json-mode)
 (add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
