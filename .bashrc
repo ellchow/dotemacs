@@ -14,10 +14,11 @@ export EDITOR='emacs -nw'
 export PYTHONSTARTUP=~/.pystartup
 export TERM=xterm-256color
 export TMPDIR="/tmp"
+# export PS1="\u@\h:\w$" ## MAC Prompt
 
 ## java
 # export CLASSPATH=
-# export JAVA_HOME=
+# export JAVA_HOME="$(/usr/libexec/java_home)" ## MAC java home
 
 #### misc aliases/functions
 alias emacs='emacs -nw'
