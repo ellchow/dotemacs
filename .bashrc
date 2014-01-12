@@ -10,19 +10,19 @@ fi
 
 #### environment variables
 # export PATH=$PATH
-export EDITOR='emacs -nw'
+export EDITOR='emacs -q -nw'
 export PYTHONSTARTUP=~/.pystartup
 export TERM=xterm-256color
 export TMPDIR="/tmp"
-# export PS1="\u@\h:\w$ " ## MAC Prompt
+export PS1="\u@\h:\w$ " ## MAC Prompt
 
 ## java
 # export CLASSPATH=
-# export JAVA_HOME="$(/usr/libexec/java_home)" ## MAC java home
+export JAVA_HOME="$(/usr/libexec/java_home)" ## MAC java home
 
 #### misc aliases/functions
-alias emacs='emacs -nw'
-# alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs -nw' ## MAC
+# alias emacs='emacs -nw'
+alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs -nw' ## MAC
 # alias rm="rm -I"
 function mbc(){ echo "scale=3;$@" | bc -l ; }
 
