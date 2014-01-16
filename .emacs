@@ -331,6 +331,9 @@
 (require 'textile-mode)
 (add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
 
+(require 'protobuf-mode)
+(add-to-list 'auto-mode-alist '("\\.proto\\'" . textile-mode))
+
 ;;;;;;;;;;;;;; libraries
 
 ;;;; bookmarking
