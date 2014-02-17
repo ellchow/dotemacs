@@ -281,6 +281,9 @@
 ;;;; json
 (require 'json-mode)
 (add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
+(add-to-list 'auto-mode-alist '("\\.avsc$" . json-mode))
+(add-to-list 'auto-mode-alist '("\\.avdl$" . json-mode))
+(add-to-list 'auto-mode-alist '("\\.avpr$" . json-mode))
 
 (require 'python-mode)
 (setq tab-width 2)
@@ -330,6 +333,9 @@
 ;; Textile Mode
 (require 'textile-mode)
 (add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
+
+(require 'protobuf-mode)
+(add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
 
 ;;;;;;;;;;;;;; libraries
 
