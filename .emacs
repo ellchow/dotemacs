@@ -64,6 +64,13 @@
 (setq x-select-enable-clipboard t)
 ;; (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 
+(defun copy-line ()
+      (interactive)
+      (kill-ring-save (line-beginning-position)
+                      (line-end-position))
+      (message "line copied")
+)
+
 ;;;; tramp
 (setq password-cache-expiry 72000)
 (setq tramp-default-method "ssh")
@@ -356,6 +363,8 @@
 
 ;;;;;;;;;;;; key bindings
 (setq mac-command-modifier 'meta)
+
+(global-set-key "\C-c\C-k" 'copy-line)
 
 (global-set-key "\C-c,L" 'sort-lines)
 (global-set-key "\C-c,l" 'sort-lines-ignore-case)
