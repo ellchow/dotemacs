@@ -10,7 +10,7 @@ fi
 
 #### environment variables
 # export PATH=$PATH
-export EDITOR='emacs -q -nw'
+export EDITOR='nano'
 export PYTHONSTARTUP=~/.pystartup
 export TERM=xterm-256color
 export TMPDIR="/tmp"
@@ -27,38 +27,6 @@ alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs -nw' ## MAC
 function mbc(){ echo "scale=3;$@" | bc -l ; }
 
 #### tsv stuff
-
-cutbyname(){
-    if [ ${#2} = 0 ]; then
-        sep="\t"
-    else
-        sep=$2
-    fi
-    awkwh '
-BEGIN{
-  FS="'$sep'"
-  OFS="\t"
-  split("'$1'", keep, ",")
-}
-NR == 1{
-  for(k=1;k <= length(keep);k+=1){
-    if(!(keep[k] in IDX) || (keep[k] in ks)){
-      delete keep[k]
-    }else{
-       ks[keep[k]] = 1
-    }
-  }
-}
-{
-  row = ""
-  for(k=1;k <= length(keep);k+=1){
-    if(k in keep)
-      row = row OFS $IDX[keep[k]]
-  }
-  print row
-}
-' | sed s/'\t\(.*\)'/'\1'/g
-}
 
 header(){
     if [ ${#1} = 0 ]; then
@@ -129,6 +97,13 @@ END{
 }' >&2 )
 }
 
+ppjson() {
+python -c "
+import sys, json
+for ln in sys.stdin: print json.dumps(json.loads(ln),indent=2)
+"
+}
+
 
 #### hadoop stuff
 
@@ -153,7 +128,11 @@ function hdussort() { hadoop fs -dus "$@" | perl -pi -e 's/(.*?)(\d+)$/$2 $1/' |
 #### git
 source ~/.git-completion.sh
 
-
-
 ####
 echo "loaded .bashrc" >&2
+
+bashrc_plus=~/.bashrc.plus
+if [ -f $bashrc_plus ]; then
+  source $bashrc_plus
+  echo "loaded "$bashrc_plus >&2
+fi
