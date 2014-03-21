@@ -97,6 +97,19 @@
   (hs-show-all)
 )
 
+;;;; window resize
+
+(defun v-resize (key)
+   "interactively resize the window"  
+   (interactive "cHit +/- to enlarge/shrink") 
+     (cond                                  
+       ((eq key (string-to-char "+"))                      
+          (enlarge-window 1)             
+          (call-interactively 'v-resize)) 
+       ((eq key (string-to-char "-"))                      
+          (enlarge-window -1)            
+          (call-interactively 'v-resize)) 
+       (t (push key unread-command-events)))) 
 
 ;;;; formatting
 (defun dos2unix (buffer)
@@ -387,6 +400,8 @@
 (global-set-key "\C-\\" 'comment-line)
 (global-set-key "\C-c\C-c"     'comment-region)
 (global-set-key "\C-c\C-v"      'uncomment-region)
+
+(global-set-key "\C-c+" 'v-resize)
 
 (global-set-key "\t" 'clever-hippie-tab)
 
