@@ -99,17 +99,30 @@
 
 ;;;; window resize
 
-(defun v-resize (key)
-   "interactively resize the window"  
-   (interactive "cHit +/- to enlarge/shrink") 
-     (cond                                  
-       ((eq key (string-to-char "+"))                      
-          (enlarge-window 1)             
-          (call-interactively 'v-resize)) 
-       ((eq key (string-to-char "-"))                      
-          (enlarge-window -1)            
-          (call-interactively 'v-resize)) 
-       (t (push key unread-command-events)))) 
+(defun resize-window (&optional arg)    ; Hirose Yuuji and Bob Wiener
+  "*Resize window interactively."
+  (interactive "p")
+  (if (one-window-p) (error "Cannot resize sole window"))
+  (or arg (setq arg 1))
+  (let (c)
+    (catch 'done
+      (while t
+        (message
+         "h=heighten, s=shrink, w=widen, n=narrow (by %d);  1-9=unit, q=quit"
+         arg)
+        (setq c (read-char))
+        (condition-case ()
+            (cond
+             ((= c ?h) (enlarge-window arg))
+             ((= c ?s) (shrink-window arg))
+             ((= c ?w) (enlarge-window-horizontally arg))
+             ((= c ?n) (shrink-window-horizontally arg))
+             ((= c ?\^G) (keyboard-quit))
+             ((= c ?q) (throw 'done t))
+             ((and (> c ?0) (<= c ?9)) (setq arg (- c ?0)))
+             (t (beep)))
+          (error (beep)))))
+    (message "Done.")))
 
 ;;;; formatting
 (defun dos2unix (buffer)
@@ -401,7 +414,7 @@
 (global-set-key "\C-c\C-c"     'comment-region)
 (global-set-key "\C-c\C-v"      'uncomment-region)
 
-(global-set-key "\C-c+" 'v-resize)
+(global-set-key "\C-c+" 'resize-window)
 
 (global-set-key "\t" 'clever-hippie-tab)
 
