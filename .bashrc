@@ -35,7 +35,7 @@ header(){
     else
         sep=$1
     fi
-    head -n1 | awk '
+    head -n1 | gawk '
 BEGIN{
 RS="'$sep'"
 OFS="\n"
@@ -54,8 +54,8 @@ onbody() {
     fi
 }
 
-awkwh(){
-    awk "
+gawkwh(){
+    gawk "
 NR==1{
   for(i=1;i<=NF;i+=1){
     IDX[\$i] = i
@@ -72,7 +72,7 @@ lines_read(){
     fi
 
     tee >(
-awk '
+gawk '
 BEGIN{
   x=10
   n='$n'
