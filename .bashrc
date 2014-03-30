@@ -105,6 +105,9 @@ for ln in sys.stdin: print json.dumps(json.loads(ln),indent=2)
 "
 }
 
+function zless() { gzip -dc "$@" | less ; }
+function zcat() { gzip -dc "$@" ; }
+
 
 #### hadoop stuff
 
