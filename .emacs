@@ -356,12 +356,19 @@
 (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
 (require 'markdown-mode)
 
-;; Textile Mode
+;;;; Textile Mode
 (require 'textile-mode)
 (add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
 
+
+;;;; Protobuf Mode
 (require 'protobuf-mode)
 (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
+
+;;;; CSV Mode
+(require 'csv-mode)
+(add-to-list 'auto-mode-alist '("\\.csv\\'" . protobuf-mode))
+(add-to-list 'auto-mode-alist '("\\.tsv\\'" . protobuf-mode))
 
 ;;;;;;;;;;;;;; libraries
 
