@@ -1,0 +1,11 @@
+attrcolor b ".I"
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E38;5;%dm'
+defbce "on"
+
+echo "loaded .screenrc" >&2
+
+screenrc_plus=~/.screenrc.plus
+if [ -f $screenrc_plus ]; then
+  source $screenrc_plus
+  echo "loaded "$screenrc_plus >&2
+fi
