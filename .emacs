@@ -438,3 +438,4 @@
     (autopair-mode 1)
     )
   )
+(put 'downcase-region 'disabled nil)

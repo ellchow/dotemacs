@@ -13,3 +13,4 @@ ln -s -v $wd/.git-completion.sh .git-completion.sh
 ln -s -v $wd/.pystartup .pystartup
 ln -s -v $wd/.Rprofile .Rprofile
 ln -s -v $wd/.screenrc .screenrc
+ln -s -v $wd/.gitconfig .gitconfig
