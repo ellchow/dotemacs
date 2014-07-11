@@ -14,3 +14,4 @@ ln -s -v $wd/.pystartup .pystartup
 ln -s -v $wd/.Rprofile .Rprofile
 ln -s -v $wd/.screenrc .screenrc
 ln -s -v $wd/.gitconfig .gitconfig
+ln -s -v $wd/.tmux.conf .tmux.conf
