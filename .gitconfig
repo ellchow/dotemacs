@@ -1,5 +1,6 @@
 [user]
   name = Elliot Chow
+  email = email@email.com
 
 [push]
   default = matching
