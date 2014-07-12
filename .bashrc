@@ -10,7 +10,7 @@ fi
 
 #### environment variables
 # export PATH=$PATH
-export EDITOR='emacs -q -nw'
+export EDITOR='nano'
 export PYTHONSTARTUP=~/.pystartup
 export TERM=xterm-256color
 export TMPDIR="/tmp"
@@ -19,6 +19,7 @@ export PS1="\u@\h:\w$ " ## MAC Prompt
 ## java
 # export CLASSPATH=
 export JAVA_HOME="$(/usr/libexec/java_home)" ## MAC java home
+export JAVA_TOOL_OPTIONS='-Djava.awt.headless=true'
 
 #### misc aliases/functions
 # alias emacs='emacs -nw'
@@ -28,45 +29,13 @@ function mbc(){ echo "scale=3;$@" | bc -l ; }
 
 #### tsv stuff
 
-cutbyname(){
-    if [ ${#2} = 0 ]; then
-        sep="\t"
-    else
-        sep=$2
-    fi
-    awkwh '
-BEGIN{
-  FS="'$sep'"
-  OFS="\t"
-  split("'$1'", keep, ",")
-}
-NR == 1{
-  for(k=1;k <= length(keep);k+=1){
-    if(!(keep[k] in IDX) || (keep[k] in ks)){
-      delete keep[k]
-    }else{
-       ks[keep[k]] = 1
-    }
-  }
-}
-{
-  row = ""
-  for(k=1;k <= length(keep);k+=1){
-    if(k in keep)
-      row = row OFS $IDX[keep[k]]
-  }
-  print row
-}
-' | sed s/'\t\(.*\)'/'\1'/g
-}
-
 header(){
     if [ ${#1} = 0 ]; then
         sep="\t"
     else
         sep=$1
     fi
-    head -n1 | awk '
+    head -n1 | gawk '
 BEGIN{
 RS="'$sep'"
 OFS="\n"
@@ -85,8 +54,8 @@ onbody() {
     fi
 }
 
-awkwh(){
-    awk "
+gawkwh(){
+    gawk "
 NR==1{
   for(i=1;i<=NF;i+=1){
     IDX[\$i] = i
@@ -103,7 +72,7 @@ lines_read(){
     fi
 
     tee >(
-awk '
+gawk '
 BEGIN{
   x=10
   n='$n'
@@ -129,6 +98,16 @@ END{
 }' >&2 )
 }
 
+ppjson() {
+python -c "
+import sys, json
+for ln in sys.stdin: print json.dumps(json.loads(ln),indent=2)
+"
+}
+
+function zless() { gzip -dc "$@" | less ; }
+function zcat() { gzip -dc "$@" ; }
+
 
 #### hadoop stuff
 
@@ -153,7 +132,11 @@ function hdussort() { hadoop fs -dus "$@" | perl -pi -e 's/(.*?)(\d+)$/$2 $1/' |
 #### git
 source ~/.git-completion.sh
 
-
-
 ####
 echo "loaded .bashrc" >&2
+
+bashrc_plus=~/.bashrc.plus
+if [ -f $bashrc_plus ]; then
+  source $bashrc_plus
+  echo "loaded "$bashrc_plus >&2
+fi

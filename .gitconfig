@@ -1,0 +1,14 @@
+[user]
+  name = Elliot Chow
+
+[push]
+  default = matching
+
+[alias]
+  co = checkout
+  ci = commit
+  st = status
+  br = branch
+  l = log --pretty=format:\"%h %ad [%an] | %s%d \" --graph --date=short
+  gr = grep
+  fu = fetch upstream

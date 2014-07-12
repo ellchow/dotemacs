@@ -104,6 +104,32 @@
   (hs-show-all)
 )
 
+;;;; window resize
+
+(defun resize-window (&optional arg)    ; Hirose Yuuji and Bob Wiener
+  "*Resize window interactively."
+  (interactive "p")
+  (if (one-window-p) (error "Cannot resize sole window"))
+  (or arg (setq arg 1))
+  (let (c)
+    (catch 'done
+      (while t
+        (message
+         "h=heighten, s=shrink, w=widen, n=narrow (by %d);  1-9=unit, q=quit"
+         arg)
+        (setq c (read-char))
+        (condition-case ()
+            (cond
+             ((= c ?h) (enlarge-window arg))
+             ((= c ?s) (shrink-window arg))
+             ((= c ?w) (enlarge-window-horizontally arg))
+             ((= c ?n) (shrink-window-horizontally arg))
+             ((= c ?\^G) (keyboard-quit))
+             ((= c ?q) (throw 'done t))
+             ((and (> c ?0) (<= c ?9)) (setq arg (- c ?0)))
+             (t (beep)))
+          (error (beep)))))
+    (message "Done.")))
 
 ;;;; formatting
 (defun dos2unix (buffer)
@@ -337,10 +363,12 @@
 (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
 (require 'markdown-mode)
 
-;; Textile Mode
+;;;; Textile Mode
 (require 'textile-mode)
 (add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
 
+
+;;;; Protobuf Mode
 (require 'protobuf-mode)
 (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
 
@@ -397,6 +425,8 @@
 (global-set-key "\C-c\C-c"     'comment-region)
 (global-set-key "\C-c\C-v"      'uncomment-region)
 
+(global-set-key "\C-c+" 'resize-window)
+
 (global-set-key "\t" 'clever-hippie-tab)
 
 ;;;;
@@ -417,3 +447,4 @@
     (autopair-mode 1)
     )
   )
+(put 'downcase-region 'disabled nil)
