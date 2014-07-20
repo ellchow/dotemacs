@@ -26,7 +26,8 @@
    '(color-theme-echow
      ((foreground-color . "#939393")
       ;; (foreground-color . "#d3d7cf")
-      (background-color . "#101010")
+      ;; (background-color . "#101010")
+      (background-color . "#000000")
       ;; (background-color . "#000")
       (background-mode . dark)
       (cursor-color . "#73d216") ; medium chameleon
