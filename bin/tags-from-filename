@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+python -c "import os, eyed3
+run = '"$2"' == '1'
+if not run: print 'dry-run...'
+for x in os.listdir('"$1"'):
+  x = x.strip()
+  y = eyed3.load(x)
+  x = os.path.basename(x).replace('.mp3','')
+  y.tag.artist = unicode(x.split('_-_')[0].replace('_',' '))
+  y.tag.title = unicode(x.split('_-_')[1].replace('_',' '))
+  print (y.tag.artist, y.tag.title)
+  if run: y.tag.save()
+"

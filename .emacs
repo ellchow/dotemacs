@@ -1,5 +1,4 @@
 ;;;; Elliot's .emacs
-
 (defvar ELISPDIR (format "%s/elisp" (getenv "HOME")))
 (setq load-path (cons ELISPDIR load-path))
 (let ((old-dir default-directory))
@@ -352,6 +351,7 @@
 ;;;; ESS (R)
 (require 'ess-site)
 (ess-toggle-underscore nil)
+(define-key ess-mode-map "\t" 'clever-hippie-tab)
 
 ;;;; Pig
 ;; (require 'pig-mode)
@@ -371,6 +371,9 @@
 ;;;; Protobuf Mode
 (require 'protobuf-mode)
 (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
+
+
+
 
 ;;;;;;;;;;;;;; libraries
 
