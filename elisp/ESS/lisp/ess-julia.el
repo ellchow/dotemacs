@@ -519,7 +519,7 @@ command for that version of Julia is made available.")
   (if (fboundp 'ess-add-toolbar) (ess-add-toolbar))
   (set (make-local-variable 'end-of-defun-function) 'ess-end-of-function)
   ;; (local-set-key  "\t" 'julia-indent-line) ;; temp workaround
-  ;; (set (make-local-variable 'indent-line-function) 'julia-indent-line)
+  (set (make-local-variable 'indent-line-function) 'julia-indent-line)
   (set (make-local-variable 'julia-basic-offset) 2)
   (setq imenu-generic-expression julia-imenu-generic-expression)
   (imenu-add-to-menubar "Imenu-jl")

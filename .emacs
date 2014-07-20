@@ -209,6 +209,15 @@
   (set-mark nil)
 )
 
+;; (defun indent-line ()
+;;   (interactive)
+;;   (delete-horizontal-space)
+;;   (set-mark (line-beginning-position))
+;;   (end-of-line)
+;;   (call-interactively 'indent-region)
+;;   (set-mark nil)
+;; )
+
 ;;;; saving
 (defun my-save ()
   (interactive)
