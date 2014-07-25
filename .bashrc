@@ -18,8 +18,7 @@ export PS1="\u@\h:\w$ " ## MAC Prompt
 
 ## java
 # export CLASSPATH=
-export JAVA_HOME="$(/usr/libexec/java_home)" ## MAC java home
-export JAVA_TOOL_OPTIONS='-Djava.awt.headless=true'
+export JAVA_HOME="$(/usr/libexec/java_home)" ## MAC java home, for java 6 >> export JAVA_HOME=/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Homeexport JAVA_TOOL_OPTIONS='-Djava.awt.headless=true'
 
 #### misc aliases/functions
 # alias emacs='emacs -nw'
