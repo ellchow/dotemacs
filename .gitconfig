@@ -20,5 +20,6 @@
   fo = fetch origin
   fu = fetch upstream
   rb = rebase
+  rbi = rebase --interactive
   prb = pull --rebase
 
