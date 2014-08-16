@@ -7,9 +7,18 @@
 
 [alias]
   co = checkout
+  cob = checkout -b
   ci = commit
+  cim = commit -m
+  ciam = commit --amend -m
   st = status
   br = branch
   l = log --pretty=format:\"%h %ad [%an] | %s%d \" --graph --date=short
+  rph = rev-parse HEAD
+  rss = reset --soft
   gr = grep
+  fo = fetch origin
   fu = fetch upstream
+  rb = rebase
+  prb = pull --rebase
+
