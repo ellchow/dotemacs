@@ -3,7 +3,7 @@
   email = email@email.com
 
 [push]
-  default = matching
+  default = simple
 
 [alias]
   co = checkout
