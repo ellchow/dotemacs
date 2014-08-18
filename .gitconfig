@@ -6,20 +6,26 @@
   default = simple
 
 [alias]
+  br = branch
+  fo = fetch origin
+  fu = fetch upstream
+  gr = grep
+  l = log --pretty=format:\"%h %ad [%an] | %s%d \" --graph --date=short
+  st = status
+  rl = git rev-list --format=%B -n 1
+  rlh = git rev-list --format=%B -n 1 HEAD
+
+  aA = add -A
+  au = add -u
+
   co = checkout
   cob = checkout -b
+
   ci = commit
   cim = commit -m
   ciam = commit --amend -m
-  st = status
-  br = branch
-  l = log --pretty=format:\"%h %ad [%an] | %s%d \" --graph --date=short
-  rph = rev-parse HEAD
+
   rss = reset --soft
-  gr = grep
-  fo = fetch origin
-  fu = fetch upstream
   rb = rebase
   rbi = rebase --interactive
   prb = pull --rebase
-
