@@ -24,6 +24,7 @@
   ci = commit
   cim = commit -m
   ciam = commit --amend -m
+  cilm = commit -a -m
 
   rss = reset --soft
   rb = rebase
