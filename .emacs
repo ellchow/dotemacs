@@ -366,6 +366,7 @@
 (require 'ess-site)
 (ess-toggle-underscore nil)
 (define-key ess-mode-map "\t" 'clever-hippie-tab)
+(setq ess-indent-level 2)
 
 ;;;; Pig
 ;; (require 'pig-mode)
