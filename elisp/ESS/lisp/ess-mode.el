@@ -115,45 +115,45 @@
     (define-key map "\C-m"       'newline-and-indent); = [RETURN]
     (define-key map "\C-y"       'ess-yank)
 
-    (define-key map "\C-c\C-r"   'ess-eval-region)
-    (define-key map "\C-c\M-r"   'ess-eval-region-and-go)
-    (define-key map "\C-c\C-b"   'ess-eval-buffer)
-    (define-key map "\C-c\M-b"   'ess-eval-buffer-and-go)
-    (define-key map (kbd "C-c C-<up>")   'ess-eval-buffer-from-beg-to-here)
-    (define-key map (kbd "C-c C-<down>") 'ess-eval-buffer-from-here-to-end)
-    (define-key map "\C-c\C-f"   'ess-eval-function)
-    (define-key map "\C-c\M-f"   'ess-eval-function-and-go)
-    (define-key map "\C-c\C-c"   'ess-eval-region-or-function-or-paragraph-and-step)
-    (define-key map "\C-c\C-p"   'ess-eval-paragraph-and-step)
-    (define-key map "\C-c\M-p"   'ess-eval-paragraph-and-go)
+    ;; (define-key map "\C-c\C-r"   'ess-eval-region)
+    ;; (define-key map "\C-c\M-r"   'ess-eval-region-and-go)
+    ;; (define-key map "\C-c\C-b"   'ess-eval-buffer)
+    ;; (define-key map "\C-c\M-b"   'ess-eval-buffer-and-go)
+    ;; (define-key map (kbd "C-c C-<up>")   'ess-eval-buffer-from-beg-to-here)
+    ;; (define-key map (kbd "C-c C-<down>") 'ess-eval-buffer-from-here-to-end)
+    ;; (define-key map "\C-c\C-f"   'ess-eval-function)
+    ;; (define-key map "\C-c\M-f"   'ess-eval-function-and-go)
+    ;; (define-key map "\C-c\C-c"   'ess-eval-region-or-function-or-paragraph-and-step)
+    ;; (define-key map "\C-c\C-p"   'ess-eval-paragraph-and-step)
+    ;; (define-key map "\C-c\M-p"   'ess-eval-paragraph-and-go)
     (define-key map "\C-\M-x"    'ess-eval-region-or-function-or-paragraph)
-    (define-key map "\C-c\C-n"   'ess-eval-line-and-step)
-    (define-key map "\C-c\C-j"   'ess-eval-line)
+    ;; (define-key map "\C-c\C-n"   'ess-eval-line-and-step)
+    ;; (define-key map "\C-c\C-j"   'ess-eval-line)
     (define-key map [(control return)] 'ess-eval-region-or-line-and-step)
-    (define-key map "\C-c\M-j"   'ess-eval-line-and-go)
+    ;; (define-key map "\C-c\M-j"   'ess-eval-line-and-go)
     ;; the next three can only work in S/R - mode {FIXME}
     (define-key map "\C-\M-a"    'ess-goto-beginning-of-function-or-para)
     (define-key map "\C-\M-e"    'ess-goto-end-of-function-or-para)
     (define-key map "\C-xnd"     'ess-narrow-to-defun)
-    (define-key map "\C-c\C-y"   'ess-switch-to-ESS-deprecated)
-    (define-key map "\C-c\C-z"   'ess-switch-to-inferior-or-script-buffer)
-    (define-key map "\C-c\C-l"   'ess-load-file)
-    (define-key map "\C-c\M-l"   'ess-load-file); alias, as in 'iESS' where C-c C-l is comint-list-*
-    (define-key map "\C-c\C-v"   'ess-display-help-on-object)
+    ;; (define-key map "\C-c\C-y"   'ess-switch-to-ESS-deprecated)
+    ;; (define-key map "\C-c\C-z"   'ess-switch-to-inferior-or-script-buffer)
+    ;; (define-key map "\C-c\C-l"   'ess-load-file)
+    ;; (define-key map "\C-c\M-l"   'ess-load-file); alias, as in 'iESS' where C-c C-l is comint-list-*
+    ;; (define-key map "\C-c\C-v"   'ess-display-help-on-object)
     ;;(define-key map "\C-c5\C-d"'ess-dump-object-into-edit-buffer-other-frame)
-    (define-key map "\C-c\C-s"   'ess-switch-process) ; use a
+    ;; (define-key map "\C-c\C-s"   'ess-switch-process) ; use a
     ;; different process for the buffer.
     ;; (define-key map "\C-c\C-t"   'ess-execute-in-tb)
-    (define-key map "\C-c\t"     'ess-complete-object-name-deprecated)
+    ;; (define-key map "\C-c\t"     'ess-complete-object-name-deprecated)
     ;;M  (define-key map "\C-c\t"        'comint-dynamic-complete-filename)
     (unless (and (featurep 'emacs) (>= emacs-major-version 24))
       (define-key map "\M-\t"    'comint-dynamic-complete))
     (define-key map "\M-?"       'ess-list-object-completions)
     ;; wrong here (define-key map "\C-c\C-k" 'ess-request-a-process)
-    (define-key map "\C-c\C-k"   'ess-force-buffer-current)
-    (define-key map "\C-c`"      'ess-show-traceback)
-    (define-key map [(control ?c) ?~] 'ess-show-call-stack)
-    (define-key map "\C-c."      (lambda () (interactive) (message "ess-set-style moved to C-c C-e C-s. Sorry for the inconvenience")))
+    ;; (define-key map "\C-c\C-k"   'ess-force-buffer-current)
+    ;; (define-key map "\C-c`"      'ess-show-traceback)
+    ;; (define-key map [(control ?c) ?~] 'ess-show-call-stack)
+    ;; (define-key map "\C-c."      (lambda () (interactive) (message "ess-set-style moved to C-c C-e C-s. Sorry for the inconvenience")))
     (define-key map "{"          'ess-electric-brace)
     (define-key map "}"          'ess-electric-brace)
     (define-key map "\C-\M-q"    'ess-indent-exp)
@@ -162,15 +162,15 @@
         (define-key map [(meta backspace)] 'backward-kill-word))
     ;;(define-key map [delete]   'backward-delete-char-untabify)
     (define-key map "\t"         'ess-indent-or-complete)
-    (define-key map "\C-c\C-q"   'ess-quit)
+    ;; (define-key map "\C-c\C-q"   'ess-quit)
     (define-key map "\M-\r"      'ess-use-this-dir)
 
     ;; smart operators; most likely will go in the future into a separate local map
     (define-key map ","          'ess-smart-comma)
 
-    (define-key map "\C-c\C-d"   'ess-doc-map)
-    (define-key map "\C-c\C-e"   'ess-extra-map)
-    (define-key map "\C-c\C-t"   'ess-dev-map)
+    ;; (define-key map "\C-c\C-d"   'ess-doc-map)
+    ;; (define-key map "\C-c\C-e"   'ess-extra-map)
+    ;; (define-key map "\C-c\C-t"   'ess-dev-map)
     map)
   "Keymap for `ess-mode'.")
 
@@ -433,8 +433,8 @@ Furthermore, \\[ess-set-style] command enables you to set up predefined ess-mode
 indentation style. At present, predefined style are `BSD', `GNU', `K&R', `C++',
 `CLB' (quoted from C language style)."
   (setq alist (or alist
-		  (buffer-local-value 'ess-local-customize-alist (current-buffer))
-		  (error "Customise alist is not specified, nor  ess-local-customize-alist is set.")))
+                  (buffer-local-value 'ess-local-customize-alist (current-buffer))
+                  (error "Customise alist is not specified, nor  ess-local-customize-alist is set.")))
   (kill-all-local-variables) ;; NOTICE THIS! *** NOTICE THIS! *** NOTICE THIS! ***
   (ess-setq-vars-local alist)
   ;; must happen here, since the mode map is set up too early:
@@ -749,30 +749,30 @@ if this is the case."
   ;;VS[02-04-2012|ESS 12.03]: this is sooo ugly
   (when (> (length ess-change-sp-regexp) 0)
     (and (buffer-file-name) ess-filenames-map
-	 (let ((sourcemod (nth 5 (file-attributes (buffer-file-name))))
-	       (objname))
-	   (save-excursion
-	     (goto-char (point-min))
-	     ;; Get name of assigned object, if we can find it
-	     (setq objname
-		   (and
-		    (re-search-forward
-		     "^\\s *\"?\\(\\(\\sw\\|\\s_\\)+\\)\"?\\s *[<_]"
-		     nil
-		     t)
-		    (buffer-substring (match-beginning 1)
-				      (match-end 1)))))
-	   (and
-	    sourcemod			; the file may have been deleted
-	    objname			; may not have been able to
-					; find name
-	    (ess-modtime-gt (ess-object-modtime objname) sourcemod)
-	    (not (y-or-n-p
+         (let ((sourcemod (nth 5 (file-attributes (buffer-file-name))))
+               (objname))
+           (save-excursion
+             (goto-char (point-min))
+             ;; Get name of assigned object, if we can find it
+             (setq objname
+                   (and
+                    (re-search-forward
+                     "^\\s *\"?\\(\\(\\sw\\|\\s_\\)+\\)\"?\\s *[<_]"
+                     nil
+                     t)
+                    (buffer-substring (match-beginning 1)
+                                      (match-end 1)))))
+           (and
+            sourcemod                   ; the file may have been deleted
+            objname                     ; may not have been able to
+                                        ; find name
+            (ess-modtime-gt (ess-object-modtime objname) sourcemod)
+            (not (y-or-n-p
 
-		  (format
-		   "The ESS object %s is newer than this file. Continue?"
-		   objname)))
-	    (error "Aborted"))))))
+                  (format
+                   "The ESS object %s is newer than this file. Continue?"
+                   objname)))
+            (error "Aborted"))))))
 
 (defun ess-check-source (fname)
   "If file FNAME has an unsaved buffer, offer to save it.
@@ -818,31 +818,31 @@ With prefix argument, only shows the errors ESS reported."
       (set-buffer errbuff)
       (goto-char (point-max))
       (if
-	  (re-search-backward
-	   ;; FIXME: R does not give "useful" error messages -
-	   ;; -----  by default: We (ESS) could try to use a more useful one, via
-	   ;;   options(error=essErrorHandler)
-	   ess-error-regexp
-	   nil
-	   t)
-	  (let* ((filename (buffer-substring (match-beginning 3) (match-end 3)))
-		 (fbuffer (get-file-buffer filename))
-		 (linenum
-		  (string-to-number
-		   (buffer-substring (match-beginning 2) (match-end 2))))
-		 (errmess (buffer-substring (match-beginning 1) (match-end 1))))
-	    (if showerr
+          (re-search-backward
+           ;; FIXME: R does not give "useful" error messages -
+           ;; -----  by default: We (ESS) could try to use a more useful one, via
+           ;;   options(error=essErrorHandler)
+           ess-error-regexp
+           nil
+           t)
+          (let* ((filename (buffer-substring (match-beginning 3) (match-end 3)))
+                 (fbuffer (get-file-buffer filename))
+                 (linenum
+                  (string-to-number
+                   (buffer-substring (match-beginning 2) (match-end 2))))
+                 (errmess (buffer-substring (match-beginning 1) (match-end 1))))
+            (if showerr
                 (ess-display-temp-buffer errbuff)
-	      (if fbuffer nil
-		(setq fbuffer (find-file-noselect filename))
-		(with-current-buffer fbuffer
-		  (ess-mode)))
-	      (pop-to-buffer fbuffer)
-	      ;;(goto-line linenum) gives warning: is said to be replaced by
-	      (goto-char (point-min)) (forward-line (1- linenum)))
-	    (princ errmess t))
-	(message "Not a syntax error.")
-	(ess-display-temp-buffer errbuff)))))
+              (if fbuffer nil
+                (setq fbuffer (find-file-noselect filename))
+                (with-current-buffer fbuffer
+                  (ess-mode)))
+              (pop-to-buffer fbuffer)
+              ;;(goto-line linenum) gives warning: is said to be replaced by
+              (goto-char (point-min)) (forward-line (1- linenum)))
+            (princ errmess t))
+        (message "Not a syntax error.")
+        (ess-display-temp-buffer errbuff)))))
 
 ;;*;; ESS code formatting/indentation
 
@@ -1094,49 +1094,49 @@ Return the amount the indentation changed by."
       (funcall ess-indent-line-function)
     ;; else S and R default behavior
     (let ((indent (ess-calculate-indent nil))
-	  beg shift-amt
-	  (case-fold-search nil)
-	  (pos (- (point-max) (point))))
+          beg shift-amt
+          (case-fold-search nil)
+          (pos (- (point-max) (point))))
       (beginning-of-line)
       (setq beg (point))
       (cond ((eq indent nil)
-	     (setq indent (current-indentation)))
-	    (t
-	     (skip-chars-forward " \t")
-	     (cond ((and ess-fancy-comments ;; ### or #!
-			 (or (looking-at "###")
-			     (and (looking-at "#!") (= 1 (line-number-at-pos)))))
-		    (setq indent 0))
-		   ;; Single # comment
-		   ((and ess-fancy-comments
-			 (looking-at "#") (not (looking-at "##")) (not (looking-at "#'")))
-		    (setq indent comment-column))
-		   (t
-		    (if (eq indent t) (setq indent 0))
-		    (if (listp indent) (setq indent (car indent)))
-		    (cond ((and (looking-at "else\\b")
-				(not (looking-at "else\\s_")))
-			   (setq indent (save-excursion
-					  (ess-backward-to-start-of-if)
-					  (+ ess-else-offset (current-column)))))
-			  ((= (following-char) ?})
-			   (setq indent
-				 (+ indent
-				    (- ess-close-brace-offset ess-indent-level))))
-			  ((= (following-char) ?{)
-			   (setq indent (+ indent ess-brace-offset))))))))
+             (setq indent (current-indentation)))
+            (t
+             (skip-chars-forward " \t")
+             (cond ((and ess-fancy-comments ;; ### or #!
+                         (or (looking-at "###")
+                             (and (looking-at "#!") (= 1 (line-number-at-pos)))))
+                    (setq indent 0))
+                   ;; Single # comment
+                   ((and ess-fancy-comments
+                         (looking-at "#") (not (looking-at "##")) (not (looking-at "#'")))
+                    (setq indent comment-column))
+                   (t
+                    (if (eq indent t) (setq indent 0))
+                    (if (listp indent) (setq indent (car indent)))
+                    (cond ((and (looking-at "else\\b")
+                                (not (looking-at "else\\s_")))
+                           (setq indent (save-excursion
+                                          (ess-backward-to-start-of-if)
+                                          (+ ess-else-offset (current-column)))))
+                          ((= (following-char) ?})
+                           (setq indent
+                                 (+ indent
+                                    (- ess-close-brace-offset ess-indent-level))))
+                          ((= (following-char) ?{)
+                           (setq indent (+ indent ess-brace-offset))))))))
       (skip-chars-forward " \t")
       (setq shift-amt (- indent (current-column)))
       (if (zerop shift-amt)
-	  (if (> (- (point-max) pos) (point))
-	      (goto-char (- (point-max) pos)))
-	(delete-region beg (point))
-	(indent-to indent)
-	;; If initial point was within line's indentation,
-	;; position after the indentation.
-	;; Else stay at same point in text.
-	(if (> (- (point-max) pos) (point))
-	    (goto-char (- (point-max) pos))))
+          (if (> (- (point-max) pos) (point))
+              (goto-char (- (point-max) pos)))
+        (delete-region beg (point))
+        (indent-to indent)
+        ;; If initial point was within line's indentation,
+        ;; position after the indentation.
+        ;; Else stay at same point in text.
+        (if (> (- (point-max) pos) (point))
+            (goto-char (- (point-max) pos))))
       shift-amt)))
 
 
@@ -1144,7 +1144,7 @@ Return the amount the indentation changed by."
   (looking-at "[[:blank:]]*([[:blank:]]*\\($\\|#\\)"))
 
 (defun ess-calculate-indent--closing-paren ()
-  (search-forward ")") 
+  (search-forward ")")
   (backward-sexp)
   (if (ess-looking-at-last-open-paren-p)
       ;; If this line ends with "("
@@ -1218,7 +1218,7 @@ Return the amount the indentation changed by."
                    ;;   a <- some.function(
                    ;;     arg1,
                    ;;     arg2)
-                   ;; 
+                   ;;
                    ;; case 1: numeric
                    ((and (numberp ess-arg-function-offset-new-line)
                          (ess-looking-at-last-open-paren-p))
@@ -1322,7 +1322,7 @@ Returns nil if line starts inside a string, t if in a comment."
                              ;; return number of skiped chars
                              (skip-chars-forward ", \t"))))
         (- indent unindent)))
-     
+
      ;; default indentation rules
      (t
       (ess-calculate-indent--default parse-start)))))
@@ -1387,7 +1387,7 @@ Returns nil if line starts inside a string, t if in a comment."
                       (or (and (/= ess-first-continued-statement-offset 0)
                                (null (ess--continued-statement containing-sexp))
                                ess-first-continued-statement-offset)
-                          0)))                 
+                          0)))
                  (+ first-indent
                     (if containing-sexp
                         (if (> (point-at-bol) containing-sexp)
@@ -1397,7 +1397,7 @@ Returns nil if line starts inside a string, t if in a comment."
                       (+ (current-indentation)))))))))))
 
 (defun ess-backward-to-noncomment (lim)
-  ;; this one is bad. Use 
+  ;; this one is bad. Use
   (let ((lim (or lim (point-min)))
         opoint stop)
     (while (not stop)

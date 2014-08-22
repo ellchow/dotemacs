@@ -55,6 +55,11 @@
 
 (setq inhibit-startup-message t)
 
+(require 'whitespace)
+(setq whitespace-line-column 160) ;; limit line length
+(setq whitespace-style '(face lines-tail))
+(add-hook 'prog-mode-hook 'whitespace-mode)
+
 ;;;;;;;;;;;;;;; behaviors and functions
 
 (require 'redo)

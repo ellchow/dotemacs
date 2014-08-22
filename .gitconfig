@@ -3,13 +3,30 @@
   email = email@email.com
 
 [push]
-  default = matching
+  default = simple
 
 [alias]
-  co = checkout
-  ci = commit
-  st = status
   br = branch
-  l = log --pretty=format:\"%h %ad [%an] | %s%d \" --graph --date=short
-  gr = grep
+  fo = fetch origin
   fu = fetch upstream
+  gr = grep
+  l = log --pretty=format:\"%h %ad [%an] | %s%d \" --graph --date=short
+  st = status
+  rl = git rev-list --format=%B -n 1
+  rlh = git rev-list --format=%B -n 1 HEAD
+
+  aA = add -A
+  au = add -u
+
+  co = checkout
+  cob = checkout -b
+
+  ci = commit
+  cim = commit -m
+  ciam = commit --amend -m
+  cilm = commit -a -m
+
+  rss = reset --soft
+  rb = rebase
+  rbi = rebase --interactive
+  prb = pull --rebase
