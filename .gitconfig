@@ -34,5 +34,4 @@
   rb = rebase
   rbi = rebase --interactive
   prb = pull --rebase
-  rbi = rebase --interactive
-  prb = pull --rebase
+  mff = merge --ff-only

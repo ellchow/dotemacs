@@ -442,8 +442,8 @@
 
 (global-set-key "\M-\\"     'uncomment-line)
 (global-set-key "\C-\\" 'comment-line)
-(global-set-key "\C-c\C-c"     'comment-region)
-(global-set-key "\C-c\C-v"      'uncomment-region)
+(global-set-key "\C-cc"     'comment-region)
+(global-set-key "\C-cv"      'uncomment-region)
 
 (global-set-key "\C-c+" 'resize-window)
 
