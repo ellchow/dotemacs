@@ -28,10 +28,11 @@
 
   ci = commit
   cim = commit -m
-  ciAm = commit --amend -m
-  ciam = commit -a -m
+  ciam = commit --amend -m
 
   rss = reset --soft
   rb = rebase
+  rbi = rebase --interactive
+  prb = pull --rebase
   rbi = rebase --interactive
   prb = pull --rebase
