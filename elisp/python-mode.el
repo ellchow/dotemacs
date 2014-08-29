@@ -4306,6 +4306,16 @@ With optional \\[universal-argument] an indent with length `py-indent-offset' is
            (py--indent-line-intern need cui this-indent-offset col beg end region))
           (t (py--indent-line-intern need cui this-indent-offset col beg end region)))))
 
+(defun py-indent-line-hippie (&optional arg)
+  (cond
+   ((and transient-mark-mode mark-active)
+    (indent-region (region-beginning) (region-end) nil))
+   ((and (eq (char-syntax (preceding-char)) ?w)
+         (not (= (current-column) 0)))
+    (hippie-expand arg))
+   (t (py-indent-line)))
+  )
+
 (defun py-indent-line (&optional arg)
   "Indent the current line according to Python rules.
 
