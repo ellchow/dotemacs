@@ -4306,17 +4306,6 @@ With optional \\[universal-argument] an indent with length `py-indent-offset' is
            (py--indent-line-intern need cui this-indent-offset col beg end region))
           (t (py--indent-line-intern need cui this-indent-offset col beg end region)))))
 
-(defun py-indent-line-hippie (&optional arg)
-  (interactive)
-  (cond
-   ((and transient-mark-mode mark-active)
-    (indent-region (region-beginning) (region-end) nil))
-   ((and (eq (char-syntax (preceding-char)) ?w)
-         (not (= (current-column) 0)))
-    (hippie-expand arg))
-   (t (py-indent-line arg)))
-  )
-
 (defun py-indent-line (&optional arg)
   "Indent the current line according to Python rules.
 
@@ -17020,7 +17009,7 @@ Try to find source definition of function at point"]
         (define-key map [(control c)(control b)] 'py-submit-bug-report)
         (define-key map [(control c)(control v)] 'py-version)
         (define-key map [(control c)(control w)] 'py-pychecker-run)
-        (define-key map (kbd "TAB") 'py-indent-line-hippie)
+        (define-key map [(backtab)] 'py-indent-line)
         ;; (if py-complete-function
         ;;     (progn
         ;;       (define-key map [(meta tab)] py-complete-function)
