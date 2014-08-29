@@ -11,7 +11,7 @@ fi
 #### environment variables
 # export PATH=$PATH
 export EDITOR='nano'
-export PYTHONSTARTUP=~/.pystartup
+#export PYTHONSTARTUP=~/.pystartup
 export TERM=xterm-256color
 export TMPDIR="/tmp"
 export PS1="\u@\h:\w$ " ## MAC Prompt
