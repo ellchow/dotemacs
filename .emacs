@@ -308,7 +308,9 @@
 ;;;; git
 (add-to-list 'load-path (format "%s/egg" ELISPDIR))
 (require 'egg)
-(require 'git-blame)
+(setq egg-auto-update t)
+(setq egg-switch-to-buffer t)
+;; (require 'git-blame)
 
 ;;;; ido
 (setq ido-enable-flex-matching t)
@@ -424,7 +426,7 @@
 
 (global-set-key "\C-cg"  'egg-status)
 (global-set-key "\C-cl"  'egg-log)
-(global-set-key "\C-cb"  'git-blame-mode)
+;; (global-set-key "\C-cb"  'git-blame-mode)
 
 (global-set-key "\C-ch" 'hs-load-hide-block)
 (global-set-key "\C-cH" 'hs-load-hide-all)
