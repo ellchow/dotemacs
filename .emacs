@@ -308,7 +308,7 @@
 ;;;; git
 (add-to-list 'load-path (format "%s/egg" ELISPDIR))
 (require 'egg)
-(setq egg-auto-update t)
+;; (setq egg-auto-update t)
 (setq egg-switch-to-buffer t)
 ;; (require 'git-blame)
 
