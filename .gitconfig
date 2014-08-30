@@ -9,7 +9,7 @@
   fo = fetch origin
   fu = fetch upstream
   gr = grep
-  l = log --pretty=format:\"%h %ad [%an] | %s%d \" --graph --date=short
+  l = log --pretty=format:\"%h %ad [%an] | %s%d \" --graph --date=iso
   st = status
   rl = rev-list --format=%B -n 1
   rlh = rev-list --format=%B -n 1 HEAD
@@ -22,6 +22,7 @@
   brdr = push --delete
   brda = !"f() { git branch -D $2; git push $1 :$2; }; f"
   brm = branch -M
+  psu = push --set-upstream
 
   co = checkout
   cob = checkout -b
@@ -29,9 +30,13 @@
   ci = commit
   cim = commit -m
   ciam = commit --amend -m
+  ciap = !"f() { x=`git log --pretty=format:"%s" | head -1`; git commit --amend -m \"$x\"; }; f"
 
   rss = reset --soft
   rb = rebase
   rbi = rebase --interactive
+  rbo = rebase --onto
   prb = pull --rebase
   mff = merge --ff-only
+  pff = pull --ff-only
+
