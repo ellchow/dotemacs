@@ -10,7 +10,7 @@ fi
 
 #### environment variables
 # export PATH=$PATH
-export EDITOR='nano'
+export EDITOR='emacs -nw -q'
 #export PYTHONSTARTUP=~/.pystartup
 export TERM=xterm-256color
 export TMPDIR="/tmp"
