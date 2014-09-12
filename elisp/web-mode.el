@@ -284,7 +284,7 @@ See web-mode-part-face."
 
 (defface web-mode-html-tag-bracket-face
   '((((class color) (min-colors 88) (background dark))  :foreground "Snow3")
-    (((class color) (min-colors 88) (background light)) :foreground "Grey14")
+    (((class color) (min-colors 88) (background light)) :foreground "LightYellow5")
     (((class color) (min-colors 16) (background dark))  :foreground "Snow3")
     (((class color) (min-colors 16) (background light)) :foreground "Grey14")
     (((class color) (min-colors 8))                     :foreground "Snow3")
