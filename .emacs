@@ -349,8 +349,13 @@
 ;; ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
 ;;;; Javascript
-(add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
-(autoload 'javascript-mode "javascript" nil t)
+;; (add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
+;; (autoload 'javascript-mode "javascript" nil t)
+
+;;;; Web mode
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))
 
 ;;;; Scala  https://github.com/hvesalai/scala-mode2
 (require 'scala-mode2)
