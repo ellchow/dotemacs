@@ -308,7 +308,9 @@
 ;;;; git
 (add-to-list 'load-path (format "%s/egg" ELISPDIR))
 (require 'egg)
-(require 'git-blame)
+;; (setq egg-auto-update t)
+(setq egg-switch-to-buffer t)
+;; (require 'git-blame)
 
 ;;;; ido
 (setq ido-enable-flex-matching t)
@@ -348,8 +350,13 @@
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
 ;;;; Javascript
-(add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
-(autoload 'javascript-mode "javascript" nil t)
+;; (add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
+;; (autoload 'javascript-mode "javascript" nil t)
+
+;;;; Web mode
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))
 
 ;;;; Scala  https://github.com/hvesalai/scala-mode2
 (require 'scala-mode2)
@@ -370,6 +377,7 @@
 (require 'ess-site)
 (ess-toggle-underscore nil)
 (define-key ess-mode-map "\t" 'clever-hippie-tab)
+(setq ess-indent-level 2)
 
 ;;;; Pig
 ;; (require 'pig-mode)
@@ -427,7 +435,7 @@
 
 (global-set-key "\C-cg"  'egg-status)
 (global-set-key "\C-cl"  'egg-log)
-(global-set-key "\C-cb"  'git-blame-mode)
+;; (global-set-key "\C-cb"  'git-blame-mode)
 
 (global-set-key "\C-ch" 'hs-load-hide-block)
 (global-set-key "\C-cH" 'hs-load-hide-all)
