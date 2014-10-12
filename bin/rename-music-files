@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
-python -c "import os, eyed3
+python -c "import os, eyed3, re
 run = '"$2"' == '1'
 if not run: print 'dry-run...'
 for x in os.listdir('"$1"'):
-  y = eyed3.load(x)
-  to = ('%s - %s.mp3' % (y.tag.artist, y.tag.title)).replace(' ','_')
-  print (x, to)
-  if run: os.rename(x, to)
+  if re.search(r'.mp3$', x):
+    print x,
+    y = eyed3.load(x)
+    to = ('%s - %s.mp3' % (y.tag.artist, y.tag.title)).replace(' ','_')
+    print x, '->', to
+    if run: os.rename(x, to)
 "

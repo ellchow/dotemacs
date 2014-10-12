@@ -339,12 +339,13 @@
 (add-to-list 'auto-mode-alist '("\\.yaml$" . python-mode))
 
 ;;;; Haskell
-;; (load (format "%s/haskell-mode/haskell-site-file.el" ELISPDIR))
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-;; ; use only one indentation mode
-;; ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-;; ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+(add-to-list 'load-path (format "%s/haskell-mode" ELISPDIR))
+(require 'haskell-mode-autoloads)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+; use only one indentation mode
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
 ;;;; Javascript
 (add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
@@ -442,8 +443,8 @@
 
 (global-set-key "\M-\\"     'uncomment-line)
 (global-set-key "\C-\\" 'comment-line)
-(global-set-key "\C-c\C-c"     'comment-region)
-(global-set-key "\C-c\C-v"      'uncomment-region)
+(global-set-key "\C-cc"     'comment-region)
+(global-set-key "\C-cv"      'uncomment-region)
 
 (global-set-key "\C-c+" 'resize-window)
 

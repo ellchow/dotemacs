@@ -1,0 +1,22 @@
+--------------------------------
+clojure
+--------------------------------
+leiningen
+
+sudo curl -o /usr/local/bin/lein https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+sudo chmod a+x /usr/local/bin/lein
+
+
+--------------------------------
+haskell
+--------------------------------
+
+git clone https://github.com/haskell/haskell-mode.git
+cd haskell-mode
+git co 6a4d4bd
+make EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs ## path to your emacs
+
+cd ~/git/dotemacs/elisp
+mkdir haskell-mode
+cd haskell-mode
+cp ~/git/haskell-mode/*.el .
