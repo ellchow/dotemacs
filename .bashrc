@@ -9,7 +9,7 @@ if [ -f /etc/bashrc ]; then
 fi
 
 #### environment variables
-export PATH=$PATH:~/git/dotemacs/bin
+export PATH=$PATH:~/git/dotemacs/bin:~/.cabal/bin
 export EDITOR='emacs -nw -q'
 #export PYTHONSTARTUP=~/.pystartup
 export TERM=xterm-256color
