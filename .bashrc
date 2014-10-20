@@ -24,7 +24,7 @@ export JAVA_TOOL_OPTIONS='-Djava.awt.headless=true'
 #### misc aliases/functions
 # alias emacs='emacs -nw'
 alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs -nw' ## MAC
-# alias julia='/Applications/Julia-0.2.1.app/Contents/Resources/julia/bin/julia'
+alias julia='/Applications/Julia-0.2.1.app/Contents/Resources/julia/bin/julia'
 # alias rm="rm -I"
 function mbc(){ echo "scale=3;$@" | bc -l ; }
 alias tmux='tmux -CC'

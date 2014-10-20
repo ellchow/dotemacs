@@ -20,3 +20,8 @@ cd ~/git/dotemacs/elisp
 mkdir haskell-mode
 cd haskell-mode
 cp ~/git/haskell-mode/*.el .
+
+brew install haskell-platform
+cabal update
+cabal install hlint
+caba install regex-tdfa
