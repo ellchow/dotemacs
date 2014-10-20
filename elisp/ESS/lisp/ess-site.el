@@ -277,7 +277,7 @@ between .s or .S files and assembly mode.
            ("\\.[Ss]t\\'"       . S-transcript-mode)
            ("\\.[Ss]out"        . S-transcript-mode)
            ("\\.[Rr]t\\'"       . R-transcript-mode)
-           ("\\.[Rr]out"        . R-transcript-mode)
+           ("\\.[Rr]out$"       . R-transcript-mode)
            ("\\.Rd\\'"          . Rd-mode)
            ("\\.[Bb][Uu][Gg]\\'"         . ess-bugs-mode)
            ("\\.[Bb][Oo][Gg]\\'"         . ess-bugs-mode)
