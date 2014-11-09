@@ -108,6 +108,17 @@
   (hs-show-all)
 )
 
+(defun indent-newline-indent ()
+  (interactive)
+  (set-mark (line-beginning-position))
+  (end-of-line)
+
+  (if (string-match "^\s*end\s*$" (buffer-substring-no-properties (mark) (point)))
+      (indent-region (region-beginning) (region-end)))
+
+  (newline-and-indent)
+)
+
 ;;;; window resize
 
 (defun resize-window (&optional arg)    ; Hirose Yuuji and Bob Wiener
@@ -380,6 +391,10 @@
 (ess-toggle-underscore nil)
 (define-key ess-mode-map "\t" 'clever-hippie-tab)
 (setq ess-indent-level 2)
+
+
+;;;;; ESS (Julia)
+(add-hook 'julia-mode-hook '(lambda () (local-set-key (kbd "RET") `indent-newline-indent)))
 
 ;;;; Pig
 ;; (require 'pig-mode)
