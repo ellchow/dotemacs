@@ -110,13 +110,20 @@
 
 (defun indent-newline-indent ()
   (interactive)
-  (set-mark (line-beginning-position))
-  (end-of-line)
 
-  (if (string-match "^\s*\\(end\\|else\\)\s*$" (buffer-substring-no-properties (mark) (point)))
-      (indent-region (region-beginning) (region-end)))
+  (defun run ()
+    (set-mark (line-beginning-position))
+    (end-of-line)
 
-  (newline-and-indent)
+    (if (string-match "^\s*\\(end\\|else\\)\s*$" (buffer-substring-no-properties (mark) (point)))
+        (indent-region (region-beginning) (region-end)))
+
+    (newline-and-indent)
+    )
+
+  (if (eq (point) (line-end-position))
+    (run)
+    (newline-and-indent))
 )
 
 ;;;; window resize
