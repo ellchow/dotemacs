@@ -113,7 +113,7 @@
   (set-mark (line-beginning-position))
   (end-of-line)
 
-  (if (string-match "^\s*end\s*$" (buffer-substring-no-properties (mark) (point)))
+  (if (string-match "^\s*\\(end\\|else\\)\s*$" (buffer-substring-no-properties (mark) (point)))
       (indent-region (region-beginning) (region-end)))
 
   (newline-and-indent)
