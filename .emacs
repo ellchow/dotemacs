@@ -108,15 +108,23 @@
   (hs-show-all)
 )
 
-(defun indent-newline-indent ()
+(defun julia-indent-newline-indent ()
   (interactive)
 
-  (defun run ()
-    (set-mark (line-beginning-position))
+  (defun end-section()
+    (insert "\nend")
+    (indent-region (line-beginning-position) (line-end-position))
+    (previous-line)
     (end-of-line)
+    )
 
-    (if (string-match "^\s*\\(end\\|else\\)\s*$" (buffer-substring-no-properties (mark) (point)))
-        (indent-region (region-beginning) (region-end)))
+  (defun run ()
+
+    (if (string-match "^\s*\\(end\\|else\\)\s*$" (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
+        (indent-region (line-beginning-position) (line-end-position)))
+
+    (if (string-match "^\s*\\(if\\|function\\|immutable\\|type\\|else\\|for\\|while\\|begin\\)\s.*$" (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
+        (end-section))
 
     (newline-and-indent)
     )
@@ -401,7 +409,7 @@
 
 
 ;;;;; ESS (Julia)
-(add-hook 'julia-mode-hook '(lambda () (local-set-key (kbd "RET") `indent-newline-indent)))
+(add-hook 'julia-mode-hook '(lambda () (local-set-key (kbd "RET") `julia-indent-newline-indent)))
 
 ;;;; Pig
 ;; (require 'pig-mode)

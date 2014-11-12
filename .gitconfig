@@ -1,6 +1,6 @@
 [user]
   name = Elliot Chow
-  email = email@email.com
+  email = chow.elliot@gmail.com
 
 [push]
   default = simple
@@ -42,4 +42,3 @@
   prb = pull --rebase
   mff = merge --ff-only
   pff = pull --ff-only
-
