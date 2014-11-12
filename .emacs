@@ -134,6 +134,44 @@
     (newline-and-indent))
 )
 
+;;;;  from https://github.com/mattharrison/point-stack/blob/master/point-stack.el
+(defvar point-stack-stack nil)
+(defvar point-stack-forward-stack nil)
+(defun point-stack-push ()
+  "Push current buffer, point, and scroll position onto stack."
+  (interactive)
+  (point-stack-store 'point-stack-stack)
+  (setq point-stack-forward-stack nil) ; new step resets forward history
+  (message "Location marked."))
+(defun point-stack-pop ()
+  "Push current location onto forward stack, move to previous location."
+  (interactive)
+  (if (null point-stack-stack)
+      (message "Stack is empty.")
+    (point-stack-store 'point-stack-forward-stack)
+    (point-stack-go (car point-stack-stack))
+    (setq point-stack-stack (cdr point-stack-stack))))
+(defun point-stack-forward-stack-pop ()
+  "Push current location onto stack, pop and move to location from forward stack."
+  (interactive)
+  (if (null point-stack-forward-stack)
+      (message "forward Stack is empty.")
+    (point-stack-store 'point-stack-stack)
+    (point-stack-go (car point-stack-forward-stack))
+    (setq point-stack-forward-stack (cdr point-stack-forward-stack))))
+(defun point-stack-store (stack)
+  (let ((loc (car (symbol-value stack))))
+    ;; don't push the same location twice
+    (unless (and (eq (current-buffer) (car loc))
+                 (eq (point) (cadr loc)))
+      (add-to-list stack (list (current-buffer) (point) (window-start))))))
+(defun point-stack-go (loc)
+  (switch-to-buffer (car loc))
+  (set-window-start nil (caddr loc))
+  (goto-char (cadr loc)))
+(provide 'point-stack)
+
+
 ;;;; window resize
 
 (defun resize-window (&optional arg)    ; Hirose Yuuji and Bob Wiener
@@ -463,7 +501,9 @@
 (global-set-key "\C-c\C-b" 'bm-toggle)
 
 (global-set-key [f7]  'my-start-or-clear-eshell)
-(global-set-key [f3]  'longlines-mode)
+(global-set-key [f3]  'point-stack-push)
+(global-set-key [f4]  'point-stack-pop)
+(global-set-key [f5]  'point-stack-forward-stack-pop)
 
 (global-set-key "\C-cg"  'egg-status)
 (global-set-key "\C-cl"  'egg-log)
