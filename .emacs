@@ -8,6 +8,8 @@
         (normal-top-level-add-subdirs-to-load-path))
     (setq default-directory old-dir)))
 
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+(setq exec-path (append exec-path '("/usr/local/bin")))
 
 ;;;;;;;;;; display
 (require 'color-theme)
