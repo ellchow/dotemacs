@@ -122,10 +122,10 @@
 
   (defun run ()
 
-    (if (string-match "^\s*\\(end\\|else\\)\s*$" (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
+    (if (string-match "^\s*\\(end\\|else\\|elseif\\)\s*$" (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
         (indent-region (line-beginning-position) (line-end-position)))
 
-    (if (string-match "^\s*\\(if\\|function\\|immutable\\|type\\|else\\|for\\|while\\|begin\\)\s.*$" (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
+    (if (string-match "^\s*\\(if\\|module\\|function\\|immutable\\|type\\|else\\|for\\|while\\|begin\\|let\\)\s.*$" (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
         (end-section))
 
     (newline-and-indent)
@@ -383,7 +383,19 @@
   (setq ido-everywhere t)
   (ido-mode 1)
 
+;;;; abbrev
+(setq default-abbrev-mode t)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;; modes
+
+;;;; java
+
+(defun my-java-init ()
+  (define-mode-abbrev "psvm" "public static void main (String[] args)")
+)
+(add-hook 'java-mode-hook 'my-java-init)
+
 
 ;;;; simple note
 (require 'simplenote)
