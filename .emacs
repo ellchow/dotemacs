@@ -393,6 +393,7 @@
 
 (defun my-java-init ()
   (define-mode-abbrev "psvm" "public static void main (String[] args)")
+  (define-key c-mode-base-map "\t" 'clever-hippie-tab)
 )
 (add-hook 'java-mode-hook 'my-java-init)
 
