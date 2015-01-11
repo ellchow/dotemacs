@@ -14,7 +14,7 @@ haskell
 git clone https://github.com/haskell/haskell-mode.git
 cd haskell-mode
 git co 6a4d4bd
-make EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs ## path to your emacs
+make EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs all ## path to your emacs
 
 cd ~/git/dotemacs/elisp
 mkdir haskell-mode
