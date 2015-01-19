@@ -52,6 +52,12 @@
 (setq search-highlight t)
 
 (show-paren-mode 1)
+(setq show-paren-style 'expression)
+(electric-pair-mode 1)
+(setq electric-pair-pairs '((?\" . ?\")
+                            (?\{ . ?\})
+                            )
+      )
 
 (set-display-table-slot standard-display-table 'wrap ?\\)
 
@@ -363,11 +369,6 @@
           (switch-to-buffer ywb-scratch-buffer)
           (lisp-interaction-mode))
       (switch-to-buffer ywb-scratch-buffer))))
-
-;;;; parentheses
-(require'autopair)
-(autopair-global-mode 1)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;; tools
 

@@ -22,6 +22,7 @@
   brd = branch -D
   brdr = push --delete
   brda = !"f() { git branch -D $2; git push $1 :$2; }; f"
+  brlr = !"f() { git br -r | grep '^[ ]*'$1; }; f"
   brm = branch -M
   psu = push --set-upstream
 

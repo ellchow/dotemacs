@@ -65,8 +65,9 @@
      (region ((t (:background "#2e3436"))))
 
      ;; Parenthesis matching
-     (show-paren-match-face ((t (:foreground "#2e3436" :background "#73d216"))))
-     (show-paren-mismatch-face ((t (:foreground "#2e3436" :background "#ef2929"))))
+     ;; (show-paren-match-face ((t (:foreground "#2e3436" :background "#73d216"))))
+     ;; (show-paren-mismatch-face ((t (:foreground "#2e3436" :background "#ef2929"))))
+     (show-paren-match ((t (:foreground "#cccc52"))))
 
      ;; Line highlighting
      (highlight ((t (:background "#222222" :foreground nil))))
