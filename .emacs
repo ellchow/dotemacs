@@ -334,9 +334,65 @@
 )
 
 ;;;; scratch buffer
+(setq initial-major-mode 'text-mode)
+(setq initial-scratch-message "*scratch*")
+
+(defvar persistent-scratch-filename
+    "~/.emacs-persistent-scratch"
+    "Location of *scratch* file contents for persistent-scratch.")
+(defvar persistent-scratch-backup-directory
+    "~/.emacs-persistent-scratch-backups/"
+    "Location of backups of the *scratch* buffer contents for
+    persistent-scratch.")
+
+(when (not (file-exists-p persistent-scratch-backup-directory))
+      (make-directory persistent-scratch-backup-directory)
+      )
+
+(defun make-persistent-scratch-backup-name ()
+  "Create a filename to backup the current scratch file by
+  concatenating PERSISTENT-SCRATCH-BACKUP-DIRECTORY with the
+  current date and time."
+    (concat
+     persistent-scratch-backup-directory
+     (format-time-string "%Y%m%d_%H%M%S_%s" (current-time))))
+
+(defun load-persistent-scratch ()
+  "Load the contents of PERSISTENT-SCRATCH-FILENAME into the
+  scratch buffer, clearing its contents first."
+  (interactive)
+
+  (if (file-exists-p persistent-scratch-filename)
+      (with-current-buffer (get-buffer "*scratch*")
+        (delete-region (point-min) (point-max))
+        (shell-command (format "cat %s" persistent-scratch-filename) (current-buffer))))
+  (switch-to-buffer "*scratch*"))
+
+(defun load-scratch ()
+  (interactive)
+  (switch-to-buffer "*scratch*"))
+
+
+(defun save-persistent-scratch ()
+  "Write the contents of *scratch* to the file name
+  PERSISTENT-SCRATCH-FILENAME, making a backup copy in
+  PERSISTENT-SCRATCH-BACKUP-DIRECTORY."
+  (interactive)
+  (when (get-buffer "*scratch*")
+    (with-current-buffer (get-buffer "*scratch*")
+      (if (file-exists-p persistent-scratch-filename)
+          (copy-file persistent-scratch-filename
+                     (make-persistent-scratch-backup-name)))
+      (delete-trailing-whitespace)
+          (write-region (point-min) (point-max)
+                        persistent-scratch-filename))))
+
+(push #'save-persistent-scratch kill-emacs-hook)
+
+
 (save-excursion
   (set-buffer (get-buffer-create "*scratch*"))
-  (lisp-interaction-mode)
+  (text-mode)
   (make-local-variable 'kill-buffer-query-functions)
   (add-hook 'kill-buffer-query-functions 'kill-scratch-buffer))
 
@@ -348,27 +404,27 @@
   (kill-buffer (current-buffer))
   ;; Make a brand new *scratch* buffer
   (set-buffer (get-buffer-create "*scratch*"))
-  (lisp-interaction-mode)
+  (text-mode)
   (make-local-variable 'kill-buffer-query-functions)
   (add-hook 'kill-buffer-query-functions 'kill-scratch-buffer)
   ;; Since we killed it, don't let caller do that.
   nil)
 
-(defvar ywb-scratch-buffer "*scratch*")
-(defun switch2scratch (arg)
-  (interactive "P")
-  (when arg
-    (setq ywb-scratch-buffer (read-buffer "Set scratch to: " (buffer-name))))
-  (let ((buf (get-buffer ywb-scratch-buffer)))
-    (if (null buf)
-        (progn
-          (or arg
-              (setq ywb-scratch-buffer (if (y-or-n-p "The buffer does not exist! Create *scratch*? ")
-                                           "*scratch*"
-                                         (read-buffer "Set scratch to: " (buffer-name)))))
-          (switch-to-buffer ywb-scratch-buffer)
-          (lisp-interaction-mode))
-      (switch-to-buffer ywb-scratch-buffer))))
+;; (defvar ywb-scratch-buffer "*scratch*")
+;; (defun switch2scratch (arg)
+;;   (interactive "P")
+;;   (when arg
+;;     (setq ywb-scratch-buffer (read-buffer "Set scratch to: " (buffer-name))))
+;;   (let ((buf (get-buffer ywb-scratch-buffer)))
+;;     (if (null buf)
+;;         (progn
+;;           (or arg
+;;               (setq ywb-scratch-buffer (if (y-or-n-p "The buffer does not exist! Create *scratch*? ")
+;;                                            "*scratch*"
+;;                                          (read-buffer "Set scratch to: " (buffer-name)))))
+;;           (switch-to-buffer ywb-scratch-buffer)
+;;           (text-mode))
+;;       (switch-to-buffer ywb-scratch-buffer))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;; tools
 
@@ -535,7 +591,9 @@
 
 (global-set-key "\C-x\C-o" 'other-window)
 (global-set-key "\C-x\C-b" 'electric-buffer-list)
-(global-set-key "\C-c,s" 'switch2scratch)
+(global-set-key "\C-c,s" 'load-scratch)
+(global-set-key "\C-c,p" 'load-persistent-scratch)
+(global-set-key "\C-c,o" 'save-persistent-scratch)
 
 (global-set-key "\M-\\"     'uncomment-line)
 (global-set-key "\C-\\" 'comment-line)
