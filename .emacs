@@ -620,6 +620,7 @@
 (add-hook 'find-file-hook
   (lambda ()
     (show-paren-mode 1)
+    (setq ess-indent-level 2)
     )
   )
 (put 'downcase-region 'disabled nil)
