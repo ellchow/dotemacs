@@ -43,3 +43,4 @@
   prb = pull --rebase
   mff = merge --ff-only
   pff = pull --ff-only
+  cp = cherry-pick
