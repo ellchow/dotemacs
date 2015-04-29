@@ -429,11 +429,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;; tools
 
 ;;;; git
-(add-to-list 'load-path (format "%s/egg" ELISPDIR))
-(require 'egg)
-;; (setq egg-auto-update t)
-(setq egg-switch-to-buffer t)
-;; (require 'git-blame)
+(add-to-list 'load-path (format "%s/git-commit-mode" ELISPDIR))
+(add-to-list 'load-path (format "%s/magit" ELISPDIR))
+(require 'magit)
+(setq magit-auto-revert-mode nil)
+(setq magit-last-seen-setup-instructions "1.4.0")
+(setq magit-status-buffer-switch-function 'switch-to-buffer)
 
 ;;;; ido
 (setq ido-enable-flex-matching t)
@@ -579,9 +580,7 @@
 (global-set-key [f4]  'point-stack-pop)
 (global-set-key [f5]  'point-stack-forward-stack-pop)
 
-(global-set-key "\C-cg"  'egg-status)
-(global-set-key "\C-cl"  'egg-log)
-;; (global-set-key "\C-cb"  'git-blame-mode)
+(global-set-key "\C-cg"  'magit-status)
 
 (global-set-key "\C-ch" 'hs-load-hide-block)
 (global-set-key "\C-cH" 'hs-load-hide-all)
