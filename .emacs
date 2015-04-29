@@ -63,10 +63,10 @@
 
 (setq inhibit-startup-message t)
 
-(require 'whitespace)
-(setq whitespace-line-column 80) ;; limit line length
-(setq whitespace-style '(face lines-tail))
-(add-hook 'prog-mode-hook 'whitespace-mode)
+;; (require 'whitespace)
+;; (setq whitespace-line-column 80) ;; limit line length
+;; (setq whitespace-style '(face lines-tail))
+;; (add-hook 'prog-mode-hook 'whitespace-mode)
 
 ;;;;;;;;;;;;;;; behaviors and functions
 
@@ -439,6 +439,7 @@
 (setq ido-enable-flex-matching t)
   (setq ido-everywhere t)
   (ido-mode 1)
+(setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
 
 ;;;; abbrev
 (setq default-abbrev-mode t)
