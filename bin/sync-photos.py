@@ -4,6 +4,7 @@ import re
 import os
 import sys
 import md5
+import shutil
 
 def listdir(path):
   return map(lambda x: os.path.join(path,x), os.listdir(path))
@@ -32,7 +33,9 @@ if __name__ == '__main__':
 
   src = sys.argv[1]
   snk = sys.argv[2]
-  simulate = not (len(sys.argv) > 3 and sys.argv[3] == '1')
+  do_run = not (len(sys.argv) <= 3 or sys.argv[3] == '0')
+
+  print do_run
 
   to_import = rlistimages(src)
   existing = dict(map(lambda x: (os.path.basename(x), x), rlistimages(snk)))
@@ -68,14 +71,17 @@ if __name__ == '__main__':
         print 'skip\t%s\t%s' % (path, existing[new_path])
       else:
         new_path = os.path.join(snk, new_path)
-        print '%s\t%s\t%s' % ('to_copy' if simulate else 'copy', path, new_path)
+
         imported += 1
-        if not simulate:
+        if do_run:
+          print '%s\t%s\t%s' % ('copying', path, new_path)
           try:
             shutil.copy(path, new_path)
           except e:
             sys.stderr.write('ERROR - error while copying %s - %s\n' % (path, e))
             failures += 1
+        else:
+          print '%s\t%s\t%s' % ('to_copy', path, new_path)
     except Exception,e:
       sys.stderr.write('ERROR - problem processing %s: %s\n' % (path, e.message))
       failures += 1
