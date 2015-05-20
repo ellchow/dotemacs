@@ -29,7 +29,7 @@
 
 (global-hl-line-mode 1)
 
-(menu-bar-mode 1)
+(menu-bar-mode 0)
 (tool-bar-mode 0)
 
 (transient-mark-mode t)
@@ -473,6 +473,7 @@
 (add-to-list 'auto-mode-alist '("\\.avdl$" . json-mode))
 (add-to-list 'auto-mode-alist '("\\.avpr$" . json-mode))
 
+;;;; python
 (require 'python-mode)
 (setq tab-width 2)
 (setq-default py-indent-offset 2)
@@ -488,7 +489,6 @@
 ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
-
 
 ;;;; Javascript
 ;; (add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
@@ -545,8 +545,10 @@
 (require 'protobuf-mode)
 (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
 
-
-
+;;;; Go
+(require 'go-mode)
+(add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
+(add-hook 'before-save-hook 'gofmt-before-save)
 
 ;;;;;;;;;;;;;; libraries
 
