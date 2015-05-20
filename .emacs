@@ -547,7 +547,11 @@
 
 ;;;; Go
 (require 'go-mode)
-(add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
+(defun init-go-mode ()
+  (go-mode)
+  (setq tab-width 2)
+)
+(add-to-list 'auto-mode-alist '("\\.go\\'" . init-go-mode))
 (add-hook 'before-save-hook 'gofmt-before-save)
 
 ;;;;;;;;;;;;;; libraries
