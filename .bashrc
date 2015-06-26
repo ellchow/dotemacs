@@ -11,7 +11,7 @@ fi
 
 
 #### environment variables
-export PATH=$PATH:~/git/dotemacs/bin
+export PATH=$PATH:$HOME/git/dotemacs/bin
 export EDITOR='emacs -nw -q'
 # export PYTHONSTARTUP=~/.pystartup
 export TERM=xterm-256color
