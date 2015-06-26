@@ -8,33 +8,35 @@ if [ -f /etc/bashrc ]; then
         . /etc/bashrc
 fi
 
+
+
 #### environment variables
-export PATH=$PATH:~/git/dotemacs/bin:~/.cabal/bin:/Applications/Julia-0.3.2.app/Contents/Resources/julia/bin
+export PATH=$PATH:~/git/dotemacs/bin
 export EDITOR='emacs -nw -q'
-#export PYTHONSTARTUP=~/.pystartup
+# export PYTHONSTARTUP=~/.pystartup
 export TERM=xterm-256color
 export TMPDIR="/tmp"
 export PS1="\u@\h:\w$ " ## MAC Prompt
 
 ## java
 # export CLASSPATH=
-export JAVA_HOME="$(/usr/libexec/java_home)" ## MAC java home, for java 6 >> export JAVA_HOME=/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
+# export JAVA_HOME="$(/usr/libexec/java_home)" ## MAC java home, for java 6 >> export JAVA_HOME=/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
 export JAVA_OPTS='-Xmx4G'
 export JAVA_TOOL_OPTIONS='-Djava.awt.headless=true'
 
-## go
-export GOPATH=$HOME/Documents/code/go
-export PATH=$PATH:$GOPATH/bin
-
 #### misc aliases/functions
 # alias emacs='emacs -nw'
-alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs -nw' ## MAC
-# alias rm="rm -I"
+# alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs -nw' ## MAC
+
+alias rm="rm -I"
+
 function mbc(){ echo "scale=3;$@" | bc -l ; }
+
 alias tmuxc='tmux -CC'
 alias tmuxa='tmux -CC a'
-alias cbl=cabal
+
 alias gl='glances -1'
+
 #### tsv stuff
 
 header(){

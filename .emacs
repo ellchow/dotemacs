@@ -133,7 +133,7 @@
     (if (string-match "^\s*\\(end\\|else\\|elseif\\)\s*$" (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
         (indent-region (line-beginning-position) (line-end-position)))
 
-    (if (string-match "^\s*\\(if\\|module\\|function\\|immutable\\|type\\|else\\|for\\|while\\|begin\\|let\\)\s.*$" (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
+    (if (string-match "^\s*\\(if\\|module\\|function\\|immutable\\|type\\|else\\|for\\|while\\|begin\\|let\\|macro\\)\s.*$" (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
         (end-section))
 
     (newline-and-indent)
