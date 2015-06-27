@@ -28,7 +28,7 @@ export JAVA_TOOL_OPTIONS='-Djava.awt.headless=true'
 # alias emacs='emacs -nw'
 # alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs -nw' ## MAC
 
-alias rm="rm -I"
+# alias rm="rm -I"
 
 function mbc(){ echo "scale=3;$@" | bc -l ; }
 
