@@ -30,7 +30,7 @@
 (global-hl-line-mode 1)
 
 (menu-bar-mode 0)
-;; (tool-bar-mode 0)
+(ignore-errors (tool-bar-mode 0))
 
 (transient-mark-mode t)
 
@@ -54,12 +54,14 @@
 (setq search-highlight t)
 
 (show-paren-mode 1)
-(setq show-paren-style 'expression)
+;; (setq show-paren-style 'expression) ;; highlight paren region
 (electric-pair-mode 1)
 (setq electric-pair-pairs '((?\" . ?\")
                             (?\{ . ?\})
                             )
       )
+(require 'rainbow-delimiters)
+(add-hook 'prog-mode-hook'rainbow-delimiters-mode)
 
 (set-display-table-slot standard-display-table 'wrap ?\\)
 
