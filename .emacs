@@ -30,7 +30,7 @@
 (global-hl-line-mode 1)
 
 (menu-bar-mode 0)
-;; (tool-bar-mode 0)
+(ignore-errors (tool-bar-mode 0))
 
 (transient-mark-mode t)
 
@@ -548,13 +548,13 @@
 (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
 
 ;;;; Go
-;; (require 'go-mode)
-;; (defun init-go-mode ()
-;;   (go-mode)
-;;   (setq tab-width 2)
-;; )
-;; (add-to-list 'auto-mode-alist '("\\.go\\'" . init-go-mode))
-;; (add-hook 'before-save-hook 'gofmt-before-save)
+(require 'go-mode)
+(defun init-go-mode ()
+  (go-mode)
+  (setq tab-width 2)
+)
+(add-to-list 'auto-mode-alist '("\\.go\\'" . init-go-mode))
+(add-hook 'before-save-hook 'gofmt-before-save)
 
 ;;;;;;;;;;;;;; libraries
 
@@ -593,10 +593,7 @@
 (global-set-key "\C-cg"  'magit-status)
 (global-set-key "\C-xg"  'goto-line)
 
-(global-set-key "\C-ch" 'hs-load-hide-block)
-(global-set-key "\C-cH" 'hs-load-hide-all)
-(global-set-key "\C-cs" 'hs-load-show-block)
-(global-set-key "\C-cS" 'hs-load-show-all)
+(global-set-key "\C-xg"  'goto-line)
 
 (global-set-key "\C-r" 'redo)
 (global-set-key "\C-x\C-s"  'my-save)
@@ -635,3 +632,4 @@
     )
   )
 (put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
