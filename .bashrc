@@ -63,7 +63,7 @@ BEGIN {
   if ((tcurr - tprev) > '$n') {
     rcurr = (NR - nprev) / (tcurr - tprev + 1);
     r = NR / (tcurr - t0 + 1);
-    print strftime(timefmt) " - " label " - read: " (NR - nprev) " (" rcurr "/sec)" " - total read: " NR " (" r "/sec)" > "/dev/stderr"
+    print strftime(timefmt) " - " label " - read: " (NR - nprev) " (" rcurr "/sec)" " ; total read: " NR " (" r "/sec)" > "/dev/stderr"
     tprev = tcurr
     nprev = NR
   }
@@ -73,7 +73,7 @@ END {
   rcurr = (NR - nprev) / (tcurr - tprev + 1);
   r = NR / (tcurr - t0 + 1);
 
-  print strftime(timefmt) " - " label " - read: " (NR - nprev) " (" rcurr "/sec)" " - total read: " NR " (" r "/sec)" > "/dev/stderr"
+  print strftime(timefmt) " - " label " - read: " (NR - nprev) " (" rcurr "/sec)" " ; total read: " NR " (" r "/sec)" > "/dev/stderr"
   print "END - "  label " - " strftime("%c") > "/dev/stderr"
 }'
 }
