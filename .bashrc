@@ -53,7 +53,7 @@ BEGIN {
   nprev = 0
   timefmt = "%Y-%m-%d %H:%M:%S"
   label = "'$label'"
-  print "START - " label " - " strftime("%c") > "/dev/stderr"
+  print strftime(timefmt) " - lines " label " - START" > "/dev/stderr"
 }
 {
   print $0
@@ -63,7 +63,7 @@ BEGIN {
   if ((tcurr - tprev) > '$n') {
     rcurr = (NR - nprev) / (tcurr - tprev + 1);
     r = NR / (tcurr - t0 + 1);
-    print strftime(timefmt) " - " label " - read: " (NR - nprev) " (" rcurr "/sec)" " ; total read: " NR " (" r "/sec)" > "/dev/stderr"
+    print strftime(timefmt) " - lines " label " - read: " (NR - nprev) " (" rcurr "/sec)" " ; total read: " NR " (" r "/sec)" > "/dev/stderr"
     tprev = tcurr
     nprev = NR
   }
@@ -73,8 +73,8 @@ END {
   rcurr = (NR - nprev) / (tcurr - tprev + 1);
   r = NR / (tcurr - t0 + 1);
 
-  print strftime(timefmt) " - " label " - read: " (NR - nprev) " (" rcurr "/sec)" " ; total read: " NR " (" r "/sec)" > "/dev/stderr"
-  print "END - "  label " - " strftime("%c") > "/dev/stderr"
+  print strftime(timefmt) " - lines " label " - read: " (NR - nprev) " (" rcurr "/sec)" " ; total read: " NR " (" r "/sec)" > "/dev/stderr"
+  print strftime(timefmt) " - lines " label " - END" > "/dev/stderr"
 }'
 }
 
