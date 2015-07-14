@@ -37,106 +37,56 @@ alias tmuxa='tmux -CC a'
 
 alias gl='glances -1'
 
-#### tsv stuff
-
-header(){
-    if [ ${#1} = 0 ]; then
-        sep="\t"
-    else
-        sep=$1
-    fi
-    head -n1 | gawk '
-BEGIN{
-RS="'$sep'"
-OFS="\n"
-}
-{ print(NR "\t" $0) }
-'
-}
-
-onbody() {
-    IFS= read -r header
-    printf '%s\n' "$header"
-    if [ ${#1} = 0 ]; then
-        cat
-    else
-        "$@"
-    fi
-}
-
-gawkwh(){
-    gawk "
-NR==1{
-  for(i=1;i<=NF;i+=1){
-    IDX[\$i] = i
-  }
-}
-""$@"
-}
-
-lines_read(){
+lines(){
     if [ ${#1} = 0 ]; then
         n=10
     else
         n=$1
     fi
 
-    tee >(
-gawk '
-BEGIN{
-  x=10
-  n='$n'
-  step=n
-  m=n*x
-  print "START " strftime("%c")
+awk '
+BEGIN {
+  print "START " strftime("%c") > "/dev/stderr"
+  t0 = systime()
+  tprev = systime()
+  nprev = 0
+  timefmt = "%Y-%m-%d %H:%M:%S"
 }
 {
-  if(NR<m && NR==n){
-    print "lines read: " NR
-    n=n+step
-  }
-  if(NR == m){
-    print "lines read: " NR " " strftime("%c")
-    step = x*step
-    n=n+step
-    m = x*m
+  print $0
+
+  tcurr = systime()
+
+  if ((tcurr - tprev) > '$n') {
+    rcurr = (NR - nprev) / (tcurr - tprev + 1);
+    r = NR / (tcurr - t0 + 1);
+    print strftime(timefmt) " - read: " (NR - nprev) " (" rcurr "/sec)" " - total read: " NR " (" r "/sec)" > "/dev/stderr"
+    tprev = tcurr
+    nprev = NR
   }
 }
-END{
-  print "total lines read: " NR
-  print "END " strftime("%c")
-}' >&2 )
+END {
+  tcurr = systime()
+  rcurr = (NR - nprev) / (tcurr - tprev + 1);
+  r = NR / (tcurr - t0 + 1);
+
+  print strftime(timefmt) " - read: " (NR - nprev) " (" rcurr "/sec)" " - total read: " NR " (" r "/sec)" > "/dev/stderr"
+  print "END " strftime("%c") > "/dev/stderr"
+}'
 }
 
 ppjson() {
 python -c "
 import sys, json
-for ln in sys.stdin: print json.dumps(json.loads(ln),indent=2)
+
+for ln in sys.stdin:
+  print json.dumps(json.loads(ln),indent=2)
 "
 }
 
 function zless() { gzip -dc "$@" | less ; }
 function zcat() { gzip -dc "$@" ; }
 
-
-#### hadoop stuff
-
-function hls() { hadoop fs -ls "$@" ; }
-function hlsr() { hadoop fs -lsr "$@" ; }
-function hcat() { hadoop fs -cat "$@" ; }
-function hrm() { hadoop fs -rm "$@" ; }
-function hrmr() { hadoop fs -rmr "$@" ; }
-function hrmrst() { hadoop fs -rmr -skipTrash "$@" ; }
-function hmkdir() { hadoop fs -mkdir "$@" ; }
-
-function hmv() { hadoop fs -mv "$@" ; }
-function hcp() { hadoop fs -cp "$@" ; }
-function htxt() { hadoop fs -text "$@" ; }
-function hput() { hadoop fs -put "$@" ; }
-
-
-function hdus() { hadoop fs -dus "$@" | perl -p -e 's/(.*?)(\d+)$//; $f=$1; $s=$2; $s= ($s/(1024*1024*1024*1024) > 1) ? sprintf("%.2f TB", $s/(1024*1024*1024*1024)) : (($s/(1024*1024*1024) > 1) ? sprintf("%.2f GB", $s/(1024*1024*1024)): (($s/(1024*1024) > 1) ? sprintf("%.2f MB", $s/(1024*1024)) : (($s/1024 > 1) ? sprintf("%.2f KB", $s/1024) : $s) ) ); printf("%12s  %s", $s, $f);'; }
-function hdussort() { hadoop fs -dus "$@" | perl -pi -e 's/(.*?)(\d+)$/$2 $1/' | sort -nr | perl -p -e 's/(\d+)(.+)$//; $f=$2; $s=$1; $s= ($s/(1024*1024*1024*1024) > 1) ? sprintf("%.2f TB", $s/(1024*1024*1024*1024)) : (($s/(1024*1024*1024) > 1) ? sprintf("%.2f GB", $s/(1024*1024*1024)): (($s/(1024*1024) > 1) ? sprintf("%.2f MB", $s/(1024*1024)) : (($s/1024 > 1) ? sprintf("%.2f KB", $s/1024) : $s) ) ); printf("%12s  %s", $s, $f);'; }
 
 
 #### git

@@ -591,6 +591,7 @@
 (global-set-key [f5]  'point-stack-forward-stack-pop)
 
 (global-set-key "\C-cg"  'magit-status)
+(global-set-key "\C-xg"  'goto-line)
 
 (global-set-key "\C-ch" 'hs-load-hide-block)
 (global-set-key "\C-cH" 'hs-load-hide-all)
