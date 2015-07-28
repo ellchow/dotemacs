@@ -7,6 +7,15 @@ sudo curl -o /usr/local/bin/lein https://raw.githubusercontent.com/technomancy/l
 sudo chmod a+x /usr/local/bin/lein
 
 
+~/.lein/profiles.clj
+
+{ :user
+ {
+  :plugins [[lein-try "0.4.3"]]
+  :repositories [["clojars" "http://clojars.org/repo"]]
+  }
+ }
+
 --------------------------------
 haskell
 --------------------------------
