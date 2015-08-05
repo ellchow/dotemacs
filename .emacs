@@ -18,8 +18,12 @@
 ;;   '(progn
 ;;      (color-theme-initialize)
 ;;      (color-theme-echow)))
-(load-file (format "%s/zenburn-theme.el" ELISPDIR))
-(load-theme 'zenburn t)
+
+;; (load-file (format "%s/zenburn-theme.el" ELISPDIR))
+;; (load-theme 'zenburn t)
+
+(load-file (format "%s/noctilux-theme.el" ELISPDIR))
+(load-theme 'noctilux t)
 
 (when window-system (setq initial-frame-alist (x-parse-geometry "85x50+0+0")))
 

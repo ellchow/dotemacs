@@ -38,19 +38,22 @@ alias tmuxa='tmux -CC a'
 alias gl='glances -1'
 
 lines(){
-    if [ ${#1} = 0 ]; then
+    label=$1
+
+    if [ ${#2} = 0 ]; then
         n=10
     else
-        n=$1
+        n=$2
     fi
 
 awk '
 BEGIN {
-  print "START " strftime("%c") > "/dev/stderr"
   t0 = systime()
   tprev = systime()
   nprev = 0
   timefmt = "%Y-%m-%d %H:%M:%S"
+  label = "'$label'"
+  print strftime(timefmt) " - lines " label " - START" > "/dev/stderr"
 }
 {
   print $0
@@ -60,7 +63,7 @@ BEGIN {
   if ((tcurr - tprev) > '$n') {
     rcurr = (NR - nprev) / (tcurr - tprev + 1);
     r = NR / (tcurr - t0 + 1);
-    print strftime(timefmt) " - read: " (NR - nprev) " (" rcurr "/sec)" " - total read: " NR " (" r "/sec)" > "/dev/stderr"
+    print strftime(timefmt) " - lines " label " - read: " (NR - nprev) " (" rcurr "/sec)" " ; total read: " NR " (" r "/sec)" > "/dev/stderr"
     tprev = tcurr
     nprev = NR
   }
@@ -70,8 +73,8 @@ END {
   rcurr = (NR - nprev) / (tcurr - tprev + 1);
   r = NR / (tcurr - t0 + 1);
 
-  print strftime(timefmt) " - read: " (NR - nprev) " (" rcurr "/sec)" " - total read: " NR " (" r "/sec)" > "/dev/stderr"
-  print "END " strftime("%c") > "/dev/stderr"
+  print strftime(timefmt) " - lines " label " - read: " (NR - nprev) " (" rcurr "/sec)" " ; total read: " NR " (" r "/sec)" > "/dev/stderr"
+  print strftime(timefmt) " - lines " label " - END" > "/dev/stderr"
 }'
 }
 
