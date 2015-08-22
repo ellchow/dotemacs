@@ -78,6 +78,10 @@
 
 (set-display-table-slot standard-display-table 'wrap ?\ )
 
+;; (linum-mode)
+(setq linum-format "%4d \u2502")
+
+
 ;;;;;;;;;;;;;;; behaviors and functions
 
 (require 'redo)
