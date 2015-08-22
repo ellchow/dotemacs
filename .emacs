@@ -76,6 +76,8 @@
 ;; (setq whitespace-style '(face lines-tail))
 ;; (add-hook 'prog-mode-hook 'whitespace-mode)
 
+(set-display-table-slot standard-display-table 'wrap ?\ )
+
 ;;;;;;;;;;;;;;; behaviors and functions
 
 (require 'redo)
