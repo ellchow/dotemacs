@@ -20,9 +20,9 @@ sudo chmod a+x /usr/local/bin/lein
 haskell
 --------------------------------
 
-git clone https://github.com/haskell/haskell-mode.git
+git clone https://github.com/ellchow/haskell-mode.git
 cd haskell-mode
-git co 6a4d4bd
+git co v13.10-ellchow
 make EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs all ## path to your emacs
 
 cd ~/git/dotemacs/elisp
