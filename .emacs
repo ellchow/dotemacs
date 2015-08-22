@@ -87,8 +87,12 @@
 (require 'redo)
 
 ;;;; copy paste
-(setq x-select-enable-clipboard t)
+;; (setq x-select-enable-clipboard t)
 ;; (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
+
+(load-file (format "%s/xclip.el" ELISPDIR))
+(require 'xclip)
+
 
 (defun copy-line ()
       (interactive)
