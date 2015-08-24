@@ -32,5 +32,10 @@ cp ~/git/haskell-mode/*.el .
 
 brew install haskell-platform
 cabal update
-cabal install hlint
-caba install regex-tdfa
+cabal install hlint hoogle
+
+cabal install regex-tdfa
+
+
+
+https://github.com/serras/emacs-haskell-tutorial/blob/master/tutorial.md

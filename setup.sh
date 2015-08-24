@@ -15,3 +15,11 @@ ln -s -v $wd/.Rprofile .Rprofile
 ln -s -v $wd/.screenrc .screenrc
 ln -s -v $wd/.gitconfig .gitconfig
 ln -s -v $wd/.tmux.conf .tmux.conf
+
+
+# pip install glances
+
+# brew install watch
+
+# brew install tmux
+# git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
