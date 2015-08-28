@@ -448,6 +448,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;; tools
 
+;;;; icicles
+(add-to-list 'load-path (format "%s/icicles" ELISPDIR))
+(require 'icicles)
+(icy-mode 1)
+
 ;;;; git
 (add-to-list 'load-path (format "%s/git-commit-mode" ELISPDIR))
 (add-to-list 'load-path (format "%s/magit" ELISPDIR))
@@ -460,7 +465,7 @@
 (setq ido-enable-flex-matching t)
   (setq ido-everywhere t)
   (ido-mode 1)
-(setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
+(setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [no match]" " [matched]" " [not readable]" " [too big]" " [confirm]")))
 
 ;;;; abbrev
 (setq default-abbrev-mode t)
