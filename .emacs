@@ -449,9 +449,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;; tools
 
 ;;;; icicles
-(add-to-list 'load-path (format "%s/icicles" ELISPDIR))
-(require 'icicles)
-(icy-mode 1)
+;; (add-to-list 'load-path (format "%s/icicles" ELISPDIR))
+;; (require 'icicles)
+;; (icy-mode 1)
 
 ;;;; git
 (add-to-list 'load-path (format "%s/git-commit-mode" ELISPDIR))
