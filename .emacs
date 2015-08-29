@@ -462,10 +462,16 @@
 (setq magit-status-buffer-switch-function 'switch-to-buffer)
 
 ;;;; ido
-(setq ido-enable-flex-matching t)
-  (setq ido-everywhere t)
-  (ido-mode 1)
-(setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [no match]" " [matched]" " [not readable]" " [too big]" " [confirm]")))
+;; (setq ido-enable-flex-matching t)
+;;   (setq ido-everywhere t)
+;;   (ido-mode 1)
+;; (setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [no match]" " [matched]" " [not readable]" " [too big]" " [confirm]")))
+
+
+;;;; helm
+(add-to-list 'load-path (format "%s/emacs-async" ELISPDIR))
+(add-to-list 'load-path (format "%s/helm" ELISPDIR))
+(require 'helm-config)
 
 ;;;; abbrev
 (setq default-abbrev-mode t)

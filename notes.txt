@@ -20,6 +20,7 @@ sudo chmod a+x /usr/local/bin/lein
 haskell
 --------------------------------
 
+cd ~/git/
 git clone https://github.com/ellchow/haskell-mode.git
 cd haskell-mode
 git co v13.10-ellchow
@@ -39,3 +40,21 @@ cabal install regex-tdfa
 
 
 https://github.com/serras/emacs-haskell-tutorial/blob/master/tutorial.md
+
+
+--------------------------------
+emacs helm
+--------------------------------
+
+cd ~/git/
+git clone -b v1.7.7 https://github.com/emacs-helm/helm.git
+git clone -b v1.4 https://github.com/jwiegley/emacs-async.git
+cd helm
+make clean
+make
+
+cd ~/git/dotemacs/elisp
+mkdir helm
+cd helm
+cp ~/git/helm/*.el .
+cp ~/git/helm/*.elc .
