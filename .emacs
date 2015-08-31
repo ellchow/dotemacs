@@ -407,7 +407,7 @@
           (write-region (point-min) (point-max)
                         persistent-scratch-filename))))
 
-(push #'save-persistent-scratch kill-emacs-hook)
+;; (push #'save-persistent-scratch kill-emacs-hook)
 
 
 (save-excursion
