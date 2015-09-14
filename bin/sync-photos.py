@@ -17,6 +17,7 @@ def rlistdir(path):
     ps = listdir(p)
     out += ps
     remaining = remaining[1:] + filter(os.path.isdir, ps)
+
   return out
 
 def rlistimages(path, ext = ['.jpg','.png']):
@@ -34,8 +35,6 @@ if __name__ == '__main__':
   src = sys.argv[1]
   snk = sys.argv[2]
   do_run = not (len(sys.argv) <= 3 or sys.argv[3] == '0')
-
-  print do_run
 
   to_import = rlistimages(src)
   existing = dict(map(lambda x: (os.path.basename(x), x), rlistimages(snk)))
