@@ -86,6 +86,7 @@ if __name__ == '__main__':
       failures += 1
 
   if failures:
+    print "Done! Examined:", len(to_import), "Imported:", imported
     print "ERROR: there were", failures, "failure(s)"
     sys.exit(1)
   else:
