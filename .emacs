@@ -84,7 +84,7 @@
 
 ;;;;;;;;;;;;;;; behaviors and functions
 
-(setq default-directory (getenv "HOME"))
+;; (setq default-directory (getenv "HOME"))
 
 (require 'redo)
 
@@ -654,5 +654,3 @@
   )
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
-
-(eshell)
