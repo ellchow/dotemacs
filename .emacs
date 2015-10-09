@@ -552,6 +552,9 @@
 ;;;; Pig
 ;; (require 'pig-mode)
 
+;;;; Swift
+(require 'swift-mode)
+
 ;;;; Markdown Mode
 (autoload 'markdown-mode "markdown-mode.el"
   "Major mode for editing Markdownfiles" t)
