@@ -501,6 +501,7 @@
 (setq tab-width 2)
 (setq-default py-indent-offset 2)
 (define-key py-mode-map [backspace] 'py-electric-backspace)
+(define-key py-mode-map [(control h)] 'py-electric-backspace)
 (setq py-indent-offset 2)
 (add-to-list 'auto-mode-alist '("\\.yaml$" . python-mode))
 
