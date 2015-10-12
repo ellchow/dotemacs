@@ -12,7 +12,7 @@ fi
 
 #### environment variables
 export PATH=$PATH:$HOME/git/dotemacs/bin
-export EDITOR='emacs -nw -q'
+export EDITOR=emacs-stock
 # export PYTHONSTARTUP=~/.pystartup
 export TERM=xterm-256color
 export TMPDIR="/tmp"
