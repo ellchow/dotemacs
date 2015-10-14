@@ -65,16 +65,20 @@
                             )
       )
 (require 'rainbow-delimiters)
-(add-hook 'prog-mode-hook'rainbow-delimiters-mode)
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 (set-display-table-slot standard-display-table 'wrap ?\\)
 
 (setq inhibit-startup-message t)
 
-;; (require 'whitespace)
-;; (setq whitespace-line-column 80) ;; limit line length
-;; (setq whitespace-style '(face lines-tail))
-;; (add-hook 'prog-mode-hook 'whitespace-mode)
+(require 'whitespace)
+(setq whitespace-line-column
+      (if (null (getenv "EMACS_LINE_LENGTH_LIMIT"))
+          100
+        (getenv "EMACS_LINE_LENGTH_LIMIT"))
+      ) ;; limit line length
+(setq whitespace-style '(face lines-tail))
+(add-hook 'prog-mode-hook 'whitespace-mode) ;; does not work for python-mode for some reason?
 
 (set-display-table-slot standard-display-table 'wrap ?\ )
 
