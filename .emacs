@@ -108,7 +108,7 @@
 )
 
 ;;;; tramp
-(setq password-cache-expiry 72000)
+(setq password-cache-expiry nil)
 (setq tramp-default-method "ssh")
 
 ;;;; indentation
