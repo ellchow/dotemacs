@@ -525,7 +525,7 @@
 
 ;;;; Web mode
 (require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html$" . web-mode-prog-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))
 (setq-default indent-tabs-mode nil)
 
