@@ -39,3 +39,9 @@ cabal install regex-tdfa
 
 
 https://github.com/serras/emacs-haskell-tutorial/blob/master/tutorial.md
+
+--------------------------------
+elm
+--------------------------------
+brew install node
+http://elm-lang.org/install
