@@ -586,6 +586,9 @@
 (add-to-list 'auto-mode-alist '("\\.go\\'" . init-go-mode))
 (add-hook 'before-save-hook 'gofmt-before-save)
 
+;;;; elm
+(require 'elm-mode)
+
 ;;;;;;;;;;;;;; libraries
 
 ;;;; bookmarking
