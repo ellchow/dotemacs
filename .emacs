@@ -589,6 +589,10 @@
 ;;;; elm
 (require 'elm-mode)
 
+;;;; erlang
+(add-to-list 'load-path (format "%s/erlang-mode" ELISPDIR))
+(require 'erlang)
+
 ;;;;;;;;;;;;;; libraries
 
 ;;;; bookmarking
