@@ -508,6 +508,7 @@
 (define-key py-mode-map [(control h)] 'py-electric-backspace)
 (setq py-indent-offset 2)
 (add-to-list 'auto-mode-alist '("\\.yaml$" . python-mode))
+(define-key python-mode-map "\t" 'clever-hippie-tab)
 
 ;;;; Haskell
 (add-to-list 'load-path (format "%s/haskell-mode" ELISPDIR))
@@ -587,6 +588,10 @@
 
 ;;;; elm
 (require 'elm-mode)
+
+;;;; erlang
+(add-to-list 'load-path (format "%s/erlang-mode" ELISPDIR))
+(require 'erlang)
 
 ;;;;;;;;;;;;;; libraries
 
