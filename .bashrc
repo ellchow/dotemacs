@@ -91,6 +91,7 @@ function zless() { gzip -dc "$@" | less ; }
 function zcat() { gzip -dc "$@" ; }
 
 
+abspath() { echo "$(cd "$(dirname "$1")" && pwd)/$(basename "$1")" ; }
 
 #### git
 source ~/.git-completion.sh

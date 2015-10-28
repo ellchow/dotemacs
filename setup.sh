@@ -2,24 +2,14 @@
 
 wd=`dirname $0`
 
-cd ~/
+cd $wd
 
-ln -s -v $wd/.emacs .emacs
-ln -s -v $wd/elisp elisp
-ln -s -v $wd/.bashrc .bashrc
-ln -s -v $wd/.bash_profile .bash_profile
-ln -s -v $wd/.profile .profile
-ln -s -v $wd/.git-completion.sh .git-completion.sh
-ln -s -v $wd/.pystartup .pystartup
-ln -s -v $wd/.Rprofile .Rprofile
-ln -s -v $wd/.screenrc .screenrc
-ln -s -v $wd/.gitconfig .gitconfig
-ln -s -v $wd/.tmux.conf .tmux.conf
+files='.emacs elisp .bashrc .bash_profile .git-completion.sh .pystartup .Rprofile .screenrc .gitconfig .tmux.conf'
 
+for x in $files; do
+    echo $x
+    rm -r ~/$x
+    cp -r $x ~/$x
+done
 
-# pip install glances
-
-# brew install watch
-
-# brew install tmux
-# git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+touch .bashrc.plus
