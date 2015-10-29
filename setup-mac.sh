@@ -12,5 +12,4 @@ brew install gawk
 brew install coreutils
 brew install the_silver_searcher
 
-
-# pip install glances
+pip install glances
