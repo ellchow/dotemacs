@@ -475,6 +475,10 @@
 (setq default-abbrev-mode t)
 (setq save-abbrevs nil)
 
+;;;; silver searcher
+(add-to-list 'load-path (format "%s/ag.el" ELISPDIR))
+(require 'ag)
+
 ;;;;;;;;;;;;;;;;;;;;;;;; modes
 
 ;;;; java
