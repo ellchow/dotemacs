@@ -11,6 +11,10 @@
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
+
+(defun getenv-or-else (env default)
+  (if (null (getenv env)) default (getenv env)))
+
 ;;;;;;;;;; display
 (require 'color-theme)
 ;; (load-file (format "%s/color-theme-echow.el" ELISPDIR))
@@ -27,7 +31,7 @@
 
 (when window-system (setq initial-frame-alist (x-parse-geometry "85x50+0+0")))
 
-(set-face-attribute 'default nil :family "Source Code Pro")
+(set-face-attribute 'default nil :family (getenv-or-else "EMACS_FONT_FACE" "Menlo"))
 (set-face-attribute 'default nil :height 160)
 (set-face-attribute 'default nil :weight 'extra-light)
 
@@ -74,11 +78,7 @@
 (setq inhibit-startup-message t)
 
 (require 'whitespace)
-(setq whitespace-line-column
-      (if (null (getenv "EMACS_LINE_LENGTH_LIMIT"))
-          100
-        (getenv "EMACS_LINE_LENGTH_LIMIT"))
-      ) ;; limit line length
+(setq whitespace-line-column (getenv-or-else "EMACS_LINE_LENGTH_LIMIT" 100 ))
 (setq whitespace-style '(face lines-tail))
 (add-hook 'prog-mode-hook 'whitespace-mode) ;; does not work for python-mode for some reason?
 
