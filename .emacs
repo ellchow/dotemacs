@@ -27,8 +27,6 @@
 
 (when window-system (setq initial-frame-alist (x-parse-geometry "85x50+0+0")))
 
-(set-default-font "-bitstream-Courier 10 Pitch-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1")
-
 (blink-cursor-mode 1)
 
 (global-hl-line-mode 1)
