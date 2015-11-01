@@ -1,5 +1,9 @@
 ;;;; Elliot's .emacs
-(defvar ELISPDIR (format "%s/elisp" (getenv "HOME")))
+
+(defun getenv-or-else (env default)
+  (if (null (getenv env)) default (getenv env)))
+
+(defvar ELISPDIR (getenv-or-else "EMACS_ELISP" (format "%s/elisp" (getenv "HOME"))))
 (setq load-path (cons ELISPDIR load-path))
 
 (let ((old-dir default-directory))
@@ -11,10 +15,6 @@
 
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setq exec-path (append exec-path '("/usr/local/bin")))
-
-
-(defun getenv-or-else (env default)
-  (if (null (getenv env)) default (getenv env)))
 
 ;;;;;;;;;; display
 (require 'color-theme)

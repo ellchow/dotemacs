@@ -16,3 +16,5 @@ for x in $files; do
 done
 
 touch .bashrc.plus
+
+emacs --batch --eval '(byte-recompile-directory "~/elisp" 0)'
