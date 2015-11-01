@@ -1,6 +1,7 @@
 ;;;; Elliot's .emacs
 (defvar ELISPDIR (format "%s/elisp" (getenv "HOME")))
 (setq load-path (cons ELISPDIR load-path))
+
 (let ((old-dir default-directory))
   (unwind-protect
       (progn
@@ -64,14 +65,14 @@
 (setq search-highlight t)
 
 (show-paren-mode 1)
-;; (setq show-paren-style 'expression) ;; highlight paren region
+(setq show-paren-style 'expression) ;; highlight paren region
 (electric-pair-mode 1)
 (setq electric-pair-pairs '((?\" . ?\")
                             (?\{ . ?\})
                             )
       )
-(require 'rainbow-delimiters)
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+;; (require 'rainbow-delimiters)
+;; (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 (set-display-table-slot standard-display-table 'wrap ?\\)
 
@@ -493,10 +494,10 @@
 
 
 ;;;; simple note
-(require 'simplenote)
-(setq simplenote-email "zzzxqq@gmail.com")
-(setq simplenote-password nil)
-(simplenote-setup)
+;; (require 'simplenote)
+;; (setq simplenote-email "zzzxqq@gmail.com")
+;; (setq simplenote-password nil)
+;; (simplenote-setup)
 
 
 ;;;; json
@@ -517,18 +518,18 @@
 (define-key python-mode-map "\t" 'clever-hippie-tab)
 
 ;;;; Haskell
-(add-to-list 'load-path (format "%s/haskell-mode" ELISPDIR))
-(require 'haskell-mode-autoloads)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-; use only one indentation mode
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+;; (add-to-list 'load-path (format "%s/haskell-mode" ELISPDIR))
+;; (require 'haskell-mode-autoloads)
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+;; ;; use only one indentation mode
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;; ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;; ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
 ;;;; Javascript
-;; (add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
-;; (autoload 'javascript-mode "javascript" nil t)
-;; (setq js-indent-level 2)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
+(autoload 'javascript-mode "javascript" nil t)
+(setq js-indent-level 2)
 
 ;;;; Web mode
 (require 'web-mode)
@@ -540,12 +541,12 @@
 (require 'scala-mode2)
 (add-to-list 'auto-mode-alist '("\\.sbt$" . scala-mode))
 (add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode))
+;; (require 'ensime)
+;; (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
 
 ;;;; clojure mode
-(require 'clojure-mode)
-
-(require 'ensime)
-;; (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+;; (require 'clojure-mode)
 
 ;;;; sql
 (eval-after-load "sql"
@@ -557,15 +558,14 @@
 (define-key ess-mode-map "\t" 'clever-hippie-tab)
 (setq ess-indent-level 2)
 
-
 ;;;;; ESS (Julia)
-(add-hook 'julia-mode-hook '(lambda () (local-set-key (kbd "RET") `julia-indent-newline-indent)))
+;; (add-hook 'julia-mode-hook '(lambda () (local-set-key (kbd "RET") `julia-indent-newline-indent)))
 
 ;;;; Pig
 ;; (require 'pig-mode)
 
 ;;;; Swift
-(require 'swift-mode)
+;; (require 'swift-mode)
 
 ;;;; Markdown Mode
 (autoload 'markdown-mode "markdown-mode.el"
@@ -575,29 +575,29 @@
 (require 'markdown-mode)
 
 ;;;; Textile Mode
-(require 'textile-mode)
-(add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
+;; (require 'textile-mode)
+;; (add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
 
 
 ;;;; Protobuf Mode
-(require 'protobuf-mode)
-(add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
+;; (require 'protobuf-mode)
+;; (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
 
 ;;;; Go
-(require 'go-mode)
-(defun init-go-mode ()
-  (go-mode)
-  (setq tab-width 2)
-)
-(add-to-list 'auto-mode-alist '("\\.go\\'" . init-go-mode))
-(add-hook 'before-save-hook 'gofmt-before-save)
+;; (require 'go-mode)
+;; (defun init-go-mode ()
+;;   (go-mode)
+;;   (setq tab-width 2)
+;; )
+;; (add-to-list 'auto-mode-alist '("\\.go\\'" . init-go-mode))
+;; (add-hook 'before-save-hook 'gofmt-before-save)
 
 ;;;; elm
-(require 'elm-mode)
+;; (require 'elm-mode)
 
 ;;;; erlang
-(add-to-list 'load-path (format "%s/erlang-mode" ELISPDIR))
-(require 'erlang)
+;; (add-to-list 'load-path (format "%s/erlang-mode" ELISPDIR))
+;; (require 'erlang)
 
 ;;;;;;;;;;;;;; libraries
 
@@ -644,8 +644,8 @@
 (global-set-key "\C-x\C-o" 'other-window)
 (global-set-key "\C-x\C-b" 'electric-buffer-list)
 (global-set-key "\C-c,s" 'load-scratch)
-(global-set-key "\C-c,p" 'load-persistent-scratch)
-(global-set-key "\C-c,o" 'save-persistent-scratch)
+;; (global-set-key "\C-c,p" 'load-persistent-scratch)
+;; (global-set-key "\C-c,o" 'save-persistent-scratch)
 
 (global-set-key "\M-\\"     'uncomment-line)
 (global-set-key "\C-\\" 'comment-line)
