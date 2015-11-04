@@ -88,7 +88,6 @@
 ;; (linum-mode)
 (setq linum-format "%4d \u2502")
 
-
 ;;;;;;;;;;;;;;; behaviors and functions
 
 ;; (setq default-directory (getenv "HOME"))
@@ -460,6 +459,9 @@
 ;; (require 'icicles)
 ;; (icy-mode 1)
 
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+
 ;;;; git
 (add-to-list 'load-path (format "%s/git-commit-mode" ELISPDIR))
 (add-to-list 'load-path (format "%s/magit" ELISPDIR))
@@ -627,6 +629,8 @@
 (global-set-key "\C-c\C-n"  'bm-next)
 (global-set-key "\C-c\C-p"  'bm-previous)
 (global-set-key "\C-c\C-b" 'bm-toggle)
+
+(global-set-key "\C-c,." 'ag-project-at-point)
 
 (global-set-key [f7]  'my-start-or-clear-eshell)
 (global-set-key [f3]  'point-stack-push)
