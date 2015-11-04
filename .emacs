@@ -459,6 +459,12 @@
 ;; (require 'icicles)
 ;; (icy-mode 1)
 
+;;;; org mode
+(setq org-todo-keywords
+       '((sequence "TODO" "WIP" "REV" "BLOCKED" "|" "DONE")))
+(setq org-log-done 'time)
+
+;;;; neotree
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
 
