@@ -644,6 +644,7 @@
 ;; (global-set-key "\C-c\C-b" 'bm-toggle)
 
 (global-set-key "\C-c,." 'ag-project-at-point)
+(global-set-key "\C-c,/" 'ag-project-dired)
 
 (global-set-key [f7]  'my-start-or-clear-eshell)
 (global-set-key [f3]  'point-stack-push)
