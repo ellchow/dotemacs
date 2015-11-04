@@ -359,6 +359,10 @@
   )
 )
 
+(defun dired-default-dir ()
+  (interactive)
+  (dired default-directory))
+
 ;;;; scratch buffer
 (setq initial-major-mode 'text-mode)
 (setq initial-scratch-message "*scratch*")
@@ -459,14 +463,17 @@
 ;; (require 'icicles)
 ;; (icy-mode 1)
 
+;; dired+
+(require 'dired+)
+(diredp-toggle-find-file-reuse-dir 1)
+
 ;;;; org mode
 (setq org-todo-keywords
        '((sequence "TODO" "WIP" "REV" "BLOCKED" "|" "DONE")))
 (setq org-log-done 'time)
 
 ;;;; neotree
-(require 'neotree)
-(global-set-key [f8] 'neotree-toggle)
+;; (require 'neotree)
 
 ;;;; git
 (add-to-list 'load-path (format "%s/git-commit-mode" ELISPDIR))
@@ -632,9 +639,9 @@
 (global-set-key "\C-c,L" 'sort-lines)
 (global-set-key "\C-c,l" 'sort-lines-ignore-case)
 
-(global-set-key "\C-c\C-n"  'bm-next)
-(global-set-key "\C-c\C-p"  'bm-previous)
-(global-set-key "\C-c\C-b" 'bm-toggle)
+;; (global-set-key "\C-c\C-n"  'bm-next)
+;; (global-set-key "\C-c\C-p"  'bm-previous)
+;; (global-set-key "\C-c\C-b" 'bm-toggle)
 
 (global-set-key "\C-c,." 'ag-project-at-point)
 
@@ -665,6 +672,8 @@
 (global-set-key "\C-c+" 'resize-window)
 
 (global-set-key "\t" 'clever-hippie-tab)
+
+(global-set-key [f8] 'dired-default-dir)
 
 ;;;;
 
