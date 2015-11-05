@@ -595,8 +595,8 @@
 
 
 ;;;; Protobuf Mode
-;; (require 'protobuf-mode)
-;; (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
+(require 'protobuf-mode)
+(add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
 
 ;;;; Go
 ;; (require 'go-mode)
