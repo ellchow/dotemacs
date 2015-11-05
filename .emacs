@@ -470,7 +470,6 @@
 ;;;; recent files
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
-(global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
 ;;;; org mode
 (setq org-todo-keywords
@@ -680,6 +679,9 @@
 (global-set-key "\t" 'clever-hippie-tab)
 
 (global-set-key [f8] 'dired-default-dir)
+(global-set-key "\C-x\ \C-r" 'recentf-open-files)
+
+(global-set-key [f10] 'org-todo)
 
 ;;;;
 
