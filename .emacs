@@ -463,9 +463,14 @@
 ;; (require 'icicles)
 ;; (icy-mode 1)
 
-;; dired+
+;;;; dired+
 (require 'dired+)
 (diredp-toggle-find-file-reuse-dir 1)
+
+;;;; recent files
+(recentf-mode 1)
+(setq recentf-max-menu-items 25)
+(global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
 ;;;; org mode
 (setq org-todo-keywords
