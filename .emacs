@@ -65,7 +65,7 @@
 (setq search-highlight t)
 
 (show-paren-mode 1)
-(setq show-paren-style 'expression) ;; highlight paren region
+(setq show-paren-style 'parenthesis) ;; highlight paren region
 (electric-pair-mode 1)
 (setq electric-pair-pairs '((?\" . ?\")
                             (?\{ . ?\})
