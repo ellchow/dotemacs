@@ -17,4 +17,4 @@ done
 
 touch .bashrc.plus
 
-emacs --batch --eval '(byte-recompile-directory "~/elisp" 0)'
+./elisp-compile.sh
