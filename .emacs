@@ -32,9 +32,9 @@
 
 (when window-system (setq initial-frame-alist (x-parse-geometry "85x50+0+0")))
 
-(set-face-attribute 'default nil :family (getenv-or-else "EMACS_FONT_FACE" "Menlo"))
-(set-face-attribute 'default nil :height 160)
-(set-face-attribute 'default nil :weight 'extra-light)
+(set-face-attribute 'default nil :family "Source Code Pro")
+(set-face-attribute 'default nil :height 130)
+;; (set-face-attribute 'default nil :weight 'extra-light)
 
 (blink-cursor-mode 1)
 
@@ -101,6 +101,19 @@
 ;; (load-file (format "%s/xclip.el" ELISPDIR))
 ;; (require 'xclip)
 
+(defun pbcopy ()
+  (interactive)
+  (call-process-region (point) (mark) "pbcopy")
+  (setq deactivate-mark t))
+
+(defun pbpaste ()
+  (interactive)
+  (call-process-region (point) (if mark-active (mark) (point)) "pbpaste" t t))
+
+(defun pbcut ()
+  (interactive)
+  (pbcopy)
+  (delete-region (region-beginning) (region-end)))
 
 (defun copy-line ()
       (interactive)
@@ -640,6 +653,12 @@
 
 (global-set-key "\C-c\C-k" 'copy-line)
 
+(defun set-pbcopy-keys ()
+  (global-set-key "\C-c,w" 'pbcopy)
+  (global-set-key "\C-c,y" 'pbpaste)
+  (message "pbcopy keys set"))
+(if (eq system-type 'darwin) (set-pbcopy-keys))
+
 (global-set-key "\C-c,L" 'sort-lines)
 (global-set-key "\C-c,l" 'sort-lines-ignore-case)
 
@@ -651,9 +670,9 @@
 (global-set-key "\C-c,/" 'ag-project-dired)
 
 (global-set-key [f7]  'my-start-or-clear-eshell)
-(global-set-key [f3]  'point-stack-push)
-(global-set-key [f4]  'point-stack-pop)
-(global-set-key [f5]  'point-stack-forward-stack-pop)
+;; (global-set-key [f3]  'point-stack-push)
+;; (global-set-key [f4]  'point-stack-pop)
+;; (global-set-key [f5]  'point-stack-forward-stack-pop)
 
 (global-set-key "\C-cg"  'magit-status)
 (global-set-key "\C-xg"  'goto-line)
