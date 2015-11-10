@@ -8,15 +8,38 @@ if [ -f /etc/bashrc ]; then
         . /etc/bashrc
 fi
 
-
-
 #### environment variables
 export PATH=$PATH:$HOME/git/dotemacs/bin
-export EDITOR=emacs-stock
+
 # export PYTHONSTARTUP=~/.pystartup
 export TERM=xterm-256color
 export TMPDIR="/tmp"
 export PS1="\u@\h:\w$ " ## MAC Prompt
+
+#### emacs
+function emacs_daemon_pid() { ps -ef | grep 'emacs --daemon' | grep -v grep | awk '{ print $2 }'; }
+function emacs_daemon_start() {
+    pid=`emacs_daemon_pid`
+    test "$pid" == "" && (echo "starting emacs daemon..." 2>&1 && emacs --daemon && echo "emacs daemon started (`emacs_daemon_pid`)" 2>&1) || \
+        (echo "emacs daemon already running ($pid)" 2>&1)
+}
+function emacs_daemon_kill() {
+    pid=`emacs_daemon_pid`
+    test "$pid" == "" && (echo "emacs daemon is not running" 2>&1) || \
+        (echo "killing emacs daemon ($pid)..." 2>&1 && kill $pid)
+
+}
+function emacs_daemon_restart() {
+    emacs_daemon_kill
+    emacs_daemon_start
+}
+emacs_daemon_start
+
+export EDITOR="emacs-stock"
+export VISUAL="emacs-stock"
+alias e='emacsclient -c'
+# alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs -nw' ## MAC
+
 
 ## java
 # export CLASSPATH=
@@ -25,8 +48,6 @@ export JAVA_OPTS='-Xmx4G'
 export JAVA_TOOL_OPTIONS='-Djava.awt.headless=true'
 
 #### misc aliases/functions
-# alias emacs='emacs -nw'
-# alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs -nw' ## MAC
 
 # alias rm="rm -I"
 
