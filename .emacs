@@ -65,14 +65,14 @@
 (setq search-highlight t)
 
 (show-paren-mode 1)
-(setq show-paren-style 'parenthesis) ;; highlight paren region
+(setq show-paren-style 'parenthesis) ;; parenthesis or expression
 (electric-pair-mode 1)
 (setq electric-pair-pairs '((?\" . ?\")
                             (?\{ . ?\})
                             )
       )
-;; (require 'rainbow-delimiters)
-;; (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+(require 'rainbow-delimiters)
+(add-hook 'prog-mode-hook'rainbow-delimiters-mode)
 
 (set-display-table-slot standard-display-table 'wrap ?\\)
 
@@ -585,10 +585,13 @@
   '(load-library "sql-indent"))
 
 ;;;; ESS (R)
-(require 'ess-site)
-(ess-toggle-underscore nil)
-(define-key ess-mode-map "\t" 'clever-hippie-tab)
-(setq ess-indent-level 2)
+;; (require 'ess-site)
+;; (ess-toggle-underscore nil)
+;; (define-key ess-mode-map "\t" 'clever-hippie-tab)
+;; (setq ess-indent-level 2)
+
+;;;; Dockerfile
+(require 'dockerfile-mode)
 
 ;;;;; ESS (Julia)
 ;; (add-hook 'julia-mode-hook '(lambda () (local-set-key (kbd "RET") `julia-indent-newline-indent)))

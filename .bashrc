@@ -9,31 +9,36 @@ if [ -f /etc/bashrc ]; then
 fi
 
 #### environment variables
-export PATH=$PATH:$HOME/git/dotemacs/bin
 
-# export PYTHONSTARTUP=~/.pystartup
+if [ "$DOTEMACS_HOME" = "" ]
+then
+    export DOTEMACS_HOME=$HOME/dotemacs
+fi
+export PATH=$PATH:$DOTEMACS_HOME/bin
+
 export TERM=xterm-256color
 export TMPDIR="/tmp"
 export PS1="\u@\h:\w$ " ## MAC Prompt
 
 #### emacs
-function emacs_daemon_pid() { ps -ef | grep 'emacs --daemon' | grep -v grep | awk '{ print $2 }'; }
-function emacs_daemon_start() {
-    pid=`emacs_daemon_pid`
-    test "$pid" == "" && (echo "starting emacs daemon..." 2>&1 && emacs --daemon && echo "emacs daemon started (`emacs_daemon_pid`)" 2>&1) || \
+function emacs-daemon-pid() { ps -ef | grep 'emacs --daemon' | grep -v grep | awk '{ print $2 }'; }
+function emacs-daemon-start() {
+    pid=`emacs-daemon-pid`
+    test "$pid" == "" && (echo "starting emacs daemon..." 2>&1 && emacs --daemon && echo "emacs daemon started (`emacs-daemon-pid`)" 2>&1) || \
         (echo "emacs daemon already running ($pid)" 2>&1)
 }
-function emacs_daemon_kill() {
-    pid=`emacs_daemon_pid`
+function emacs-daemon-kill() {
+    pid=`emacs-daemon-pid`
     test "$pid" == "" && (echo "emacs daemon is not running" 2>&1) || \
         (echo "killing emacs daemon ($pid)..." 2>&1 && kill $pid)
 
 }
-function emacs_daemon_restart() {
-    emacs_daemon_kill
-    emacs_daemon_start
+function emacs-daemon-restart() {
+    emacs-daemon-kill &&
+        sleep 1 &&
+        emacs-daemon-start
 }
-emacs_daemon_start
+emacs-daemon-start
 
 export EDITOR="emacs-stock"
 export VISUAL="emacs-stock"
@@ -42,10 +47,10 @@ alias e='emacsclient -c'
 
 
 ## java
+export JAVA_OPTS='-Xmx2G'
+export JAVA_TOOL_OPTIONS='-Djava.awt.headless=true'
 # export CLASSPATH=
 # export JAVA_HOME="$(/usr/libexec/java_home)" ## MAC java home, for java 6 >> export JAVA_HOME=/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
-export JAVA_OPTS='-Xmx4G'
-export JAVA_TOOL_OPTIONS='-Djava.awt.headless=true'
 
 #### misc aliases/functions
 
@@ -120,7 +125,8 @@ source ~/.git-completion.sh
 ####
 echo "loaded .bashrc" >&2
 
-bashrc_plus=~/.bashrc.plus
+bashrc_plus=$HOME/.bashrc.plus
+
 if [ -f $bashrc_plus ]; then
   source $bashrc_plus
   echo "loaded "$bashrc_plus >&2
