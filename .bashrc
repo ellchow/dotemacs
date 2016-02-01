@@ -53,14 +53,6 @@ export JAVA_TOOL_OPTIONS='-Djava.awt.headless=true'
 # export JAVA_HOME="$(/usr/libexec/java_home)" ## MAC java home, for java 6 >> export JAVA_HOME=/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
 
 #### misc aliases/functions
-
-# alias rm="rm -I"
-
-function mbc(){ echo "scale=3;$@" | bc -l ; }
-
-alias tmuxc='tmux -CC'
-alias tmuxa='tmux -CC a'
-
 alias gl='glances -1'
 
 lines(){
