@@ -37,6 +37,12 @@
   ciam = commit --amend -m
   ciap = !"f() { x=`git log --pretty=format:"%s" | head -1`; git commit --amend -m \"$x\"; }; f"
 
+  sl = stash list
+  ss = stash save
+  sp = stash pop
+  sa = !"f() { git stash apply 'stash^{/'$1'}'; }; f"
+  sd = !"f() { git stash drop 'stash^{/'$1'}'; }; f"
+
   rss = reset --soft
   rb = rebase
   rbi = rebase --interactive
