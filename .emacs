@@ -81,7 +81,7 @@
 (require 'whitespace)
 (setq whitespace-line-column (getenv-or-else "EMACS_LINE_LENGTH_LIMIT" 100 ))
 (setq whitespace-style '(face lines-tail))
-(add-hook 'prog-mode-hook 'whitespace-mode) ;; does not work for python-mode for some reason?
+;; (add-hook 'prog-mode-hook 'whitespace-mode) ;; does not work for python-mode for some reason?
 
 (set-display-table-slot standard-display-table 'wrap ?\ )
 
@@ -633,6 +633,11 @@
 ;;;; erlang
 ;; (add-to-list 'load-path (format "%s/erlang-mode" ELISPDIR))
 ;; (require 'erlang)
+
+;;;; groovy
+(autoload 'groovy-mode "groovy-mode" "Major mode for editing Groovy code." t)
+(add-to-list 'auto-mode-alist '("\\.groovy\\'" . groovy-mode))
+(add-to-list 'auto-mode-alist '("\\.gradle\\'" . groovy-mode))
 
 ;;;;;;;;;;;;;; libraries
 
