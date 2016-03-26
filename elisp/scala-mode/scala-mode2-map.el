@@ -7,7 +7,7 @@
 (defvar scala-mode-map
   (let ((map (make-sparse-keymap)))
     (set-keymap-parent map prog-mode-map)
-    (substitute-key-definition 'delete-indentation 'scala-indent:join-line map global-map)
+    ;(substitute-key-definition 'delete-indentation 'scala-indent:join-line map global-map)
     map)
   "Local key map used for scala mode")
 
@@ -17,7 +17,9 @@
   (add-hook 'post-self-insert-hook
             'scala-indent:indent-on-special-words)
   (add-hook 'post-self-insert-hook
-            'scala-indent:indent-on-scaladoc-asterisk))
+            'scala-indent:indent-on-scaladoc-asterisk)
+  (add-hook 'post-self-insert-hook
+            'scala-indent:fix-scaladoc-close))
 
 (defun scala-mode-map:add-remove-indent-hook ()
   (add-hook 'post-command-hook

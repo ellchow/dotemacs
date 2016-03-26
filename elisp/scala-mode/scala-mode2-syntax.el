@@ -220,7 +220,7 @@
 
 
 (defun scala-syntax:regexp-for-id (id)
-  (let ((prefix-regex 
+  (let ((prefix-regex
          (if (string-match scala-syntax:alphaid-re id)
              "\\b" (concat "\\(^\\|[^" scala-syntax:opchar-group "]\\)")))
         (suffix-regex
@@ -234,9 +234,6 @@
 
 (defconst scala-syntax:preamble-start-re
   "\#\!")
-
-(defconst scala-syntax:preamble-end-re
-  "\!\\(\#\\)[ \t]*$")
 
 (defconst scala-syntax:empty-line-re
   "^\\s *$")
@@ -254,13 +251,13 @@
   (regexp-opt '("super" "this") 'words))
 
 (defconst scala-syntax:path-keywords-re
-  (concat "\\(^\\|[^`]\\)\\(" scala-syntax:path-keywords-unsafe-re "\\)"))
+  (concat "\\(^\\|[^`'_]\\)\\(" scala-syntax:path-keywords-unsafe-re "\\)"))
 
 (defconst scala-syntax:value-keywords-unsafe-re
   (regexp-opt '("false" "null" "true") 'words))
 
 (defconst scala-syntax:value-keywords-re
-  (concat "\\(^\\|[^`]\\)\\(" scala-syntax:value-keywords-unsafe-re "\\)"))
+  (concat "\\(^\\|[^`'_]\\)\\(" scala-syntax:value-keywords-unsafe-re "\\)"))
 
 (defconst scala-syntax:other-keywords-unsafe-re
   (regexp-opt '("abstract" "case" "catch" "class" "def" "do" "else" "extends"
@@ -270,7 +267,7 @@
                 "val" "var" "while" "with" "yield") 'words))
 
 (defconst scala-syntax:other-keywords-re
-  (concat "\\(^\\|[^`]\\)\\(" scala-syntax:other-keywords-unsafe-re "\\)"))
+  (concat "\\(^\\|[^`'_]\\)\\(" scala-syntax:other-keywords-unsafe-re "\\)"))
 
 (defconst scala-syntax:keywords-unsafe-re
   (concat "\\(" scala-syntax:path-keywords-unsafe-re
@@ -280,7 +277,7 @@
 
 ;; TODO: remove
 ;; (defconst scala-syntax:keywords-re
-;;   (concat "\\(^\\|[^`]\\)\\(" scala-syntax:value-keywords-unsafe-re
+;;   (concat "\\(^\\|[^`'_]\\)\\(" scala-syntax:value-keywords-unsafe-re
 ;;           "\\|" scala-syntax:path-keywords-unsafe-re
 ;;           "\\|" scala-syntax:other-keywords-unsafe-re "\\)"))
 
@@ -319,9 +316,60 @@
           "\\(" scala-syntax:after-reserved-symbol-re "\\)"))
 
 
-(defconst scala-syntax:modifiers-re
+(defconst scala-syntax:override-unsafe-re
+  (regexp-opt '("override") 'words))
+
+(defconst scala-syntax:override-re
+  (concat "\\(^\\|[^`'_]\\)\\(" scala-syntax:override-unsafe-re "\\)"))
+
+(defconst scala-syntax:abstract-unsafe-re
+  (regexp-opt '("abstract") 'words))
+
+(defconst scala-syntax:abstract-re
+  (concat "\\(^\\|[^`'_]\\)\\(" scala-syntax:abstract-unsafe-re "\\)"))
+
+(defconst scala-syntax:final-unsafe-re
+  (regexp-opt '("final") 'words))
+
+(defconst scala-syntax:final-re
+  (concat "\\(^\\|[^`'_]\\)\\(" scala-syntax:final-unsafe-re "\\)"))
+
+(defconst scala-syntax:sealed-unsafe-re
+  (regexp-opt '("sealed") 'words))
+
+(defconst scala-syntax:sealed-re
+  (concat "\\(^\\|[^`'_]\\)\\(" scala-syntax:sealed-unsafe-re "\\)"))
+
+(defconst scala-syntax:implicit-unsafe-re
+  (regexp-opt '("implicit") 'words))
+
+(defconst scala-syntax:implicit-re
+  (concat "\\(^\\|[^`'_]\\)\\(" scala-syntax:implicit-unsafe-re "\\)"))
+
+(defconst scala-syntax:lazy-unsafe-re
+  (regexp-opt '("lazy") 'words))
+
+(defconst scala-syntax:lazy-re
+  (concat "\\(^\\|[^`'_]\\)\\(" scala-syntax:lazy-unsafe-re "\\)"))
+
+(defconst scala-syntax:private-unsafe-re
+  (regexp-opt '("private") 'words))
+
+(defconst scala-syntax:private-re
+  (concat "\\(^\\|[^`'_]\\)\\(" scala-syntax:private-unsafe-re "\\)"))
+
+(defconst scala-syntax:protected-unsafe-re
+  (regexp-opt '("protected") 'words))
+
+(defconst scala-syntax:protected-re
+  (concat "\\(^\\|[^`'_]\\)\\(" scala-syntax:protected-unsafe-re "\\)"))
+
+(defconst scala-syntax:modifiers-unsafe-re
   (regexp-opt '("override" "abstract" "final" "sealed" "implicit" "lazy"
                 "private" "protected") 'words))
+
+(defconst scala-syntax:modifiers-re
+  (concat "\\(^\\|[^`'_]\\)\\(" scala-syntax:modifiers-unsafe-re "\\)"))
 
 (defconst scala-syntax:body-start-re
   (concat "=" scala-syntax:end-of-code-line-re)
@@ -494,24 +542,20 @@ characters and one-line strings will not be fontified."
              (t (throw 'break nil)))))))))
 
 (defun scala-syntax:propertize-shell-preamble (start end)
-  "Mark a shell preamble pair (#!/!#) at the beginning of a script as a comment."
+  "Mark a shell preamble (#!) at the beginning of a script as a line comment."
   (save-excursion
-    (let ((comment-start (nth 8 (syntax-ppss))))
-      (goto-char start)
-      (when (and (= start 1)
-                 (looking-at scala-syntax:preamble-start-re))
-        (scala-syntax:put-syntax-table-property 0 '(11 . nil))
-        (setq comment-start 1))
-      (when (and (eq comment-start 1)
-                 (goto-char comment-start)
-                 (looking-at scala-syntax:preamble-start-re)
-                 (re-search-forward scala-syntax:preamble-end-re end t))
-        (scala-syntax:put-syntax-table-property 1 '(12 . nil))))))
+    (goto-char start)
+    (when (and (= start 1)
+               (looking-at scala-syntax:preamble-start-re))
+      (scala-syntax:put-syntax-table-property 0 '(11 . nil))
+      (end-of-line)
+      (when (re-search-forward "\n" end t)
+        (scala-syntax:put-syntax-table-property 0 '(12 . nil))))))
 
 (defun scala-syntax:propertize-underscore-and-idrest (start end)
   "Mark all underscores (_) as symbol constituents (syntax 3) or
 upper case letter (syntax 2). Also mark opchars in idrest as
-symbol constituents (syntax 3)"
+symbol constituents (syntax 3)."
   (save-excursion
     (goto-char start)
     (while (re-search-forward "_" end t)
@@ -533,13 +577,11 @@ symbol constituents (syntax 3)"
                  (scala-syntax:put-syntax-table-property 0 '(3 . nil)))
                '(3 . nil))))))))) ;; symbol constituent syntax (3) also for the '_'
 
-
 (defun scala-syntax:propertize (start end)
   "See syntax-propertize-function"
   (scala-syntax:propertize-char-and-string-literals start end)
   (scala-syntax:propertize-shell-preamble start end)
   (scala-syntax:propertize-underscore-and-idrest start end))
-
 
 ;;;;
 ;;;; Syntax navigation functions
@@ -680,7 +722,7 @@ one."
   (save-match-data
     (while (scala-syntax:looking-at scala-syntax:modifiers-re)
       (scala-syntax:forward-sexp)
-      (when (scala-syntax:looking-at "[")
+      (when (scala-syntax:looking-at "[[]")
         (forward-list)))))
 
 (defun scala-syntax:looking-back-else-if-p ()
@@ -737,10 +779,10 @@ point 'point') as specified by SLS chapter 1.2"
                              (not (looking-at scala-syntax:class-or-object-re)))))))))))))
 
 (defun scala-syntax:forward-sexp ()
-  "Move forward one scala expression. It can be: paramter list (value or type),
-id, reserved symbol, keyword, block, or literal. Delimiters (.,;)
+  "Move forward one scala expression. It can be: parameter list (value or type),
+id, reserved symbol, keyword, block, or literal. Punctuation (.,;)
 and comments are skipped silently. Position is placed at the
-beginning of the skipped expression."
+end of the skipped expression."
   (interactive)
   (syntax-propertize (point-max))
   ;; emacs knows how to properly skip: lists, varid, capitalid,
@@ -756,6 +798,40 @@ beginning of the skipped expression."
   ;; emacs can handle everything but opchars
   (when (= (skip-syntax-forward ".") 0)
     (goto-char (or (scan-sexps (point) 1) (buffer-end 1)))))
+
+(defun scala-syntax:forward-token ()
+  "Move forward one scala token, comment word or string word. It
+can be: start or end of list (value or type), id, reserved
+symbol, keyword, block, or literal. Punctuation (.,;), comment
+delimiters and string delimiters are skipped silently. Position
+is placed at the end of the skipped token."
+  (interactive)
+  (syntax-propertize (point-max))
+  (skip-syntax-forward " >" (point-max))
+  (when (looking-at
+         (concat "\\([#@:]\\|" scala-syntax:double-arrow-unsafe-re
+                 "\\|:>\\|<:\\)" scala-syntax:after-reserved-symbol-re))
+    (goto-char (match-end 1)))
+  (let ((syntax (char-syntax (char-after)))
+        (state (syntax-ppss)))
+    (cond
+     ((or (nth 4 state) (nth 3 state))
+      ;; inside a string or comment, skip words as normal unless that
+      ;; would end up outside the string. Then leave point at end of
+      ;; string delimiter.
+      (let ((start (nth 8 state))
+            (end (save-excursion (forward-word) (point))))
+        (if (eq (nth 8 (save-excursion (syntax-ppss end))) start)
+            (goto-char end)
+          (while (eq (nth 8 (syntax-ppss)) start)
+            (forward-char)))))
+     ;; list start or end
+     ((or (= syntax ?\)) (= syntax ?\()) (forward-char))
+     ;; comment or string start is skipped
+     ((looking-at "\\(//\\|/\\*+\\|\"\\(\"\"\\)?\\)")
+      (goto-char (match-end 1)))
+     ;; otherwise forward-sexp
+     (t (forward-sexp)))))
 
 (defun scala-syntax:backward-sexp ()
   "Move backward one scala expression. It can be: parameter
@@ -822,5 +898,96 @@ not. A list must be either enclosed in parentheses or start with
               (scala-syntax:backward-sexp)))
           (when (looking-at scala-syntax:list-keywords-re)
             (goto-char (match-end 0))))))))
+
+;; Functions to help with finding the beginning and end of scala definitions.
+
+(defconst scala-syntax:modifiers-re 
+  (regexp-opt '("override" "abstract" "final" "sealed" "implicit" "lazy"
+                "private" "protected" "case") 'words))
+
+(defconst scala-syntax:whitespace-delimeted-modifiers-re
+  (concat "\\(?:" scala-syntax:modifiers-re "\\(?: *\\)" "\\)*"))
+
+(defconst scala-syntax:definition-words-re 
+  (mapconcat 'regexp-quote '("class" "object" "trait" "val" "var" "def" "type") "\\|"))
+
+(defun scala-syntax:build-definition-re (words-re)
+  (concat " *"
+	  scala-syntax:whitespace-delimeted-modifiers-re
+	  words-re
+	  "\\(?: *\\)"
+	  "\\(?2:"
+	  scala-syntax:id-re
+	  "\\)"))
+
+(defconst scala-syntax:all-definition-re
+  (scala-syntax:build-definition-re
+   (concat "\\(?1:" scala-syntax:definition-words-re "\\)")))
+
+;; Functions to help with beginning and end of definitions.
+
+(defun scala-syntax:backward-sexp-forcing ()
+  (condition-case ex (backward-sexp) ('error (backward-char))))
+
+(defun scala-syntax:forward-sexp-or-next-line ()
+  (interactive)
+  (cond ((looking-at "\n") (next-line) (beginning-of-line))
+	(t (forward-sexp))))
+
+(defun scala-syntax:beginning-of-definition ()
+  "This function may not work properly with certain types of scala definitions.
+For example, no care has been taken to support multiple assignments to vals such as
+
+val a, b = (1, 2)
+"
+  (interactive)
+  (let ((found-position
+	 (save-excursion
+	   (scala-syntax:backward-sexp-forcing)
+	   (scala-syntax:movement-function-until-re scala-syntax:all-definition-re
+						    'scala-syntax:backward-sexp-forcing))))
+    (when found-position (progn (goto-char found-position) (back-to-indentation)))))
+
+(defun scala-syntax:end-of-definition ()
+  "This function may not work properly with certain types of scala definitions.
+For example, no care has been taken to support multiple assignments to vals such as
+
+val a, b = (1, 2)
+"
+  (interactive)
+  (re-search-forward scala-syntax:all-definition-re)
+  (scala-syntax:find-brace-equals-or-next)
+  (scala-syntax:handle-brace-equals-or-next))
+
+(defun scala-syntax:find-brace-equals-or-next ()
+  (scala-syntax:go-to-pos
+   (save-excursion
+     (scala-syntax:movement-function-until-cond-function
+      (lambda () (or (looking-at "[[:space:]]*[{=]")
+		     (looking-at scala-syntax:all-definition-re)))
+      (lambda () (condition-case ex (scala-syntax:forward-sexp-or-next-line) ('error nil)))))))
+
+(defun scala-syntax:handle-brace-equals-or-next ()
+  (cond ((looking-at "[[:space:]]*{") (forward-sexp))
+	((looking-at "[[:space:]]*=") (scala-syntax:forward-sexp-or-next-line)
+	 (scala-syntax:handle-brace-equals-or-next))
+	((looking-at scala-syntax:all-definition-re) nil)
+	(t (scala-syntax:forward-sexp-or-next-line)
+	   (scala-syntax:handle-brace-equals-or-next))))
+
+(defun scala-syntax:movement-function-until-re (re movement-function)
+  (save-excursion
+    (scala-syntax:movement-function-until-cond-function
+     (lambda () (looking-at re)) movement-function)))
+
+(defun scala-syntax:movement-function-until-cond-function (cond-function movement-function)
+  (let ((last-point (point)))
+    (if (not (funcall cond-function))
+	(progn (funcall movement-function)
+	       (if (equal last-point (point)) nil
+		 (scala-syntax:movement-function-until-cond-function
+		  cond-function movement-function))) last-point)))
+
+(defun scala-syntax:go-to-pos (pos) (when pos (goto-char pos)))
 
 (provide 'scala-mode2-syntax)

@@ -12,6 +12,7 @@
 (require 'scala-mode2-fontlock)
 (require 'scala-mode2-map)
 (require 'scala-mode2-sbt)
+(require 'scala-mode2-imenu)
 
 ;; Tested only for emacs 24
 (unless (<= 24 emacs-major-version)
@@ -77,6 +78,14 @@ If there is no plausible default, return nil."
         forward-sexp-function           'scala-mode:forward-sexp-function))
 
 ;;;###autoload
+(defun scala-mode:goto-start-of-code ()
+  "Go to the start of the real code in the file: object, class or trait."
+  (interactive)
+  (let* ((case-fold-search nil))
+    (search-forward-regexp "\\([[:space:]]+\\|^\\)\\(class\\|object\\|trait\\)" nil t)
+    (move-beginning-of-line nil)))
+
+;;;###autoload
 (define-derived-mode scala-mode prog-mode "Scala"
   "Major mode for editing scala code.
 
@@ -106,7 +115,12 @@ When started, runs `scala-mode-hook'.
    'forward-sexp-function
    'find-tag-default-function
    'indent-line-function
-   'indent-tabs-mode)
+   'fixup-whitespace
+   'delete-indentation
+   'indent-tabs-mode
+   'imenu-create-index-function
+   'beginning-of-defun-function
+   'end-of-defun-function)
 
   (add-hook 'syntax-propertize-extend-region-functions
             'scala-syntax:propertize-extend-region)
@@ -137,13 +151,16 @@ When started, runs `scala-mode-hook'.
         forward-sexp-function           'scala-mode:forward-sexp-function
         find-tag-default-function       'scala-mode:find-tag
         indent-line-function            'scala-indent:indent-line
+        fixup-whitespace                'scala-indent:fixup-whitespace
+        delete-indentation              'scala-indent:join-line
         indent-tabs-mode                nil
-        )
+	beginning-of-defun-function     #'scala-syntax:beginning-of-definition
+	end-of-defun-function           #'scala-syntax:end-of-definition
+	imenu-create-index-function     #'scala-imenu:create-imenu-index)
   (use-local-map scala-mode-map)
   ;; add indent functionality to some characters
   (scala-mode-map:add-remove-indent-hook)
-  (scala-mode-map:add-self-insert-hooks)
-)
+  (scala-mode-map:add-self-insert-hooks))
 
 ;; Attach .scala files to the scala-mode
 ;;;###autoload
