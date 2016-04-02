@@ -21,21 +21,36 @@ export TMPDIR="/tmp"
 export PS1="\u@\h:\w$ " ## MAC Prompt
 
 #### emacs
-function emacs-daemon-pid() { ps -ef | grep 'emacs --daemon' | grep -v grep | awk '{ print $2 }'; }
+function emacs-daemon-pid() {
+    ps -ef | \
+        grep 'emacs --daemon' | \
+        grep -v grep | \
+        awk '{ print $2 }'
+}
 function emacs-daemon-start() {
     pid=`emacs-daemon-pid`
-    test "$pid" == "" && (echo "starting emacs daemon..." 2>&1 && emacs --daemon && echo "emacs daemon started (`emacs-daemon-pid`)" 2>&1) || \
-        (echo "emacs daemon already running ($pid)" 2>&1)
+    if [ "$pid" = "" ]
+    then
+        echo "starting emacs daemon..."  >&2 && \
+            emacs --daemon && echo "emacs daemon started (`emacs-daemon-pid`)" >&2
+    else
+        echo "emacs daemon already running ($pid)" >&2
+    fi
 }
 function emacs-daemon-kill() {
     pid=`emacs-daemon-pid`
-    test "$pid" == "" && (echo "emacs daemon is not running" 2>&1) || \
-        (echo "killing emacs daemon ($pid)..." 2>&1 && kill $pid)
+    if [ "$pid" = "" ]
+    then
+        echo "emacs daemon is not running"  >&2
+    else
+        echo "killing emacs daemon ($pid)..."  >&2 && \
+            kill $pid
+    fi
 
 }
 function emacs-daemon-restart() {
-    emacs-daemon-kill &&
-        sleep 1 &&
+    emacs-daemon-kill && \
+        sleep 1 && \
         emacs-daemon-start
 }
 emacs-daemon-start
@@ -53,6 +68,8 @@ export JAVA_TOOL_OPTIONS='-Djava.awt.headless=true'
 # export JAVA_HOME="$(/usr/libexec/java_home)" ## MAC java home, for java 6 >> export JAVA_HOME=/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
 
 #### misc aliases/functions
+alias rerc='source ~/.bashrc'
+
 alias gl='glances -1'
 
 lines(){
@@ -112,7 +129,10 @@ function zcat() { gzip -dc "$@" ; }
 abspath() { echo "$(cd "$(dirname "$1")" && pwd)/$(basename "$1")" ; }
 
 #### git
-source ~/.git-completion.sh
+if [ -f ~/.git-completion.sh ]
+then
+    source ~/.git-completion.sh
+fi
 
 ####
 echo "loaded .bashrc" >&2
