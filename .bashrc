@@ -29,6 +29,11 @@ function emacs-daemon-pid() {
 }
 function emacs-daemon-start() {
     pid=`emacs-daemon-pid`
+
+    lock="$HOME/.emacs-daemon-start.lock"
+
+    lockfile $lock
+
     if [ "$pid" = "" ]
     then
         echo "starting emacs daemon..."  >&2 && \
@@ -36,6 +41,8 @@ function emacs-daemon-start() {
     else
         echo "emacs daemon already running ($pid)" >&2
     fi
+
+    rm -f $lock
 }
 function emacs-daemon-kill() {
     pid=`emacs-daemon-pid`
