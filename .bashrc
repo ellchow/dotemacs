@@ -25,7 +25,8 @@ function emacs-daemon-pid() {
     ps -ef | \
         grep 'emacs --daemon' | \
         grep -v grep | \
-        awk '{ print $2 }'
+        awk '{ print $2 }' | \
+        head -1
 }
 function emacs-daemon-start() {
     pid=`emacs-daemon-pid`
@@ -51,7 +52,7 @@ function emacs-daemon-kill() {
         echo "emacs daemon is not running"  >&2
     else
         echo "killing emacs daemon ($pid)..."  >&2 && \
-            kill $pid
+            kill "$@" $pid
     fi
 
 }
