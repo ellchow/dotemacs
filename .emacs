@@ -64,6 +64,9 @@
 
 (setq search-highlight t)
 
+(require 'anzu)
+(global-anzu-mode +1)
+
 (show-paren-mode 1)
 (setq show-paren-style 'parenthesis) ;; parenthesis or expression
 (electric-pair-mode 1)
