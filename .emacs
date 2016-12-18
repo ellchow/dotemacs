@@ -642,6 +642,11 @@
 (add-to-list 'auto-mode-alist '("\\.groovy\\'" . groovy-mode))
 (add-to-list 'auto-mode-alist '("\\.gradle\\'" . groovy-mode))
 
+;;;; rust
+(add-to-list 'load-path (format "%s/rust-mode.el" ELISPDIR))
+(autoload 'rust-mode "rust-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+
 ;;;;;;;;;;;;;; libraries
 
 ;;;; bookmarking
