@@ -51,3 +51,13 @@ elm
 --------------------------------
 brew install node
 http://elm-lang.org/install
+
+
+-------------------------------
+convert flac
+-------------------------------
+
+## cleanup file names first
+rename s/"[^A-Za-z0-9-.]+"/'_'/g *.flac
+## convert
+ls *.flac | xargs -P 4 -I {} ffmpeg -i {} -c:a alac {}.m4a
