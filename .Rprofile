@@ -1,3 +1,7 @@
 cat(date(),'\n', file = stderr())
-source('~/git/moRe/import.R',chdir=T)
 options(scipen=100)
+
+if (interactive()) {
+  .First <- function() try(utils::loadhistory("~/.Rhistory"))
+  .Last <- function() try(utils::savehistory("~/.Rhistory"))
+}

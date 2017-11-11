@@ -20,7 +20,7 @@ def rlistdir(path):
 
   return out
 
-def rlistimages(path, ext = ['.jpg','.png']):
+def rlistimages(path, ext = ['.jpg']): # ,'.png'
   return filter(lambda x: os.path.splitext(x)[1].lower() in ext, rlistdir(path))
 
 def str_norm(s):

@@ -4,6 +4,8 @@ python -c "import os, eyed3
 run = '"$2"' == '1'
 if not run: print 'dry-run...'
 for x in os.listdir('"$1"'):
+  if not x.endswith('.mp3'):
+    continue
   try:
     x = x.strip()
     y = eyed3.load(x)

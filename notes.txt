@@ -1,3 +1,6 @@
+chrome - flash video downloader
+http://www.fvddownloader.com/
+
 --------------------------------
 ssh
 --------------------------------
@@ -61,3 +64,36 @@ convert flac
 rename s/"[^A-Za-z0-9-.]+"/'_'/g *.flac
 ## convert
 ls *.flac | xargs -P 4 -I {} ffmpeg -i {} -c:a alac {}.m4a
+
+--------------------------------
+---- mp3 stuff
+--------------------------------
+
+ls | grep -v mp3 | xargs -P 2 -I {} ffmpeg -i '{}' -b:a 192k {}.mp3
+
+rename s/.mp4// *.mp3
+
+ls *.mp3 | sed s/'_-_.*'//  | awk '{ print "mkdir -p ~/Music/" $0 }' | xargs -I {} bash -c -x {}
+
+tags-from-filename . 1
+
+paste <(ls *.mp3) <(ls *.mp3 | sed s/'_-_.*'//  | awk '{ print "~/Music/" $0 }' ) | xargs -I {} bash -c "cp -fv "{}
+
+
+---------------------------------
+---- R docker
+--------------------------------
+docker for mac
+
+docker run -a stdin -a stdout -i -t rocker/verse R
+
+alias R="docker run -a stdin -a stdout -e HOME=/home/`whoami` -e R_HISTFILE=/home/`whoami`/.Rhistory -v $HOME:/home/`whoami` -i -t my-r R --no-save"
+
+## ~/.Rprofile
+cat(date(),'\n', file = stderr())
+options(scipen=100)
+
+if (interactive()) {
+  .First <- function() try(utils::loadhistory("~/.Rhistory"))
+  .Last <- function() try(utils::savehistory("~/.Rhistory"))
+}
