@@ -8,6 +8,7 @@
   fo = fetch origin
   fu = fetch upstream
 
+  find = !"f() { git ls-files $1; }; f"
   gr = grep
 
   l = log --pretty=format:\"%h %ad [%ae] | %s%d \" --graph --date=iso
@@ -53,3 +54,5 @@
   mff = merge --ff-only
   pff = pull --ff-only
   cp = cherry-pick
+  cpc = cherry-pick --continue
+  cpa = cherry-pick --abort
