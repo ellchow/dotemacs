@@ -588,10 +588,10 @@
   '(load-library "sql-indent"))
 
 ;;;; ESS (R)
-;; (require 'ess-site)
-;; (ess-toggle-underscore nil)
-;; (define-key ess-mode-map "\t" 'clever-hippie-tab)
-;; (setq ess-indent-level 2)
+(require 'ess-site)
+(ess-toggle-underscore nil)
+(define-key ess-mode-map "\t" 'clever-hippie-tab)
+(setq ess-indent-level 2)
 
 ;;;; Dockerfile
 (require 'dockerfile-mode)

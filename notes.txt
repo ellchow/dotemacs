@@ -85,9 +85,22 @@ paste <(ls *.mp3) <(ls *.mp3 | sed s/'_-_.*'//  | awk '{ print "~/Music/" $0 }' 
 --------------------------------
 docker for mac
 
+brew cask install xquartz
+
+run xquartz, set security to allow network connections/clients
+
+
 docker run -a stdin -a stdout -i -t rocker/verse R
 
-alias R="docker run -a stdin -a stdout -e HOME=/home/`whoami` -e R_HISTFILE=/home/`whoami`/.Rhistory -v $HOME:/home/`whoami` -i -t my-r R --no-save"
+
+IP=$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')
+xhost + $IP
+
+R_DOCKER_START_CMD="docker run -a stdin -a stdout -e DISPLAY=$IP:0 -v /tmp/.X11-unix:/tmp/.X11-unix -e HOME=/home/`whoami` -e R_HISTFILE=/home/`whoami`/.Rhistory -v $HOME:/home/`whoami` -i -t my-r R --no-save"
+alias R=$R_DOCKER_START_CMD
+
+
+
 
 ## ~/.Rprofile
 cat(date(),'\n', file = stderr())
