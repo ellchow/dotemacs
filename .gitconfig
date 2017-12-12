@@ -56,3 +56,4 @@
   cp = cherry-pick
   cpc = cherry-pick --continue
   cpa = cherry-pick --abort
+  cpr = !"f() { git cherry-pick $1^..$2; }; f"
