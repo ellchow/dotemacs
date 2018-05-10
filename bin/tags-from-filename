@@ -10,9 +10,12 @@ for x in os.listdir('"$1"'):
     x = x.strip()
     y = eyed3.load(x)
     x = os.path.basename(x).replace('.mp3','')
-    y.tag.artist = unicode(x.split('_-_')[0].replace('_',' '))
-    y.tag.title = unicode(x.split('_-_')[1].replace('_',' '))
-    print (y.tag.artist, y.tag.title)
+    xx = x.split('_-_')
+    y.tag.artist = unicode(xx[0].replace('_',' '))
+    if len(xx) == 3:
+      y.tag.album = unicode(xx[1].replace('_',' '))
+    y.tag.title = unicode(xx[-1].replace('_',' '))
+    print (y.tag.artist, y.tag.album, y.tag.title)
     if run: y.tag.save()
   except Exception, e:
     print x, e
