@@ -32,8 +32,8 @@
 
 (when window-system (setq initial-frame-alist (x-parse-geometry "85x50+0+0")))
 
-(set-face-attribute 'default nil :family "Source Code Pro")
-(set-face-attribute 'default nil :height 130)
+;; (set-face-attribute 'default nil :family "Source Code Pro")
+;; (set-face-attribute 'default nil :height 160)
 ;; (set-face-attribute 'default nil :weight 'extra-light)
 
 (blink-cursor-mode 1)
