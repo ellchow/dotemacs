@@ -1,3 +1,23 @@
+--------------------------------
+---- mp3 stuff
+--------------------------------
+
+rename 's/[ ]+/_/g' * && \
+ls | grep -v mp3 | xargs -P 2 -I {} ffmpeg -i '{}' -b:a 256k {}.mp3 && \
+rename s/.mp4// *.mp3 && \
+ls *.mp3 | sed s/'_-_.*'//  | awk '{ print "mkdir -p ~/Music/" $0 }' | xargs -I {} bash -c -x {} && \
+tags-from-filename . 1 && \
+paste <(ls *.mp3) <(ls *.mp3 | sed s/'_-_.*'//  | awk '{ print "~/Music/" $0 }' ) | xargs -I {} bash -c "cp -fv "{}
+
+
+path=~/Music/Kina_Grannis/Kina_Grannis_-_New_Slang.mp3 && \
+t=157 && \
+name=`basename $path` && \
+cp -v $path /tmp/ && \
+ffmpeg -i /tmp/$name -t $t -acodec copy $path
+
+--------------------------------
+
 chrome - flash video downloader
 http://www.fvddownloader.com/
 
