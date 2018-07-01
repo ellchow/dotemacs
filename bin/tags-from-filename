@@ -14,6 +14,8 @@ for x in os.listdir('"$1"'):
     y.tag.artist = unicode(xx[0].replace('_',' '))
     if len(xx) == 3:
       y.tag.album = unicode(xx[1].replace('_',' '))
+    else:
+      y.tag.album = unicode(' ')
     y.tag.title = unicode(xx[-1].replace('_',' '))
     print (y.tag.artist, y.tag.album, y.tag.title)
     if run: y.tag.save()
