@@ -32,9 +32,9 @@
 
 (when window-system (setq initial-frame-alist (x-parse-geometry "85x50+0+0")))
 
-;; (set-face-attribute 'default nil :family "Source Code Pro")
-;; (set-face-attribute 'default nil :height 160)
-;; (set-face-attribute 'default nil :weight 'extra-light)
+(set-face-attribute 'default nil :family "Source Code Pro")
+(set-face-attribute 'default nil :height 180)
+(set-face-attribute 'default nil :weight'extra-light)
 
 (blink-cursor-mode 1)
 
@@ -485,7 +485,8 @@
 
 ;;;; recent files
 (recentf-mode 1)
-(setq recentf-max-menu-items 25)
+(setq recentf-max-menu-items 50)
+(run-at-time nil (* 5 60) 'recentf-save-list)
 
 ;;;; org mode
 (setq org-todo-keywords
