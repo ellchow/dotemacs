@@ -4,11 +4,12 @@ import eyed3
 import os
 import sys
 import datetime as dt
+import shutil
 
 ########################################################
 #### OPs
 ########################################################
-VALID_OPS = ['tagsfromfilename', 'renameusingtags', "help", "h"]
+VALID_OPS = ['tagsfromfilename', 'renameusingtags', "help", "h", "copytolibrary"]
 
 def tags_from_filename(input_dir, execute):
   for full_path in list_dir(input_dir, include = lambda x: not os.path.isdir(x) and os.path.basename(x).endswith(".mp3")):
@@ -65,9 +66,30 @@ def rename_using_tags(input_dir, execute):
         os.rename(full_path, full_dest_path)
         log(full_path, 'renamed!')
 
-def move_to_library(input_dir, execute):
-  list_dir(input_dir, include = lambda x: not os.path.isdir(x) and os.path.basename(x).endswith(".mp3"))
-  #### FIXME finish
+def copy_to_library(input_dir, execute):
+  lib_dir = os.path.join(os.getenv("HOME"), "Music")
+
+  for full_path in list_dir(input_dir, include = lambda x: not os.path.isdir(x) and os.path.basename(x).endswith(".mp3")):
+    try:
+      metadata = eyed3.load(full_path)
+    except Exception, err:
+      log("failed to load tags for %s" % full_path, "error: ", err)
+      continue
+
+      artist_dir = os.path.join(lib_dir, metadata.tag.artist.replace(" ", "_"))
+      dest_path = os.path.join(artist_dir, os.path.basename(full_path))
+
+      if full_path != dest_path:
+        if not os.path.exists(artist_dir):
+          log("create artist dir:", artist_dir)
+          if execute:
+            os.mkdir(artist_dir)
+
+
+        log(full_path, '->', dest_path)
+        if execute:
+          shutil.copyfile(full_path, dest_path)
+          log(full_path, 'copied!')
 
 ########################################################
 #### utils
@@ -141,3 +163,5 @@ if __name__ == '__main__':
     tags_from_filename(input_dir = input_dir, execute = execute)
   elif op == "renameusingtags":
     rename_using_tags(input_dir = input_dir, execute = execute)
+  elif op == "copytolibrary":
+    copy_to_library(input_dir = input_dir, execute = execute)
