@@ -2,30 +2,28 @@
 ---- mp3 stuff
 --------------------------------
 
-### old
 cd ~/Downloads/songs && \
-rename 's/[ ]+/_/g' * && \
 ls | grep -v mp3 | xargs -P 2 -I {} ffmpeg -i '{}' -b:a 256k {}.mp3 && \
 rename s/.mp4// *.mp3 && \
 rename s/.webm// *.mp3 && \
-ls *.mp3 | sed s/'_-_.*'//  | awk '{ print "mkdir -p ~/Music/" $0 }' | xargs -I {} bash -c -x {} && \
-tags-from-filename . 1 && \
-paste <(ls *.mp3) <(ls *.mp3 | sed s/'_-_.*'//  | awk '{ print "~/Music/" $0 }' ) | xargs -I {} bash -c "cp -fv "{}
-####
+music-tools.py tagsfromfilename . execute && \
+music-tools.py copytolibrary . execute
 
+## cut end
 path=/Users/elliot/Music/Nicki_Minaj/Nicki_Minaj_-_Barbie_Dreams.mp3 && \
 t=26 && \
 name=`basename $path` && \
 cp -v $path /tmp/ && \
 ffmpeg -i /tmp/$name -t $t -acodec copy $path
 
+## cut beginning
 path=/Users/elliot/Music/Nicki_Minaj/Nicki_Minaj_-_Barbie_Dreams.mp3 && \
 t=26 && \
 name=`basename $path` && \
 cp -v $path /tmp/ && \
 ffmpeg -i /tmp/$name -ss $t -acodec copy $path
 
-
+## change speed
 ffmpeg -i Nicki_Minaj_-_Barbie_Dreams.mp4.mp3 -filter:a "atempo=1.5" -vn Nicki_Minaj_-_Barbie_Dreams-1.mp4.mp3
 
 --------------------------------
