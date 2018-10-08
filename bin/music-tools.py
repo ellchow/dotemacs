@@ -16,7 +16,7 @@ def tags_from_filename(input_dir, execute):
     try:
       metadata = eyed3.load(full_path)
     except Exception, err:
-      log("failed to load tags for %s" % full_path, "error: ", err)
+      log("ERROR: failed to load tags for %s" % full_path, "error: ", err)
       continue
     base_name = os.path.basename(full_path.strip())
 
@@ -44,7 +44,7 @@ def rename_using_tags(input_dir, execute):
     try:
       metadata = eyed3.load(full_path)
     except Exception, err:
-      log("failed to load tags for %s" % full_path, "error: ", err)
+      log("ERROR: failed to load tags for %s" % full_path, "error: ", err)
       continue
 
     dir_name = os.path.dirname(full_path)
@@ -73,7 +73,7 @@ def copy_to_library(input_dir, execute):
     try:
       metadata = eyed3.load(full_path)
     except Exception, err:
-      log("failed to load tags for %s" % full_path, "error: ", err)
+      log("ERROR: failed to load tags for %s" % full_path, "error: ", err)
       continue
 
     artist_dir = os.path.join(lib_dir, metadata.tag.artist.replace(" ", "_"))
