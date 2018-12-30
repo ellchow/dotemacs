@@ -76,20 +76,24 @@ def copy_to_library(input_dir, execute):
       log("ERROR: failed to load tags for %s" % full_path, "error: ", err)
       continue
 
-    artist_dir = os.path.join(lib_dir, metadata.tag.artist.replace(" ", "_"))
-    dest_path = os.path.join(artist_dir, os.path.basename(full_path).replace(" ", "_"))
+    try:
+      artist_dir = os.path.join(lib_dir, metadata.tag.artist.replace(" ", "_"))
+      dest_path = os.path.join(artist_dir, os.path.basename(full_path).replace(" ", "_"))
 
-    if full_path != dest_path:
-      if not os.path.exists(artist_dir):
-        log("create artist dir:", artist_dir)
+      if full_path != dest_path:
+        if not os.path.exists(artist_dir):
+          log("create artist dir:", artist_dir)
+          if execute:
+            os.mkdir(artist_dir)
+
+
+        log(full_path, '->', dest_path)
         if execute:
-          os.mkdir(artist_dir)
-
-
-      log(full_path, '->', dest_path)
-      if execute:
-        shutil.copyfile(full_path, dest_path)
-        log(full_path, 'copied!')
+          shutil.copyfile(full_path, dest_path)
+          log(full_path, 'copied!')
+    except Exception, err:
+      log("problem with %s" % full_path)
+      # raise err
 
 ########################################################
 #### utils

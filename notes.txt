@@ -10,8 +10,8 @@ music-tools.py tagsfromfilename . execute && \
 music-tools.py copytolibrary . execute
 
 ## cut end
-path=/Users/elliot/Music/Nicki_Minaj/Nicki_Minaj_-_Barbie_Dreams.mp3 && \
-t=26 && \
+path=/Users/elliot/Music/Kina_Grannis/Kina_Grannis_-_When_The_Partys_Over.mp3 && \
+t=153 && \
 name=`basename $path` && \
 cp -v $path /tmp/ && \
 ffmpeg -i /tmp/$name -t $t -acodec copy $path
