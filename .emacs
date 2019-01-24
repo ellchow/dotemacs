@@ -668,6 +668,8 @@
 ;;;;;;;;;;;; key bindings
 (setq mac-command-modifier 'meta)
 
+(global-set-key "\C-x\C-l" 'locate)
+
 (global-set-key "\C-c\C-k" 'copy-line)
 
 (defun set-pbcopy-keys ()
