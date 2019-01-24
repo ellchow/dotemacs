@@ -7,6 +7,7 @@
 [alias]
   fo = fetch origin
   fu = fetch upstream
+  pr="!f() { repo=`git remote -v | grep fetch | grep $1 | egrep -o '(github|stash)'`; x=`test $repo = "github" && echo refs/pull/$2/head || echo refs/pull-requests/$2/from`; git fetch $1 $x:PR/$2; } ; f"
 
   find = !"f() { git ls-files $1; }; f"
   gr = grep
