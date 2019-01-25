@@ -542,6 +542,7 @@
 (add-to-list 'auto-mode-alist '("\\.avsc$" . json-mode))
 (add-to-list 'auto-mode-alist '("\\.avdl$" . json-mode))
 (add-to-list 'auto-mode-alist '("\\.avpr$" . json-mode))
+(add-to-list 'auto-mode-alist '("dependencies\\.lock$" . json-mode))
 
 ;;;; python
 (require 'python-mode)
