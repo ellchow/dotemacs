@@ -121,20 +121,42 @@ END {
 }'
 }
 
-ppjson() {
-python -c "
-import sys, json
-
-for ln in sys.stdin:
-  print json.dumps(json.loads(ln),indent=2)
-"
-}
-
 function zless() { gzip -dc "$@" | less ; }
 function zcat() { gzip -dc "$@" ; }
 
-
 abspath() { echo "$(cd "$(dirname "$1")" && pwd)/$(basename "$1")" ; }
+
+function cached() {
+    tmp=$CACHED_TMP_DIR
+    mkdir -p $tmp
+
+    which md5 > /dev/null
+    if [ "$?" != "0" ]
+    then
+        ## md5 alias for ubuntu
+        function md5() { md5sum | cut -f1 -d' '; }
+    fi
+
+
+    if [ "$1" = "-clear" ]
+    then
+        rm -f $tmp/*
+        echo 'deleted cache markers!' >&2
+    else
+        while IFS="" read -r cmd || [ -n "$cmd" ]
+        do
+            checksum=`echo $cmd | md5`
+            succ=$tmp/"success_"$checksum
+
+            if [ "$force" = "1" ]
+            then
+                rm -f $succ
+            fi
+
+            (test -f $succ && test "$force" != "1" ) || ($cmd && touch $succ)
+        done < $1
+    fi
+}
 
 #### git
 if [ -f ~/.git-completion.sh ]
