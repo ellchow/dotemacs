@@ -15,7 +15,7 @@
 
   l = log --pretty=format:\"%h %ad [%ae] | %s%d \" --graph --date=iso
   lh = !"f() { git log --pretty=format:\"%h %ad [%ae] | %s%d \" --graph --date=iso | head $@ ; }; f"
-  st = status
+  st = !"f() { git status ; git rev-parse HEAD ; }; f"
   rl = rev-list --format=%B -n 1
   rlh = rev-list --format=%B -n 1 HEAD
   d = diff
