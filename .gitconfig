@@ -59,3 +59,5 @@
   cpc = cherry-pick --continue
   cpa = cherry-pick --abort
   cpr = !"f() { git cherry-pick $1^..$2; }; f"
+
+  arc = !"f() { dest=$1; p=`pwd`; p=`basename $p`; h=`git rev-parse HEAD`; o=$dest/${p}_$h.tar.gz; echo archiving to $o; git archive -o $o HEAD; }; f"
