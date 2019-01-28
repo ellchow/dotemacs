@@ -520,6 +520,9 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;; modes
 
+;;;; disable eldoc which automatically displays docs
+(global-eldoc-mode -1)
+
 ;;;; java
 
 (defun my-java-init ()
