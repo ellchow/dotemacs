@@ -151,7 +151,16 @@
   (interactive)
   (mark-whole-buffer)
   (call-interactively 'indent-region)
-)
+  )
+
+;; (defun indent-line ()
+;;   (interactive)
+;;   (delete-horizontal-space)
+;;   (set-mark (line-beginning-position))
+;;   (end-of-line)
+;;   (call-interactively 'indent-region)
+;;   (set-mark nil)
+;;   )
 
 ;;;; hiding
 (defun hs-load-hide-block ()
@@ -345,15 +354,6 @@
   (set-mark nil)
 )
 
-;; (defun indent-line ()
-;;   (interactive)
-;;   (delete-horizontal-space)
-;;   (set-mark (line-beginning-position))
-;;   (end-of-line)
-;;   (call-interactively 'indent-region)
-;;   (set-mark nil)
-;; )
-
 ;;;; saving
 (defun my-save ()
   (interactive)
@@ -473,21 +473,6 @@
   ;; Since we killed it, don't let caller do that.
   nil)
 
-;; (defvar ywb-scratch-buffer "*scratch*")
-;; (defun switch2scratch (arg)
-;;   (interactive "P")
-;;   (when arg
-;;     (setq ywb-scratch-buffer (read-buffer "Set scratch to: " (buffer-name))))
-;;   (let ((buf (get-buffer ywb-scratch-buffer)))
-;;     (if (null buf)
-;;         (progn
-;;           (or arg
-;;               (setq ywb-scratch-buffer (if (y-or-n-p "The buffer does not exist! Create *scratch*? ")
-;;                                            "*scratch*"
-;;                                          (read-buffer "Set scratch to: " (buffer-name)))))
-;;           (switch-to-buffer ywb-scratch-buffer)
-;;           (text-mode))
-;;       (switch-to-buffer ywb-scratch-buffer))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;; tools
 
@@ -702,17 +687,10 @@
 (global-set-key "\C-c,L" 'sort-lines)
 (global-set-key "\C-c,l" 'sort-lines-ignore-case)
 
-;; (global-set-key "\C-c\C-n"  'bm-next)
-;; (global-set-key "\C-c\C-p"  'bm-previous)
-;; (global-set-key "\C-c\C-b" 'bm-toggle)
-
 (global-set-key "\C-c,." 'ag-project-at-point)
 (global-set-key "\C-c,/" 'ag-project-dired)
 
 (global-set-key [f7]  'my-start-or-clear-eshell)
-;; (global-set-key [f3]  'point-stack-push)
-;; (global-set-key [f4]  'point-stack-pop)
-;; (global-set-key [f5]  'point-stack-forward-stack-pop)
 
 (global-set-key "\C-cg"  'magit-status)
 (global-set-key "\C-xg"  'goto-line)
