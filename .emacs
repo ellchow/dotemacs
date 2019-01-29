@@ -125,6 +125,23 @@
       (message "line copied")
 )
 
+
+;;;; rename file and buffer at the same time
+(defun rename-file-and-buffer (new-name)
+  "Renames both current buffer and file it's visiting to NEW-NAME."
+  (interactive "sNew name: ")
+  (let ((name (buffer-name))
+        (filename (buffer-file-name)))
+    (if (not filename)
+        (message "Buffer '%s' is not visiting a file!" name)
+      (if (get-buffer new-name)
+          (message "A buffer named '%s' already exists!" new-name)
+        (progn
+          (rename-file filename new-name 1)
+          (rename-buffer new-name)
+          (set-visited-file-name new-name)
+          (set-buffer-modified-p nil))))))
+
 ;;;; tramp
 (setq password-cache-expiry nil)
 (setq tramp-default-method "ssh")
@@ -704,6 +721,7 @@
 
 (global-set-key "\C-r" 'redo)
 (global-set-key "\C-x\C-s"  'my-save)
+(global-set-key "\C-c\C-s"  'rename-file-and-buffer)
 
 (global-set-key "\C-x\C-o" 'other-window)
 (global-set-key "\C-x\C-b" 'electric-buffer-list)
