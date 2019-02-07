@@ -81,15 +81,22 @@
 
 (setq inhibit-startup-message t)
 
-(require 'whitespace)
-(setq whitespace-line-column (getenv-or-else "EMACS_LINE_LENGTH_LIMIT" 100 ))
-(setq whitespace-style '(face lines-tail))
+;; (require 'whitespace)
+;; (setq whitespace-line-column (getenv-or-else "EMACS_LINE_LENGTH_LIMIT" 100 ))
+;; (setq whitespace-style '(face lines-tail))
 ;; (add-hook 'prog-mode-hook 'whitespace-mode) ;; does not work for python-mode for some reason?
+(turn-off-auto-fill)
+(remove-hook 'text-mode-hook 'turn-on-auto-fill)
+
 
 (set-display-table-slot standard-display-table 'wrap ?\ )
 
 ;; (linum-mode)
 (setq linum-format "%4d \u2502")
+
+(require 'longlines)
+(add-hook 'markdown-mode-hook 'longlines-mode)
+(add-hook 'text-mode-hook 'longlines-mode)
 
 ;;;;;;;;;;;;;;; behaviors and functions
 
@@ -557,6 +564,7 @@
 (define-key py-mode-map [(control h)] 'py-electric-backspace)
 (setq py-indent-offset 2)
 (add-to-list 'auto-mode-alist '("\\.yaml$" . python-mode))
+(add-to-list 'auto-mode-alist '("\\.yml$" . python-mode))
 (define-key python-mode-map "\t" 'clever-hippie-tab)
 
 ;;;; Haskell
@@ -588,7 +596,7 @@
 
 
 ;;;; clojure mode
-;; (require 'clojure-mode)
+(require 'clojure-mode)
 
 ;;;; sql
 (eval-after-load "sql"
