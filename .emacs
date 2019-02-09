@@ -94,10 +94,6 @@
 ;; (linum-mode)
 (setq linum-format "%4d \u2502")
 
-(require 'longlines)
-(add-hook 'markdown-mode-hook 'longlines-mode)
-(add-hook 'text-mode-hook 'longlines-mode)
-
 ;;;;;;;;;;;;;;; behaviors and functions
 
 ;; (setq default-directory (getenv "HOME"))
