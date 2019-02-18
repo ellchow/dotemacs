@@ -12,6 +12,7 @@
 
   find = !"f() { git ls-files $1; }; f"
   gr = grep
+  sed = !"f() { sed -i .gitsedbak $1 `git ls-files | grep $2`; find . -name '*.gitsedbak' -delete; }; f"
 
   l = log --pretty=format:\"%h %ad [%ae] | %s%d \" --graph --date=iso
   lh = !"f() { git log --pretty=format:\"%h %ad [%ae] | %s%d \" --graph --date=iso | head $@ ; }; f"
