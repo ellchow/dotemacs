@@ -693,7 +693,9 @@ dollar-slashy-quoted strings."
 
 (defun groovy--enclosing-blocks ()
   "Return a list of the block keywords that enclose point.
+
 Given the code, where | is point:
+
 def foo() {
   if (bar) {
     switch (baz) {
@@ -701,6 +703,7 @@ def foo() {
     }
   }
 }
+
 Then this function returns (\"def\" \"if\" \"switch\")."
   (let (enclosing-paren-pos blocks)
     (save-excursion
@@ -958,8 +961,10 @@ statement, without an open curly brace."
 ;;;###autoload
 (define-derived-mode groovy-mode groovy-parent-mode "Groovy"
   "Major mode for editing Groovy code.
+
 The hook `groovy-mode-hook' is run with no args at mode
 initialization.
+
 Key bindings:
 \\{groovy-mode-map}"
   ;; if `groovy-highlight-assignments' add to keyword search.
