@@ -573,13 +573,12 @@
 ;; ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
 ;;;; Javascript
-(add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
 (autoload 'javascript-mode "javascript" nil t)
 (setq js-indent-level 2)
 
 ;;;; Web mode
 (require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.html$" . web-mode-prog-mode))
+(add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))
 (setq-default indent-tabs-mode nil)
 
