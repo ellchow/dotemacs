@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TITLE</title>
+        <meta charset="utf-8">
+        <style>
+         @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+         @font-face {
+             font-family: Gotham;
+             src: url("./fonts/Gotham-Light.otf") format("opentype");
+         }
+
+         @font-face {
+             font-family: Gotham;
+             font-weight: bold;
+             src: url("./fonts/Gotham-Bold.otf") format("opentype");
+         }
+
+         .remark-slide-content { font-size: 30px; }
+
+         body {
+             font-family: 'Gotham';
+             color: #2d2d2d;
+         }
+         h1 {
+             font-family: 'Gotham';
+             font-weight: bold;
+             color: #e50914;
+         }
+         h2, h3 {
+             font-family: 'Gotham';
+             font-weight: bold;
+         }
+
+         table {
+            border: 1px solid black;
+         }
+         th, td {
+            padding: 15px;
+         }
+
+         table tr:nth-child(even) {
+             background-color: #ccc;
+         }
+
+         .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+         .remark-slide-number {
+             visibility: hidden;
+         }
+
+         .column:first-of-type {float:left}
+         .column:last-of-type {float:right}
+         .split-50 .column:first-of-type { width: 50% }
+         .split-50 .column:last-of-type { width: 50% }
+
+        </style>
+    </head>
+    <body>
+        <textarea id="source">
+
+class: center, middle
+
+# Title
+
+Elliot Chow
+
+???
+
+`decktape slides.html slides.pdf`
+
+---
+class: split-50
+
+# Scale
+
+.column[
+left side
+
+text
+]
+
+.column[
+right side
+
+text
+]
+
+---
+# Normal
+
+### Bar
+
+- Baz
+
+???
+
+- notes
+
+
+
+---
+# Qux
+
+<img src="myimage.png" width="100%"/>
+
+
+
+---
+# Table
+
+<table class="basictable">
+<tr><th>Member</th><th>Window Start</th><th>Window End</th></tr>
+<tr><td>1</t><td><em>__</em> : 00</td><td><em>__</em> : 09</td></tr>
+<tr><td>1</t><td><em>__</em> : 10</td><td><em>__</em> : 19</td></tr>
+<tr><td>2</t><td><em>__</em> : 01</td><td><em>__</em> : 10</td></tr>
+<tr><td>2</t><td><em>__</em> : 11</td><td><em>__</em> : 20</td></tr>
+</table>
+
+---
+# Code
+
+```scala
+class Event // ...
+class State // ...
+class Output // ...
+
+def insert(input: Event, state: State): State = // ...
+def emit(time: Timestamp): (State, List[Output]) = // ...
+```
+
+
+        </textarea>
+        <script src="./remark-latest.min.js">
+        </script>
+        <script>
+         var slideshow = remark.create({
+             ratio: '16:9',
+             touch: false,
+             click: false
+         });
+        </script>
+    </body>
+</html>
