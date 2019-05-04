@@ -573,13 +573,12 @@
 ;; ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
 ;;;; Javascript
-(autoload 'javascript-mode "javascript" nil t)
-(setq js-indent-level 2)
+(require `rjsx-mode)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
 
 ;;;; Web mode
 (require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))
+(add-to-list 'auto-mode-alist '("\\.html$" . web-mode-prog-mode))
 (setq-default indent-tabs-mode nil)
 
 ;;;; Scala  https://github.com/hvesalai/scala-mode2
