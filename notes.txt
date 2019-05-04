@@ -2,7 +2,8 @@
 ---- mp3 stuff
 --------------------------------
 
-cd ~/Downloads/songs && \
+cd ~/Downloads/songs
+
 ls | grep -v mp3 | xargs -P 2 -I {} ffmpeg -i '{}' -b:a 256k {}.mp3 && \
 rename s/.mp4// *.mp3 && \
 rename s/.webm// *.mp3 && \
@@ -22,6 +23,15 @@ t=26 && \
 name=`basename $path` && \
 cp -v $path /tmp/ && \
 ffmpeg -i /tmp/$name -ss $t -acodec copy $path
+
+## cut beginning and end
+path=`ls /Users/elliot/Music/Billie_Eilish/Billie_Eilish_-_Belly*Acoustic* | head -1` && \
+echo $path && \
+t0=453 && \
+t1=176 && \
+name=`basename "$path"` && \
+cp -v "$path" /tmp/ && \
+ffmpeg -i /tmp/$name -ss $t0 -t $t1 -acodec copy "$path"
 
 ## change speed
 ffmpeg -i Nicki_Minaj_-_Barbie_Dreams.mp4.mp3 -filter:a "atempo=1.5" -vn Nicki_Minaj_-_Barbie_Dreams-1.mp4.mp3
