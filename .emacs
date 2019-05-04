@@ -743,3 +743,5 @@
   )
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
+
+(desktop-save-mode 1)
