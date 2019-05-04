@@ -61,11 +61,11 @@ function emacs-daemon-restart() {
         sleep 1 && \
         emacs-daemon-start
 }
-emacs-daemon-start
+# emacs-daemon-start
 
 export EDITOR="emacs-stock"
 export VISUAL="emacs-stock"
-alias e='emacsclient -c'
+# alias e='emacsclient -c'
 # alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs -nw' ## MAC
 
 
