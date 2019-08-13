@@ -493,6 +493,11 @@
 (setq recentf-max-menu-items 50)
 (run-at-time nil (* 5 60) 'recentf-save-list)
 
+;;;;  very large files
+(add-to-list 'load-path (format "%s/vlfi" ELISPDIR))
+(require 'vlf-setup)
+(custom-set-variables '(vlf-application 'dont-ask))
+
 ;;;; org mode
 (setq org-todo-keywords
        '((sequence "TODO" "WIP" "REV" "BLOCKED" "|" "DONE")))
