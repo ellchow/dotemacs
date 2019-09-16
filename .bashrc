@@ -12,6 +12,8 @@ fi
 export HISTTIMEFORMAT="%Y/%M/%d-%H:%M:%S "
 export HISTSIZE=50000
 export HISTFILESIZE=$HISTSIZE
+export HISTIGNORE="ls:history"
+export HISTCONTROL="ignorespace:erasedups"
 
 if [ "$DOTEMACS_HOME" = "" ]
 then
