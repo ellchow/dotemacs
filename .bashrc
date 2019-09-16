@@ -9,6 +9,9 @@ if [ -f /etc/bashrc ]; then
 fi
 
 #### environment variables
+export HISTTIMEFORMAT="%h %d %H:%M:%S "
+export HISTSIZE=50000
+export HISTFILESIZE=$HISTSIZE
 
 if [ "$DOTEMACS_HOME" = "" ]
 then
