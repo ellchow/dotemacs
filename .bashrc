@@ -147,6 +147,23 @@ then
     source ~/.git-completion.sh
 fi
 
+#### python
+
+function venv() {
+    is_venv=`python -c "import sys; print(1 if hasattr(sys, 'real_prefix') or (hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix) else 0)"`
+
+    if [ "$is_venv" = "0" ]
+    then
+        e=$PYTHON_VENV_DIR/bin/activate
+        echo "activating virtual env $e" >&2
+        source $e
+    else
+        echo "already inside virtual env" >&2
+    fi
+
+    $@
+}
+
 ####
 echo "loaded .bashrc" >&2
 
