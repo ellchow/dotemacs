@@ -581,6 +581,10 @@
 (require `rjsx-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
 
+;;;; Typescript
+(require 'typescript-mode)
+(add-to-list 'auto-mode-alist '("\\.tsx$" . typescript-mode))
+
 ;;;; Web mode
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.html$" . web-mode-prog-mode))
