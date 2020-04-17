@@ -86,8 +86,7 @@
 ;; (setq whitespace-style '(face lines-tail))
 ;; (add-hook 'prog-mode-hook 'whitespace-mode) ;; does not work for python-mode for some reason?
 (turn-off-auto-fill)
-(remove-hook 'text-mode-hook 'turn-on-auto-fill)
-
+(add-hook 'text-mode-hook 'turn-off-auto-fill)
 
 (set-display-table-slot standard-display-table 'wrap ?\ )
 
@@ -436,7 +435,8 @@
 
 (defun load-scratch ()
   (interactive)
-  (switch-to-buffer "*scratch*"))
+  (switch-to-buffer "*scratch*")
+  (turn-off-auto-fill))
 
 
 (defun save-persistent-scratch ()
@@ -459,6 +459,7 @@
 (save-excursion
   (set-buffer (get-buffer-create "*scratch*"))
   (text-mode)
+  (turn-off-auto-fill)
   (make-local-variable 'kill-buffer-query-functions)
   (add-hook 'kill-buffer-query-functions 'kill-scratch-buffer))
 
@@ -471,6 +472,7 @@
   ;; Make a brand new *scratch* buffer
   (set-buffer (get-buffer-create "*scratch*"))
   (text-mode)
+  (turn-off-auto-fill)
   (make-local-variable 'kill-buffer-query-functions)
   (add-hook 'kill-buffer-query-functions 'kill-scratch-buffer)
   ;; Since we killed it, don't let caller do that.
@@ -484,7 +486,7 @@
 ;; (require 'icicles)
 ;; (icy-mode 1)
 
-;;;; dired+
+;; ;;;; dired+
 (require 'dired+)
 (diredp-toggle-find-file-reuse-dir 1)
 
@@ -494,7 +496,7 @@
 (run-at-time nil (* 5 60) 'recentf-save-list)
 
 ;;;;  very large files
-;; (add-to-list 'load-path (format "%s/vlfi" ELISPDIR))
+(add-to-list 'load-path (format "%s/vlfi" ELISPDIR))
 ;; (require 'vlf-setup)
 ;; (custom-set-variables '(vlf-application 'dont-ask))
 
@@ -530,7 +532,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;; modes
 
-;;;; disable eldoc which automatically displays docs
+;;;; disable eldoc
 (global-eldoc-mode -1)
 
 ;;;; java
@@ -580,10 +582,9 @@
 ;;;; Javascript
 (require `rjsx-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
-
 ;;;; Typescript
 (require 'typescript-mode)
-(add-to-list 'auto-mode-alist '("\\.tsx$" . typescript-mode))
+(add-to-list 'auto-mode-alist '("\\.ts$" . typescript-mode))
 
 ;;;; Web mode
 (require 'web-mode)
