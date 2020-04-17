@@ -85,8 +85,6 @@
 ;; (setq whitespace-line-column (getenv-or-else "EMACS_LINE_LENGTH_LIMIT" 100 ))
 ;; (setq whitespace-style '(face lines-tail))
 ;; (add-hook 'prog-mode-hook 'whitespace-mode) ;; does not work for python-mode for some reason?
-(turn-off-auto-fill)
-(add-hook 'text-mode-hook 'turn-off-auto-fill)
 
 (set-display-table-slot standard-display-table 'wrap ?\ )
 
@@ -399,7 +397,7 @@
   (dired default-directory))
 
 ;;;; scratch buffer
-(setq initial-major-mode 'text-mode)
+(setq initial-major-mode 'fundamental-mode)
 (setq initial-scratch-message "*scratch*")
 
 (defvar persistent-scratch-filename
@@ -458,7 +456,7 @@
 
 (save-excursion
   (set-buffer (get-buffer-create "*scratch*"))
-  (text-mode)
+  (fundamental-mode)
   (turn-off-auto-fill)
   (make-local-variable 'kill-buffer-query-functions)
   (add-hook 'kill-buffer-query-functions 'kill-scratch-buffer))
@@ -471,8 +469,7 @@
   (kill-buffer (current-buffer))
   ;; Make a brand new *scratch* buffer
   (set-buffer (get-buffer-create "*scratch*"))
-  (text-mode)
-  (turn-off-auto-fill)
+  (fundamental-mode)
   (make-local-variable 'kill-buffer-query-functions)
   (add-hook 'kill-buffer-query-functions 'kill-scratch-buffer)
   ;; Since we killed it, don't let caller do that.
