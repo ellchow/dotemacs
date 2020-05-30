@@ -520,8 +520,8 @@
 (setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [no match]" " [matched]" " [not readable]" " [too big]" " [confirm]")))
 
 ;;;; abbrev
-(setq default-abbrev-mode t)
-(setq save-abbrevs nil)
+;; (setq default-abbrev-mode t)
+;; (setq save-abbrevs nil)
 
 ;;;; silver searcher
 (add-to-list 'load-path (format "%s/ag.el" ELISPDIR))
@@ -535,7 +535,7 @@
 ;;;; java
 
 (defun my-java-init ()
-  (define-mode-abbrev "psvm" "public static void main (String[] args)")
+  ;; (define-mode-abbrev "psvm" "public static void main (String[] args)")
   (define-key c-mode-base-map "\t" 'clever-hippie-tab)
 )
 (add-hook 'java-mode-hook 'my-java-init)
