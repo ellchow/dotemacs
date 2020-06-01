@@ -483,6 +483,14 @@
 ;; (require 'icicles)
 ;; (icy-mode 1)
 
+;;;; yasnippet
+(require 'yasnippet)
+(yas-global-mode 1)
+(define-key yas-minor-mode-map (kbd "<tab>") nil)
+(define-key yas-minor-mode-map (kbd "TAB") nil)
+(define-key yas-minor-mode-map "\M-\t" yas-maybe-expand)
+
+
 ;; ;;;; dired+
 (require 'dired+)
 (diredp-toggle-find-file-reuse-dir 1)

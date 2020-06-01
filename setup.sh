@@ -18,3 +18,5 @@ done
 touch .bashrc.plus
 
 ./elisp-compile.sh
+mkdir -p ~/.emacs.d/snippets
+cp -r yasnippets/* ~/.emacs.d/snippets/.
