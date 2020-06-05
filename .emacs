@@ -670,6 +670,8 @@
 (add-to-list 'load-path (format "%s/rust-mode.el" ELISPDIR))
 (autoload 'rust-mode "rust-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+(setq rust-format-on-save 1)
+(setq rust-format-show-buffer nil)
 
 ;;;;;;;;;;;;;; libraries
 
