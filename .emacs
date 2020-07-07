@@ -84,7 +84,8 @@
 (require 'whitespace)
 (setq whitespace-line-column (getenv-or-else "EMACS_LINE_LENGTH_LIMIT" 100 ))
 (setq whitespace-style '(face lines-tail))
-;; (add-hook 'prog-mode-hook 'whitespace-mode) ;; does not work for python-mode for some reason?
+;; (add-hook 'prog-mode-hook 'whitespace-mode) ;; does not work for 
+-mode for some reason?
 
 (set-display-table-slot standard-display-table 'wrap ?\ )
 
@@ -552,6 +553,7 @@
 (setq py-indent-offset 2)
 (add-to-list 'auto-mode-alist '("\\.yaml$" . python-mode))
 (define-key python-mode-map "\t" 'clever-hippie-tab)
+(setq py-block-comment-prefix "#")
 
 ;;;; Haskell
 ;; (add-to-list 'load-path (format "%s/haskell-mode" ELISPDIR))
