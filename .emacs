@@ -575,6 +575,9 @@
 (add-to-list 'auto-mode-alist '("\\.yml$" . python-mode))
 (define-key python-mode-map "\t" 'clever-hippie-tab)
 
+(require 'py-yapf)
+(add-hook 'python-mode-hook 'py-yapf-enable-on-save)
+
 ;;;; Haskell
 ;; (add-to-list 'load-path (format "%s/haskell-mode" ELISPDIR))
 ;; (require 'haskell-mode-autoloads)
