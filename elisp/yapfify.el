@@ -75,7 +75,7 @@ If yapf exits with an error, the output will be shown in a help-window."
                                                (= (char-before end) 13))
                                            (- end 1)
                                          end)))
-         (tmpbuf (generate-new-buffer "*yapfify*"))
+         (tmpbuf (generate-new-buffer (format "*yapfify-%s*" (buffer-name original-buffer))))
          (exit-code (yapfify-call-bin original-buffer tmpbuf start-line end-line)))
     (deactivate-mark)
     ;; There are three exit-codes defined for YAPF:
@@ -89,7 +89,7 @@ If yapf exits with an error, the output will be shown in a help-window."
           ((eq exit-code 1)
            (error "Yapf failed, see %s buffer for details" (buffer-name tmpbuf))))
     ;; Clean up tmpbuf
-    (kill-buffer tmpbuf)
+    (mapc 'kill-buffer (seq-filter (lambda (x) (string-prefix-p "*yapfify-faiss.py*" (buffer-name x))) (buffer-list)))
     ;; restore window to similar state
     (goto-char original-point)
     (cl-mapcar 'set-window-start buffer-windows original-window-pos)))
