@@ -89,7 +89,7 @@ If yapf exits with an error, the output will be shown in a help-window."
           ((eq exit-code 1)
            (error "Yapf failed, see %s buffer for details" (buffer-name tmpbuf))))
     ;; Clean up tmpbuf
-    (mapc 'kill-buffer (seq-filter (lambda (x) (string-prefix-p "*yapfify-faiss.py*" (buffer-name x))) (buffer-list)))
+    (mapc 'kill-buffer (seq-filter (lambda (x) (string-prefix-p "*yapfify-" (buffer-name x))) (buffer-list)))
     ;; restore window to similar state
     (goto-char original-point)
     (cl-mapcar 'set-window-start buffer-windows original-window-pos)))
