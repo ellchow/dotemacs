@@ -606,6 +606,9 @@
 ;; (require 'ensime)
 ;; (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
+(require 'scalafmter)
+(add-hook 'scala-mode-hook 'scalafmt-mode)
+
 
 ;;;; clojure mode
 (require 'clojure-mode)
