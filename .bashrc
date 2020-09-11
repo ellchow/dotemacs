@@ -9,6 +9,11 @@ if [ -f /etc/bashrc ]; then
 fi
 
 #### environment variables
+export HISTTIMEFORMAT="%Y/%M/%d-%H:%M:%S "
+export HISTSIZE=50000
+export HISTFILESIZE=$HISTSIZE
+export HISTIGNORE="ls:history"
+export HISTCONTROL="ignorespace:erasedups"
 
 if [ "$DOTEMACS_HOME" = "" ]
 then
@@ -70,8 +75,8 @@ export VISUAL="emacs-stock"
 
 
 ## java
-export JAVA_OPTS='-Xmx2G'
-export JAVA_TOOL_OPTIONS='-Djava.awt.headless=true'
+export JAVA_OPTS='-Xmx4G'
+# export JAVA_TOOL_OPTIONS='-Djava.awt.headless=true'
 # export CLASSPATH=
 # export JAVA_HOME="$(/usr/libexec/java_home)" ## MAC java home, for java 6 >> export JAVA_HOME=/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
 
