@@ -1,21 +1,22 @@
 #!/usr/bin/env bash
 
 ## brew
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/elliot/.bashrc
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 brew install emacs
 brew install watch
-brew install gawk
 brew install coreutils
 brew install the_silver_searcher
 brew install rename
 
-brew tap caskroom/cask
-brew install brew-cask
-brew cask install java
+# brew tap caskroom/cask
+# brew install brew-cask
+# brew cask install java
 
-brew install tmux
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+# brew install tmux
+# git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # sudo easy_install pip && pip install glances
 
