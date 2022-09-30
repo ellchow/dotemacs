@@ -26,5 +26,9 @@ brew install rename
 
 # brew install docker
 # brew install docker-machine
-# brew cask install virtualbox
-# docker-machine create --driver virtualbox default
+
+# brew install python@3.9
+
+# source "/Users/elliot/.sdkman/bin/sdkman-init.sh"
+# sdk install java 18.0.2.1-open
+# sdk install scala 2.13.9

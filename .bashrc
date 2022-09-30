@@ -169,6 +169,10 @@ then
     source ~/.git-completion.sh
 fi
 
+#### sdkman
+
+# source "/Users/elliot/.sdkman/bin/sdkman-init.sh"
+
 ####
 echo "loaded .bashrc" >&2
 
