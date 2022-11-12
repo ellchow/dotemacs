@@ -104,15 +104,19 @@ DISPLAY-ERRORS is non-nil, shows a buffer if the formatting fails."
 
 (defun python-black--make-args (beg end)
   "Helper to build the argument list for black for span BEG to END."
-  (append
-   python-black--base-args
-   (-when-let* ((file-name (buffer-file-name))
-                (extension (file-name-extension file-name))
-                (is-pyi-file (string-equal "pyi" extension)))
-     '("--pyi"))
-   python-black-extra-args
-   (when (python-black--whole-buffer-p beg end)
-     '("-"))))
+  (let ((lst (append
+             python-black--base-args
+             (when-let (project-directory (file-truename (locate-dominating-file (buffer-file-name) python-black--config-file)))
+               (list "--config" (concat project-directory python-black--config-file)))
+             (-when-let* ((file-name (buffer-file-name))
+                          (extension (file-name-extension file-name))
+                          (is-pyi-file (string-equal "pyi" extension)))
+               '("--pyi"))
+             python-black-extra-args
+             (when (python-black--whole-buffer-p beg end)
+               '("-")))))
+    (message "python black args for %s: %s" (buffer-file-name) lst)
+    lst))
 
 (defun python-black--whole-buffer-p (beg end)
   "Return whether BEG and END span the whole buffer."

@@ -584,7 +584,7 @@
 ;; (add-hook 'python-mode-hook 'yapf-mode)
 
 (require 'python-black)
-(add-hook 'python-mode-hook 'python-black-on-save-mode)
+(add-hook 'python-mode-hook 'python-black-on-save-mode-enable-dwim)
 
 ;;;; Haskell
 ;; (add-to-list 'load-path (format "%s/haskell-mode" ELISPDIR))
