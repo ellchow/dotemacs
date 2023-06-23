@@ -65,7 +65,7 @@ If scalafmt exits with an error, the output will be shown in a help-window."
     ;; anything else would be very unexpected.
     (cond ((eq exit-code 0)
            (with-current-buffer tmpbuf
-             (copy-to-buffer original-buffer (point-min) (point-max))))
+             (if (< (point-min) (point-max))(copy-to-buffer original-buffer (point-min) (point-max)))))
           ((or (eq exit-code 1) (eq exit-code 2))
            (error "Scalafmt failed, see %s buffer for details" (buffer-name tmpbuf))))
     ;; Clean up tmpbuf
