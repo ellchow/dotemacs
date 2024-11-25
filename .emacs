@@ -586,6 +586,12 @@
 (require 'python-black)
 (add-hook 'python-mode-hook 'python-black-on-save-mode-enable-dwim)
 
+(require 'ruff-format)
+(add-hook 'python-mode-hook 'ruff-format-on-save-mode)
+
+(require 'ruff-check)
+(add-hook 'python-mode-hook 'ruff-check-on-save-mode)
+
 ;;;; Haskell
 ;; (add-to-list 'load-path (format "%s/haskell-mode" ELISPDIR))
 ;; (require 'haskell-mode-autoloads)
